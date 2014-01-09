@@ -186,6 +186,7 @@ nnoremap <F2> :set ic! <CR>:set ic?<CR>
 " highlight
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap ,h :set hlsearch!<CR>
+nnoremap ,c :set cursorline! cursorcolumn!<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jumping (with menus)
