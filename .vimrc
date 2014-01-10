@@ -324,6 +324,7 @@ Bundle 'EasyMotion'
 Bundle 'ack.vim'
 
 " Editing
+Bundle 'PProvost/vim-ps1'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-abolish'
@@ -396,6 +397,7 @@ if g:vimrc_bundle_syntastic == 1
     if g:vimrc_bundle_ycm == 0
         " Syntax check fallback
         nnoremap <F5> :SyntasticCheck<CR>
+        nnoremap <C-F5> :SyntasticToggleMode<CR>
     endif
 endif
 
@@ -417,8 +419,13 @@ endif
 if g:vimrc_bundle_ctrlp == 1
     " Ctrl-p extension
     Bundle 'kien/ctrlp.vim'
-    nnoremap <C-n> :CtrlPBuffer<CR>
-    nnoremap <leader>be :CtrlPMRU<CR>
+    nnoremap <C-n> :CtrlPLine<CR>
+    nnoremap <leader>be :CtrlPBuffer<CR>
+    noremap <Leader>bt :CtrlPMRU<CR>
+    noremap <Leader>r :CtrlPLastMode<CR>
+    noremap <Leader><C-p> :CtrlPMixed<CR>
+    noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
+    noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
 else
     " Buffer explorer
     Bundle 'bufexplorer.zip'
