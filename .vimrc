@@ -28,9 +28,11 @@ let g:vimrc_bundle_syntastic=1
 " extra undo functionality
 let g:vimrc_bundle_undo=0
 " git functionality
-let g:vimrc_bundle_git=1
+let g:vimrc_bundle_revision_control=1
 " CTRL-P replaces bufexplore
 let g:vimrc_bundle_ctrlp=1
+" wiki plugins
+let g:vimrc_bundle_wiki=1
 
 if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
@@ -38,7 +40,8 @@ if has("win32") || has("win64")
     behave xterm
     " Ensure various split commands work on windows
     " like :Gdiff
-    set directory+=,~/tmp,$TMP
+    " set directory+=,~/tmp,$TMP
+    set dir=c:\tmp
     " Disable YCM on windows because it's too difficult
     " to get up and running
     let g:vimrc_bundle_ycm=0
@@ -414,9 +417,11 @@ elseif g:vimrc_bundle_ctrlp == 1
     noremap U :CtrlPUndo<CR>
 endif
 
-if g:vimrc_bundle_git == 1
+if g:vimrc_bundle_revision_control == 1
     " git integration
     Bundle 'tpope/vim-fugitive'
+    " ClearCase integration
+    Bundle 'vim-scripts/ccase.vim'
 endif
 
 if g:vimrc_bundle_ctrlp == 1
@@ -435,6 +440,12 @@ else
 endif
 
 
+if g:vimrc_bundle_wiki == 1
+    " Wiki extensions
+    Bundle 'vim-scripts/wikipedia.vim'
+    " I add this to the syntax file, right above sy include @TeX
+    "let g:tex_isk="@,48-57,_,192-255"
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TurboMark
