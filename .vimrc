@@ -151,7 +151,9 @@ set smarttab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scrollbars
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set guioptions=egmT
+set guioptions=egm
+nnoremap <Leader>xT :set guioptions+=T<CR>
+nnoremap <Leader>xt :set guioptions-=T<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cursor/Mouse
