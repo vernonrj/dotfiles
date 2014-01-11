@@ -297,6 +297,11 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 set foldmethod=marker
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" changing directory
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <Leader>cd :lcd %:p:h<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Copying tweaks
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>ac ggvG$"+y''
@@ -310,6 +315,8 @@ nnoremap Y y$
 " Diff original file
 command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
         \ | wincmd p | diffthis
+
+
 
 "----------------------------------------------------------"
 " Plugins
