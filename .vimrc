@@ -305,6 +305,8 @@ nnoremap <Leader>cd :lcd %:p:h<CR>
 " Copying tweaks
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>ac ggvG$"+y''
+vnoremap <Leader><C-y> "+y
+nnoremap <Leader><C-v> "+p
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pasting tweaks
