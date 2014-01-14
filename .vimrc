@@ -37,7 +37,7 @@ let g:vimrc_bundle_wiki=1
 if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
 
-    set guifont=Consolas:10
+    set guifont=Consolas:h11:cANSI
     behave xterm
     " Ensure various split commands work on windows
     " like :Gdiff
