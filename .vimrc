@@ -37,6 +37,7 @@ let g:vimrc_bundle_wiki=1
 if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
 
+    set guifont=Consolas:10
     behave xterm
     " Ensure various split commands work on windows
     " like :Gdiff
@@ -347,8 +348,9 @@ Bundle 'tpope/vim-abolish'
 " Commenting
 Bundle 'tComment'
 
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'Zenburn'
 if g:vimrc_bundle_color == 'solarized'
-    Bundle 'altercation/vim-colors-solarized'
     set background=dark
     let g:solarized_termtrans=1
     let g:solarized_termcolors=256
@@ -356,7 +358,6 @@ if g:vimrc_bundle_color == 'solarized'
     "let g:solarized_visibility="high"
     colorscheme solarized
 elseif g:vimrc_bundle_color == 'zenburn'
-    Bundle 'Zenburn'
     let g:zenburn_high_Contrast=1
     colorscheme zenburn
     " Fix some weird urxvt behavior
