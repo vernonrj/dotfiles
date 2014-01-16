@@ -186,6 +186,8 @@ set incsearch   " Do incremental searching
 " case sensitive/insensitive searches
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F2> :set ic! <CR>:set ic?<CR>
+cnoremap <M-4> \>
+cnoremap <M-6> \<
 
 
 
