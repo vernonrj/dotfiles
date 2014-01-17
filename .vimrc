@@ -432,6 +432,7 @@ endif
 if g:vimrc_bundle_revision_control == 1
     " git integration
     Bundle 'tpope/vim-fugitive'
+    " Bundle 'gregsexton/gitv'
     " ClearCase integration
     Bundle 'vim-scripts/ccase.vim'
 endif
