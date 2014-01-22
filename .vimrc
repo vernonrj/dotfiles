@@ -127,6 +127,15 @@ syntax enable
 " Remember info about open buffers on close
 set viminfo^=%
 map ,t :tab split<CR>
+map <M-1> 1gt
+map <M-2> 2gt
+map <M-3> 3gt
+map <M-4> 4gt
+map <M-5> 5gt
+map <M-6> 6gt
+map <M-7> 7gt
+map <M-8> 8gt
+map <M-9> 9gt
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Splits
@@ -369,6 +378,13 @@ endif
 if g:vimrc_bundle_c == 1
     Bundle 'a.vim'
     Bundle 'majutsushi/tagbar'
+    let g:tagbar_type_idl = {
+        \ 'ctagstype' : 'idl',
+        \ 'kinds'     : [
+            \ 'i:interface'
+        \ ],
+        \ 'sort'      : 0
+        \ }
     nmap <silent> <F7> :TagbarToggle<CR>
     Bundle 'steffanc/cscopemaps.vim'
 endif
@@ -435,6 +451,11 @@ if g:vimrc_bundle_revision_control == 1
     " Bundle 'gregsexton/gitv'
     " ClearCase integration
     Bundle 'vim-scripts/ccase.vim'
+    Bundle 'vim-scripts/visual_studio.vim'
+    let g:visual_studio_output = "C:/temp/vs_output.txt"
+    let g:visual_studio_task_list = "C:/temp/vs_task_list.txt"
+    let g:visual_studio_find_results_1 = "C:/temp/vs_find_results_1.txt"
+    let g:visual_studio_find_results_2 = "C:/temp/vs_find_results_2.txt"
 endif
 
 if g:vimrc_bundle_ctrlp == 1
