@@ -9,6 +9,9 @@ set nocompatible
 
 set cryptmethod=blowfish
 
+" tab length and other settings
+let g:vimrc_rsa_1es=1
+
 "----------------------------------------------------------"
 " Bundle Configuration
 "----------------------------------------------------------"
@@ -150,8 +153,13 @@ set splitright
 " Tab Behavior
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab
-set tabstop=4
-set shiftwidth=4
+if g:vimrc_rsa_1es == 1
+    set tabstop=3
+    set shiftwidth=3
+else
+    set tabstop=4
+    set shiftwidth=4
+endif
 set smarttab
 
 
