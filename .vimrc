@@ -68,6 +68,10 @@ if &term =~ "xterm"
     set term=xterm-256color
 endif
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Editing
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+cnoremap <M-5> <C-R>=expand('%:p:h')<CR>/
 
 "----------------------------------------------------------"
 " Look And Feel
@@ -395,6 +399,9 @@ if g:vimrc_bundle_c == 1
         \ }
     nmap <silent> <F7> :TagbarToggle<CR>
     Bundle 'steffanc/cscopemaps.vim'
+    " Bundle 'vim-scripts/TagHighlight'
+    Bundle 'xolox/vim-misc'
+    Bundle 'xolox/vim-easytags'
 endif
 
 if g:vimrc_bundle_lisp == 1
@@ -476,6 +483,20 @@ if g:vimrc_bundle_ctrlp == 1
     noremap <Leader><C-p> :CtrlPMixed<CR>
     noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
     noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
+    if g:vimrc_rsa_1es == 1
+        " lots and lots of files
+        let g:ctrlp_max_files = 0
+    endif
+    " Compilation
+    set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.o,*.lnk,*.msi,*.exe,*.pyc
+    " Pictures
+    set wildignore+=*.bmp,*.ico,*.svg,*.png,*.gif
+    " Archives
+    set wildignore+=*.zip,*.rar,*.tar,*.jar,*.tar.gz,*.tar.xz,*.tar.bz,*.7z
+    " Other
+    set wildignore+=*.chm,*.ilk,*.dfl,*.ttf
+    set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
+    set wildignore+=*.doc,*.docx,*.xls,*.xlsx
 else
     " Buffer explorer
     Bundle 'bufexplorer.zip'
