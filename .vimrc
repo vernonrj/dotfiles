@@ -10,7 +10,7 @@ set nocompatible
 set cryptmethod=blowfish
 
 " tab length and other settings
-let g:vimrc_rsa_1es=1
+let g:vimrc_rsa_1es=0
 
 "----------------------------------------------------------"
 " Bundle Configuration
