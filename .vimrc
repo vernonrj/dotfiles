@@ -20,7 +20,7 @@ let g:vimrc_bundle_color='solarized'
 " c-like language plugins
 let g:vimrc_bundle_c=1
 " extra ctags plugins
-let g:vimrc_extra_ctags=1
+let g:vimrc_extra_ctags=0
 " lisp-related plugins
 let g:vimrc_bundle_lisp=1
 " statusbar plugin
@@ -402,6 +402,7 @@ if g:vimrc_bundle_c == 1
         \ }
     nmap <silent> <F7> :TagbarToggle<CR>
     Bundle 'steffanc/cscopemaps.vim'
+    Bundle 'octol/vim-cpp-enhanced-highlight'
     if g:vimrc_extra_ctags == 1
         " Bundle 'vim-scripts/TagHighlight'
         Bundle 'xolox/vim-shell'
