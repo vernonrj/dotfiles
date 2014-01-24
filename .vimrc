@@ -373,17 +373,21 @@ Bundle 'tpope/vim-abolish'
 " Commenting
 Bundle 'tComment'
 
+" Solarized
 Bundle 'altercation/vim-colors-solarized'
+set background=dark
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+"let g:solarized_contrast="high"
+"let g:solarized_visibility="high"
+
+" Zenburn
 Bundle 'Zenburn'
+let g:zenburn_high_Contrast=1
+
 if g:vimrc_bundle_color == 'solarized'
-    set background=dark
-    let g:solarized_termtrans=1
-    let g:solarized_termcolors=256
-    "let g:solarized_contrast="high"
-    "let g:solarized_visibility="high"
     colorscheme solarized
 elseif g:vimrc_bundle_color == 'zenburn'
-    let g:zenburn_high_Contrast=1
     colorscheme zenburn
     " Fix some weird urxvt behavior
     "hi TabLineFill cterm=none
@@ -507,7 +511,8 @@ if g:vimrc_bundle_ctrlp == 1
         let g:ctrlp_max_files = 0
     endif
     " Compilation
-    set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.o,*.lnk,*.msi,*.exe,*.pyc
+    set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
+    set wildignore+=*.pyo,*.pyc,*.so,*.o
     " Pictures
     set wildignore+=*.bmp,*.ico,*.svg,*.png,*.gif
     " Archives
