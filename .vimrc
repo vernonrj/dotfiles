@@ -19,6 +19,8 @@ let g:vimrc_rsa_1es=1
 let g:vimrc_bundle_color='solarized'
 " c-like language plugins
 let g:vimrc_bundle_c=1
+" extra ctags plugins
+let g:vimrc_extra_ctags=1
 " lisp-related plugins
 let g:vimrc_bundle_lisp=1
 " statusbar plugin
