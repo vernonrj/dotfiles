@@ -392,6 +392,7 @@ endif
 if g:vimrc_bundle_c == 1
     Bundle 'a.vim'
     Bundle 'majutsushi/tagbar'
+    let g:tagbar_sort=0
     let g:tagbar_type_idl = {
         \ 'ctagstype' : 'idl',
         \ 'kinds'     : [
