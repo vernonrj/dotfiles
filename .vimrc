@@ -249,12 +249,12 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
-map <silent> <F11> :let fname = expand('%:p:h') . '/types.vim'<CR><F12>
+" map <silent> <F11> :let fname = expand('%:p:h') . '/types.vim'<CR><F12>
 " Just highlight tags based on existing tags.vim file.
 ":map <F12>  :so tags.vim<CR>
-map <silent> <F12> :if filereadable(fname)<Bar>
-    \   exe 'so ' . fname<CR>
-    \ endif <CR>
+" map <silent> <F12> :if filereadable(fname)<Bar>
+"     \   exe 'so ' . fname<CR>
+"     \ endif <CR>
 
 
 
@@ -400,8 +400,12 @@ if g:vimrc_bundle_c == 1
     nmap <silent> <F7> :TagbarToggle<CR>
     Bundle 'steffanc/cscopemaps.vim'
     " Bundle 'vim-scripts/TagHighlight'
+    Bundle 'xolox/vim-shell'
     Bundle 'xolox/vim-misc'
     Bundle 'xolox/vim-easytags'
+    let g:easytags_dynamic_files=2
+    nmap <F12> :HighlightTags<CR>
+    nmap <C-F12> :UpdateTags<CR> :HighlightTags<CR>
 endif
 
 if g:vimrc_bundle_lisp == 1
@@ -476,9 +480,9 @@ endif
 if g:vimrc_bundle_ctrlp == 1
     " Ctrl-p extension
     Bundle 'kien/ctrlp.vim'
-    nnoremap <C-n> :CtrlPLine<CR>
+    nnoremap <C-n> :CtrlPMRU<CR>
     nnoremap <leader>be :CtrlPBuffer<CR>
-    noremap <Leader>bt :CtrlPMRU<CR>
+    noremap <Leader>bt :CtrlPTag<CR>
     noremap <Leader>r :CtrlPLastMode<CR>
     noremap <Leader><C-p> :CtrlPMixed<CR>
     noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
