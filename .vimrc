@@ -16,7 +16,7 @@ let g:vimrc_rsa_1es=1
 " Bundle Configuration
 "----------------------------------------------------------"
 " colorscheme (zenburn or solarized)
-let g:vimrc_bundle_color='zenburn'
+let g:vimrc_bundle_color='solarized'
 " c-like language plugins
 let g:vimrc_bundle_c=1
 " lisp-related plugins
@@ -31,11 +31,12 @@ let g:vimrc_bundle_syntastic=1
 " extra undo functionality
 let g:vimrc_bundle_undo=0
 " git functionality
-let g:vimrc_bundle_revision_control=1
-" CTRL-P replaces bufexplore
+let g:vimrc_bundle_git=1
+" CTRL-P replaces bufexplorer
 let g:vimrc_bundle_ctrlp=1
-" wiki plugins
-let g:vimrc_bundle_wiki=1
+" work/windows plugins
+let g:vimrc_bundle_windows_dev=0
+
 
 if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
@@ -363,7 +364,6 @@ Bundle 'EasyMotion'
 Bundle 'ack.vim'
 
 " Editing
-Bundle 'PProvost/vim-ps1'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-abolish'
@@ -399,13 +399,15 @@ if g:vimrc_bundle_c == 1
         \ }
     nmap <silent> <F7> :TagbarToggle<CR>
     Bundle 'steffanc/cscopemaps.vim'
-    " Bundle 'vim-scripts/TagHighlight'
-    Bundle 'xolox/vim-shell'
-    Bundle 'xolox/vim-misc'
-    Bundle 'xolox/vim-easytags'
-    let g:easytags_dynamic_files=2
-    nmap <F12> :HighlightTags<CR>
-    nmap <C-F12> :UpdateTags<CR> :HighlightTags<CR>
+    if g:vimrc_extra_ctags == 1
+        " Bundle 'vim-scripts/TagHighlight'
+        Bundle 'xolox/vim-shell'
+        Bundle 'xolox/vim-misc'
+        Bundle 'xolox/vim-easytags'
+        let g:easytags_dynamic_files=2
+        nmap <F12> :HighlightTags<CR>
+        nmap <C-F12> :UpdateTags<CR> :HighlightTags<CR>
+    endif
 endif
 
 if g:vimrc_bundle_lisp == 1
@@ -464,17 +466,26 @@ elseif g:vimrc_bundle_ctrlp == 1
     noremap U :CtrlPUndo<CR>
 endif
 
-if g:vimrc_bundle_revision_control == 1
-    " git integration
-    Bundle 'tpope/vim-fugitive'
-    " Bundle 'gregsexton/gitv'
+if g:vimrc_bundle_windows_dev == 1
     " ClearCase integration
     Bundle 'vim-scripts/ccase.vim'
+    " Visual Studio integration
     Bundle 'vim-scripts/visual_studio.vim'
     let g:visual_studio_output = "C:/temp/vs_output.txt"
     let g:visual_studio_task_list = "C:/temp/vs_task_list.txt"
     let g:visual_studio_find_results_1 = "C:/temp/vs_find_results_1.txt"
     let g:visual_studio_find_results_2 = "C:/temp/vs_find_results_2.txt"
+    " Wiki extensions
+    Bundle 'vim-scripts/wikipedia.vim'
+    " I add this to the syntax file, right above sy include @TeX
+    "let g:tex_isk="@,48-57,_,192-255"
+    Bundle 'PProvost/vim-ps1'
+endif
+
+if g:vimrc_bundle_git == 1
+    " git integration
+    Bundle 'tpope/vim-fugitive'
+    " Bundle 'gregsexton/gitv'
 endif
 
 if g:vimrc_bundle_ctrlp == 1
@@ -507,12 +518,6 @@ else
 endif
 
 
-if g:vimrc_bundle_wiki == 1
-    " Wiki extensions
-    Bundle 'vim-scripts/wikipedia.vim'
-    " I add this to the syntax file, right above sy include @TeX
-    "let g:tex_isk="@,48-57,_,192-255"
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TurboMark
