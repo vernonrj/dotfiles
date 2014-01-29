@@ -224,8 +224,8 @@ nnoremap ,c :set cursorline! cursorcolumn!<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jumping (with menus)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Leader>* :call <SID>JumpOccurrence()<CR>
-nnoremap <Leader>? :call <SID>JumpPrompt()<CR>
+" nnoremap <Leader>* :call <SID>JumpOccurrence()<CR>
+" nnoremap <Leader>? :call <SID>JumpPrompt()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jump-searching (in blocks)
@@ -237,8 +237,8 @@ vnoremap <Leader>[ <Esc>/<C-R>=<SID>ScopeSearch('[[', 2)<CR><CR>gV
 nnoremap <Leader>{ /<C-R>=<SID>ScopeSearch('[{', 1)<CR><CR>
 vnoremap <Leader>{ <Esc>/<C-R>=<SID>ScopeSearch('[{', 2)<CR><CR>gV
 " Search within current top-level block for user-entered text.
-nnoremap <Leader>/ /<C-R>=<SID>ScopeSearch('[[', 0)<CR>
-vnoremap <Leader>/ <Esc>/<C-R>=<SID>ScopeSearch('[[', 2)<CR><CR>
+" nnoremap <Leader>/ /<C-R>=<SID>ScopeSearch('[[', 0)<CR>
+" vnoremap <Leader>/ <Esc>/<C-R>=<SID>ScopeSearch('[[', 2)<CR><CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Jumping
@@ -407,6 +407,9 @@ if g:vimrc_bundle_c == 1
     nmap <silent> <F7> :TagbarToggle<CR>
     Bundle 'steffanc/cscopemaps.vim'
     Bundle 'octol/vim-cpp-enhanced-highlight'
+    Bundle 'agassiyzh/Mark--Karkat'
+    nmap <k0> <Plug>MarkSearchAnyNext
+    nmap <C-k0> <Plug>MarkSearchAnyPrev
     if g:vimrc_extra_ctags == 1
         " Bundle 'vim-scripts/TagHighlight'
         Bundle 'xolox/vim-shell'
@@ -502,7 +505,7 @@ if g:vimrc_bundle_ctrlp == 1
     nnoremap <C-n> :CtrlPMRU<CR>
     nnoremap <leader>be :CtrlPBuffer<CR>
     noremap <Leader>bt :CtrlPTag<CR>
-    noremap <Leader>r :CtrlPLastMode<CR>
+    " noremap <Leader>r :CtrlPLastMode<CR>
     noremap <Leader><C-p> :CtrlPMixed<CR>
     noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
     noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
