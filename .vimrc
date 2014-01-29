@@ -510,8 +510,9 @@ if g:vimrc_bundle_ctrlp == 1
     noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
     noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
     if g:vimrc_rsa_1es == 1
-        " lots and lots of files
+        " handle large projects better
         let g:ctrlp_max_files = 0
+        let g:ctrlp_lazy_update = 1
     endif
     " Compilation
     set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
