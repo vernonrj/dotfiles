@@ -8,6 +8,8 @@
 set nocompatible
 
 set cryptmethod=blowfish
+set history=2000
+set viminfo+=!
 
 " tab length and other settings
 let g:vimrc_rsa_1es=0
@@ -75,6 +77,7 @@ endif
 " Editing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 cnoremap <M-5> <C-R>=expand('%:p:h')<CR>/
+cnoremap <M-2> expand('%:p')
 
 "----------------------------------------------------------"
 " Look And Feel
@@ -364,6 +367,10 @@ let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 
 Bundle 'EasyMotion'
 Bundle 'ack.vim'
+function! AckFile(args)
+   exec("Ack ".a:args." ".expand('%:p'))
+endfunction
+command! -nargs=* -complete=file AckFile call AckFile(<q-args>)
 
 " Editing
 Bundle 'tpope/vim-surround'
@@ -408,6 +415,8 @@ if g:vimrc_bundle_c == 1
     Bundle 'steffanc/cscopemaps.vim'
     Bundle 'octol/vim-cpp-enhanced-highlight'
     Bundle 'agassiyzh/Mark--Karkat'
+    let g:mvDefaultHighlightingPalette = 'extended'
+    set ssop+=globals
     nmap <k0> <Plug>MarkSearchAnyNext
     nmap <C-k0> <Plug>MarkSearchAnyPrev
     if g:vimrc_extra_ctags == 1
@@ -509,6 +518,7 @@ if g:vimrc_bundle_ctrlp == 1
     noremap <Leader><C-p> :CtrlPMixed<CR>
     noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
     noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
+    let g:ctrlp_prompt_mappings = { 'ToggleMRURelative()': ['<F2>']}
     if g:vimrc_rsa_1es == 1
         " handle large projects better
         let g:ctrlp_max_files = 0
