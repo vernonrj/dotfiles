@@ -387,7 +387,7 @@ let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 Bundle 'EasyMotion'
 Bundle 'ack.vim'
 function! AckFile(args)
-   exec("Ack ".a:args." ".expand('%:p'))
+   exec("Ack ".a:args." \"".expand('%:p')."\"")
 endfunction
 command! -nargs=* -complete=file AckFile call AckFile(<q-args>)
 
