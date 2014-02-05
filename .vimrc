@@ -58,6 +58,21 @@ if has("win32") || has("win64")
     map ,v :source ~/_vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
     "Open .vimrc for editing
     map ,V :e ~/_vimrc<CR>
+    function! BCompAdd()
+        let g:bcomp_file = expand('%:p')
+    endfunction
+    command! -nargs=* -complete=file BCompAdd call BCompAdd()
+    function! BComp()
+        if !exists('g:bcomp_file')
+            let g:bcomp_file = ""
+        endif
+        let thisfile = ''.expand('%:p')
+        let bcomp = "C:\\Program Files (x86)\\Beyond Compare 3\\BComp.exe"
+        echo("Compare ".thisfile." ".g:bcomp_file)
+        " exec('!"'.bcomp.'"')
+        exec("silent !\"".bcomp."\" \"".thisfile."\" \"".g:bcomp_file."\"")
+    endfunction
+    command! -nargs=* -complete=file BComp call BComp()
 else
     " reloading mappings for vimrc on *nix
     map ,v :source ~/.vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
