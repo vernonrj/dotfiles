@@ -58,26 +58,13 @@ if has("win32") || has("win64")
     map ,v :source ~/_vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
     "Open .vimrc for editing
     map ,V :e ~/_vimrc<CR>
-    function! BCompAdd()
-        let g:bcomp_file = expand('%:p')
-    endfunction
-    command! -nargs=* -complete=file BCompAdd call BCompAdd()
-    function! BComp()
-        if !exists('g:bcomp_file')
-            let g:bcomp_file = ""
-        endif
-        let thisfile = ''.expand('%:p')
-        let bcomp = "C:\\Program Files (x86)\\Beyond Compare 3\\BComp.exe"
-        echo("Compare ".thisfile." ".g:bcomp_file)
-        " exec('!"'.bcomp.'"')
-        exec("silent !\"".bcomp."\" \"".thisfile."\" \"".g:bcomp_file."\"")
-    endfunction
-    command! -nargs=* -complete=file BComp call BComp()
+    let g:bcomp_path = "C:\\Program Files (x86)\\Beyond Compare 3\\BComp.exe"
 else
     " reloading mappings for vimrc on *nix
     map ,v :source ~/.vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
     "Open .vimrc for editing
     map ,V :e ~/.vimrc<CR>
+    let g:bcomp_path = "bcompare"
 endif
 
 
@@ -93,6 +80,23 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 cnoremap <M-5> <C-R>=expand('%:p:h')<CR>/
 cnoremap <M-2> expand('%:p')
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Beyond Compare Integration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! BCompAdd()
+    let g:bcomp_file = expand('%:p')
+endfunction
+command! -nargs=* -complete=file BCompAdd call BCompAdd()
+function! BComp()
+    if !exists('g:bcomp_file')
+        let g:bcomp_file = ""
+    endif
+    let thisfile = ''.expand('%:p')
+    echo("Compare ".thisfile." ".g:bcomp_file)
+    exec("silent !\"".g:bcomp_path."\" \"".thisfile."\" \"".g:bcomp_file."\"")
+endfunction
+command! -nargs=* -complete=file BComp call BComp()
 
 "----------------------------------------------------------"
 " Look And Feel
