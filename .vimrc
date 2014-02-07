@@ -40,7 +40,8 @@ let g:vimrc_bundle_git=1
 let g:vimrc_bundle_ctrlp=1
 " work/windows plugins
 let g:vimrc_bundle_windows_dev=0
-
+" multiple cursors
+let g:vimrc_multiple_cursors = 1
 
 if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
@@ -559,6 +560,13 @@ else
     Bundle 'bufexplorer.zip'
 endif
 
+if g:vimrc_multiple_cursors == 1
+    Bundle 'terryma/vim-multiple-cursors'
+    let g:multi_cursor_next_key='<M-n>'
+    let g:multi_cursor_prev_key='<M-p>'
+    let g:multi_cursor_skip_key='<M-x>'
+    let g:multi_cursor_quit_key='<Esc>'
+endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
