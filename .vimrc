@@ -202,7 +202,7 @@ set smarttab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scrollbars
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set guioptions=egm
+set guioptions=eg
 nnoremap <Leader>xT :set guioptions+=T<CR>
 nnoremap <Leader>xt :set guioptions-=T<CR>
 
@@ -396,6 +396,7 @@ command! -nargs=* -complete=file AckFile call AckFile(<q-args>)
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-rsi'
 
 " Commenting
 Bundle 'tComment'
@@ -566,6 +567,8 @@ if g:vimrc_multiple_cursors == 1
     let g:multi_cursor_prev_key='<M-p>'
     let g:multi_cursor_skip_key='<M-x>'
     let g:multi_cursor_quit_key='<Esc>'
+    let g:multi_cursor_exit_from_visual_mode = 0
+    let g:multi_cursor_exit_from_insert_mode = 0
 endif
 
 
