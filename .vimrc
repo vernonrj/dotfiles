@@ -414,7 +414,11 @@ Bundle 'Zenburn'
 let g:zenburn_high_Contrast=1
 
 if g:vimrc_bundle_color == 'solarized'
-    colorscheme solarized
+    if has('gui_running')
+        colorscheme solarized
+    else
+        colorscheme zenburn
+    endif
 elseif g:vimrc_bundle_color == 'zenburn'
     colorscheme zenburn
     " Fix some weird urxvt behavior
