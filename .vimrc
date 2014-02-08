@@ -563,8 +563,8 @@ endif
 
 if g:vimrc_multiple_cursors == 1
     Bundle 'terryma/vim-multiple-cursors'
-    let g:multi_cursor_next_key='<M-n>'
-    let g:multi_cursor_prev_key='<M-p>'
+    let g:multi_cursor_next_key='<M-j>'
+    let g:multi_cursor_prev_key='<M-k>'
     let g:multi_cursor_skip_key='<M-x>'
     let g:multi_cursor_quit_key='<Esc>'
     let g:multi_cursor_exit_from_visual_mode = 0
