@@ -158,7 +158,7 @@ syntax enable
 " Buffers/Tabs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remember info about open buffers on close
-set viminfo^=%
+" set viminfo^=%
 map ,t :tab split<CR>
 map <M-1> 1gt
 map <M-2> 2gt
