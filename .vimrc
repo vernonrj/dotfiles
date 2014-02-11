@@ -9,7 +9,7 @@ set nocompatible
 
 set cryptmethod=blowfish
 set history=2000
-set viminfo+=!
+set viminfo+=!             " Store upper-case registers in viminfo
 
 " tab length and other settings
 let g:vimrc_rsa_1es=0
