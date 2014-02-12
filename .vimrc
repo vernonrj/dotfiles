@@ -387,10 +387,15 @@ let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 
 Bundle 'EasyMotion'
 Bundle 'ack.vim'
-function! AckFile(args)
+function! AckThis(args)
    exec("Ack ".a:args." \"".expand('%:p')."\"")
 endfunction
-command! -nargs=* -complete=file AckFile call AckFile(<q-args>)
+command! -nargs=* -complete=file AckThis call AckThis(<q-args>)
+
+function! AckFiles(args)
+   exec("Ack -f -G ".a:args)
+endfunction
+command! -nargs=* -complete=file AckFiles call AckFiles(<q-args>)
 
 " Editing
 Bundle 'tpope/vim-surround'
