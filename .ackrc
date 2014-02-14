@@ -1,0 +1,15 @@
+--type-set=idl=.idl
+--type-set=vstudio=.vcproj,.sln,.def,.rc
+--type-set=registry=.reg,.rgs
+--type-set=gfw=.gfw
+--type-set=autoit=.au3
+
+--type-add=shell=.ps1
+--type-add=java=.jxgp
+--type-add=xml=.manifest,.filter,.xsd
+
+--ignore-dir=ifc,OBJ,Gen,GeneratedFiles
+
+--ignore-file=is:cscope.files
+--ignore-file=is:cscope.out
+--ignore-file=is:tags
