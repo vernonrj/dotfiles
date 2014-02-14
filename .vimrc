@@ -402,6 +402,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-rsi'
+Bundle 'vim-scripts/matchit.zip'
 
 " Commenting
 Bundle 'tComment'
