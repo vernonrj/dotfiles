@@ -392,9 +392,17 @@ function! AckThis(args)
 endfunction
 command! -nargs=* -complete=file AckThis call AckThis(<q-args>)
 
+let g:ack_files="ack\\ -g\\ --nocolor\\ --nogroup"
+
 function! AckFiles(args)
-   exec("Ack -f -G ".a:args)
+    let grepprg_bak=&grepprg
+    exec "set grepprg=" . g:ack_files
+    execute "silent! grep " . a:args
+    botright copen
+    let &grepprg=grepprg_bak
+    exec "redraw!"
 endfunction
+
 command! -nargs=* -complete=file AckFiles call AckFiles(<q-args>)
 
 " Editing
