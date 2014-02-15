@@ -8,7 +8,10 @@
 --type-add=java=.jxgp
 --type-add=xml=.manifest,.filter,.xsd
 
---ignore-dir=ifc,OBJ,Gen,GeneratedFiles
+--ignore-dir=ifc
+--ignore-dir=OBJ
+--ignore-dir=Gen
+--ignore-dir=GeneratedFiles
 
 --ignore-file=is:cscope.files
 --ignore-file=is:cscope.out
