@@ -508,6 +508,7 @@ if g:vimrc_bundle_syntastic == 1
     Bundle 'scrooloose/syntastic'
     let g:syntastic_cpp_compiler_options = ' -std=c++11'
     let g:syntastic_python_checkers = ['pylint']
+    let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
     if g:vimrc_bundle_ycm == 0
         " Syntax check fallback
         nnoremap <F5> :SyntasticCheck<CR>
