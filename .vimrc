@@ -490,7 +490,6 @@ if g:vimrc_bundle_ycm == 1
     let g:ycm_confirm_extra_conf = 0
     "let g:ycm_filetype_blacklist = { 'python': 1}
     let g:ycm_autoclose_preview_window_after_insertion = 1
-    nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
     " use syntastic too
     let g:vimrc_bundle_syntastic=1
 else
@@ -509,11 +508,8 @@ if g:vimrc_bundle_syntastic == 1
     let g:syntastic_cpp_compiler_options = ' -std=c++11'
     let g:syntastic_python_checkers = ['pylint']
     let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
-    if g:vimrc_bundle_ycm == 0
-        " Syntax check fallback
-        nnoremap <F5> :SyntasticCheck<CR>
-        nnoremap <C-F5> :SyntasticToggleMode<CR>
-    endif
+    nnoremap <F5> :SyntasticCheck<CR>
+    nnoremap <C-F5> :SyntasticToggleMode<CR>
 endif
 
 if g:vimrc_bundle_undo == 1
