@@ -382,6 +382,7 @@ Bundle 'gmarik/vundle'
 
 " Navigation
 Bundle 'scrooloose/nerdtree'
+Bundle 'q335r49/textabyss'
 Bundle 'vim-scripts/VimExplorer'
 nmap <silent> <F6> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
