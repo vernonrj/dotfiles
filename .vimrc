@@ -10,6 +10,7 @@ set nocompatible
 set cryptmethod=blowfish
 set history=2000
 set viminfo+=!             " Store upper-case registers in viminfo
+let g:netrw_liststyle=3
 
 " tab length and other settings
 let g:vimrc_rsa_1es=0
@@ -381,6 +382,7 @@ Bundle 'gmarik/vundle'
 
 " Navigation
 Bundle 'scrooloose/nerdtree'
+Bundle 'vim-scripts/VimExplorer'
 nmap <silent> <F6> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
@@ -633,6 +635,26 @@ if has("autocmd")
 else
    set autoindent   " Always want that autoindent
 endif
+
+
+" Use ranger as vim file manager
+function! Ranger()
+    " Get a temp file name without creating it
+    let tmpfile = substitute(system('mktemp -u'), '\n', '', '')
+    " Launch ranger, passing it the temp file name
+    silent exec '!RANGER_RETURN_FILE='.tmpfile.' ranger'
+    " If the temp file has been written by ranger
+    if filereadable(tmpfile)
+        " Get the selected file name from the temp file
+        let filetoedit = system('cat '.tmpfile)
+        exec 'edit '.filetoedit
+        call delete(tmpfile)
+    endif
+    redraw!
+endfunction
+
+" nmap <leader>e :call Ranger()<cr>
+
 
 
 
