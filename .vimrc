@@ -116,7 +116,7 @@ set so=2
 " Line Breaks
 setlocal lbr
 "set textwidth=110
-let &showbreak = '+++ '  " Show line breaks using given symbol
+let &showbreak = '+++'  " Show line breaks using given symbol
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spell Checking
@@ -382,31 +382,12 @@ Bundle 'gmarik/vundle'
 
 " Navigation
 Bundle 'scrooloose/nerdtree'
-Bundle 'q335r49/textabyss'
-Bundle 'vim-scripts/VimExplorer'
 nmap <silent> <F6> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 
 Bundle 'EasyMotion'
-Bundle 'ack.vim'
-function! AckThis(args)
-   exec("Ack ".a:args." \"".expand('%:p')."\"")
-endfunction
-command! -nargs=* -complete=file AckThis call AckThis(<q-args>)
-
-let g:ack_files="ack\\ -g\\ --nocolor\\ --nogroup"
-
-function! AckFiles(args)
-    let grepprg_bak=&grepprg
-    exec "set grepprg=" . g:ack_files
-    execute "silent! grep " . a:args
-    botright copen
-    let &grepprg=grepprg_bak
-    exec "redraw!"
-endfunction
-
-command! -nargs=* -complete=file AckFiles call AckFiles(<q-args>)
+Bundle 'mileszs/ack.vim'
 
 " Editing
 Bundle 'tpope/vim-surround'
