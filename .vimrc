@@ -57,15 +57,15 @@ if has("win32") || has("win64")
     " to get up and running
     let g:vimrc_bundle_ycm=0
     " reloading mappings for vimrc on windows
-    map ,v :source ~/_vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
+    map <Leader>gv :source ~/_vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
     "Open .vimrc for editing
-    map ,V :e ~/_vimrc<CR>
+    map <Leader>gV :e ~/_vimrc<CR>
     let g:bcomp_path = "C:\\Program Files (x86)\\Beyond Compare 3\\BComp.exe"
 else
     " reloading mappings for vimrc on *nix
-    map ,v :source ~/.vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
+    map <Leader>gv :source ~/.vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
     "Open .vimrc for editing
-    map ,V :e ~/.vimrc<CR>
+    map <Leader>gV :e ~/.vimrc<CR>
     let g:bcomp_path = "bcompare"
 endif
 
@@ -108,8 +108,8 @@ command! -nargs=* -complete=file BComp call BComp()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lines
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <F3> :set nu!<CR> :set rnu!<CR>
-nnoremap <silent> ,<F3> :set nornu<CR> :set nu!<CR>
+nnoremap <silent> <Leader>fn :set nu!<CR> :set rnu!<CR>
+nnoremap <silent> <Leader>fN :set nornu<CR> :set nu!<CR>
 "set nu
 "set rnu
 set so=2
@@ -137,7 +137,7 @@ set laststatus=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <F4> :if exists("syntax_on") <Bar>
+nnoremap <silent> <Leader>hS :if exists("syntax_on") <Bar>
     \   syntax off <Bar>
     \   set nonumber <Bar>
     \ else <Bar>
@@ -160,7 +160,7 @@ syntax enable
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remember info about open buffers on close
 " set viminfo^=%
-map ,t :tab split<CR>
+map <Leader>t :tab split<CR>
 map <M-1> 1gt
 map <M-2> 2gt
 map <M-3> 3gt
@@ -233,7 +233,7 @@ set incsearch   " Do incremental searching
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " case sensitive/insensitive searches
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <F2> :set ic! <CR>:set ic?<CR>
+nnoremap <Leader>fi :set ic! <CR>:set ic?<CR>
 cnoremap <M-4> \>
 cnoremap <M-6> \<
 
@@ -242,8 +242,8 @@ cnoremap <M-6> \<
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " highlight
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap ,h :set hlsearch!<CR>
-nnoremap ,c :set cursorline! cursorcolumn!<CR>
+nnoremap <silent> <Leader>hs :set hlsearch!<CR>:set hlsearch?<CR>
+nnoremap <Leader>hc :set cursorline! cursorcolumn!<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jumping (with menus)
