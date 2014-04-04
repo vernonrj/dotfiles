@@ -388,6 +388,7 @@ let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 
 Bundle 'EasyMotion'
 Bundle 'mileszs/ack.vim'
+Bundle 'tpope/vim-dispatch'
 
 " Editing
 Bundle 'tpope/vim-surround'
