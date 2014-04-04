@@ -399,6 +399,10 @@ Bundle 'vim-scripts/matchit.zip'
 " Commenting
 Bundle 'tComment'
 
+Bundle 'flazz/vim-colorschemes'
+Bundle 'elzr/vim-json'
+let g:vim_json_syntax_conceal = 0
+
 " Solarized
 Bundle 'altercation/vim-colors-solarized'
 set background=dark
@@ -421,6 +425,8 @@ elseif g:vimrc_bundle_color == 'zenburn'
     colorscheme zenburn
     " Fix some weird urxvt behavior
     "hi TabLineFill cterm=none
+else
+    exec("colorscheme ".g:vimrc_bundle_color)
 endif
 
 if g:vimrc_bundle_c == 1
@@ -594,6 +600,7 @@ if has("autocmd")
     "set grepprg=grep\ -nH\ $*
     "let g:tex_flavor = "latex"
 
+    au BufRead,BufNewFile *.json set filetype=json
     " Put these in an autocmd group, so that we can delete them easily. (?)
     augroup vimrcEx
     au!
