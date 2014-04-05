@@ -35,8 +35,6 @@ let g:vimrc_bundle_ycm=0
 let g:vimrc_bundle_syntastic=1
 " extra undo functionality
 let g:vimrc_bundle_undo=0
-" git functionality
-let g:vimrc_bundle_git=1
 " CTRL-P replaces bufexplorer
 let g:vimrc_bundle_ctrlp=1
 " work/windows plugins
@@ -378,34 +376,39 @@ set runtimepath+=~/.vim/bundle/vundle
 call vundle#rc()
 
 " Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " Navigation
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 nmap <silent> <F6> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 
-Bundle 'EasyMotion'
-Bundle 'mileszs/ack.vim'
-Bundle 'tpope/vim-dispatch'
+" Movement
+Plugin 'EasyMotion'                 " Easier movement
+
+" Vim feature enhancement
+Plugin 'mileszs/ack.vim'            " Better vimgrep
+Plugin 'tpope/vim-dispatch'         " Better :make
+Plugin 'tpope/vim-obsession'        " Better :mksession
 
 " Editing
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-abolish'
-Bundle 'tpope/vim-rsi'
-Bundle 'vim-scripts/matchit.zip'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-rsi'              " readline in insert mode
+Plugin 'vim-scripts/matchit.zip'
+Plugin 'tComment'                   " better commenting
 
-" Commenting
-Bundle 'tComment'
 
-Bundle 'flazz/vim-colorschemes'
-Bundle 'elzr/vim-json'
+Plugin 'elzr/vim-json'              " json syntax highlighting
 let g:vim_json_syntax_conceal = 0
 
+" Colorscheme / Look-and-feel
+Plugin 'flazz/vim-colorschemes'
+
 " Solarized
-Bundle 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 set background=dark
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
@@ -413,7 +416,7 @@ let g:solarized_termcolors=256
 "let g:solarized_visibility="high"
 
 " Zenburn
-Bundle 'Zenburn'
+" Plugin 'Zenburn'
 let g:zenburn_high_Contrast=1
 
 if g:vimrc_bundle_color == 'solarized'
@@ -430,9 +433,48 @@ else
     exec("colorscheme ".g:vimrc_bundle_color)
 endif
 
+
+" git integration
+Plugin 'tpope/vim-fugitive'
+
+" Ctrl-p extension
+Plugin 'kien/ctrlp.vim'
+nnoremap <C-n> :CtrlPMRU<CR>
+noremap <Leader>bt :CtrlPTag<CR>
+" noremap <Leader>r :CtrlPLastMode<CR>
+noremap <Leader><C-p> :CtrlPMixed<CR>
+noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
+noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
+let g:ctrlp_prompt_mappings = { 'ToggleMRURelative()': ['<F2>']}
+if g:vimrc_rsa_1es == 1
+    " handle large projects better
+    let g:ctrlp_max_files = 0
+    let g:ctrlp_lazy_update = 1
+endif
+" Compilation
+set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
+set wildignore+=*.pyo,*.pyc,*.so,*.o
+" Pictures
+set wildignore+=*.bmp,*.ico,*.svg,*.png,*.gif
+" Archives
+set wildignore+=*.zip,*.rar,*.tar,*.jar,*.tar.gz,*.tar.xz,*.tar.bz,*.7z
+" Other
+set wildignore+=*.chm,*.ilk,*.dfl,*.ttf
+set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
+set wildignore+=*.doc,*.docx,*.xls,*.xlsx
+
+if g:vimrc_bundle_ctrlp == 1
+    nnoremap <leader>be :CtrlPBuffer<CR>
+else
+    " Buffer explorer
+    Plugin 'bufexplorer.zip'
+endif
+
+
 if g:vimrc_bundle_c == 1
-    Bundle 'a.vim'
-    Bundle 'majutsushi/tagbar'
+    " C/C++ related plugins
+    Plugin 'a.vim'
+    Plugin 'majutsushi/tagbar'
     let g:tagbar_sort=0
     let g:tagbar_type_idl = {
         \ 'ctagstype' : 'idl',
@@ -442,41 +484,35 @@ if g:vimrc_bundle_c == 1
         \ 'sort'      : 0
         \ }
     nmap <silent> <F7> :TagbarToggle<CR>
-    Bundle 'steffanc/cscopemaps.vim'
-    Bundle 'octol/vim-cpp-enhanced-highlight'
-    Bundle 'agassiyzh/Mark--Karkat'
+    Plugin 'steffanc/cscopemaps.vim'
+    Plugin 'octol/vim-cpp-enhanced-highlight'
+    Plugin 'agassiyzh/Mark--Karkat'
     let g:mvDefaultHighlightingPalette = 'extended'
     set ssop+=globals
     nmap <k0> <Plug>MarkSearchAnyNext
     nmap <C-k0> <Plug>MarkSearchAnyPrev
-    if g:vimrc_extra_ctags == 1
-        " Bundle 'vim-scripts/TagHighlight'
-        Bundle 'xolox/vim-shell'
-        Bundle 'xolox/vim-misc'
-        Bundle 'xolox/vim-easytags'
-        let g:easytags_dynamic_files=2
-        nmap <F12> :HighlightTags<CR>
-        nmap <C-F12> :UpdateTags<CR> :HighlightTags<CR>
-    endif
 endif
 
 if g:vimrc_bundle_lisp == 1
     " Load bundles related to LISP coding
-    Bundle 'guns/paredit'
-    Bundle 'tpope/vim-fireplace'
-    Bundle 'tpope/vim-classpath'
-    Bundle 'guns/vim-clojure-static'
-    Bundle 'kien/rainbow_parentheses.vim'
+    Plugin 'guns/paredit'
+    Plugin 'tpope/vim-fireplace'
+    Plugin 'tpope/vim-classpath'
+    Plugin 'guns/vim-clojure-static'
+    Plugin 'kien/rainbow_parentheses.vim'
 endif
 
 if g:vimrc_bundle_airline == 1
     " Add heavier statusbar
-    Bundle 'bling/vim-airline'
+    Plugin 'bling/vim-airline'
 endif
+
+
+" Syntax Checking/Completion
 
 if g:vimrc_bundle_ycm == 1
     " use heavier YCM for completion
-    Bundle 'Valloric/YouCompleteMe'
+    Plugin 'Valloric/YouCompleteMe'
     let g:ycm_key_invoke_completion = '<C-y>'
     let g:ycm_confirm_extra_conf = 0
     "let g:ycm_filetype_blacklist = { 'python': 1}
@@ -485,7 +521,7 @@ if g:vimrc_bundle_ycm == 1
     let g:vimrc_bundle_syntastic=1
 else
     " use lighter supertab for completion
-    Bundle 'ervandew/supertab'
+    Plugin 'ervandew/supertab'
     let g:SuperTabNoCompleteAfter = ['=', '+']
     let g:SuperTabNoCompleteAfter += ['[', '(', '{']
     let g:SuperTabNoCompleteAfter += [']', ')', '}']
@@ -493,9 +529,10 @@ else
     set completeopt+=longest
 endif
 
+
 if g:vimrc_bundle_syntastic == 1
     " Add syntax checking
-    Bundle 'scrooloose/syntastic'
+    Plugin 'scrooloose/syntastic'
     let g:syntastic_cpp_compiler_options = ' -std=c++11'
     let g:syntastic_python_checkers = ['pylint']
     let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
@@ -503,9 +540,11 @@ if g:vimrc_bundle_syntastic == 1
     nnoremap <C-F5> :SyntasticToggleMode<CR>
 endif
 
+
+" Extra undo support
 if g:vimrc_bundle_undo == 1
     " Undo extensions
-    Bundle 'mbbill/undotree'
+    Plugin 'mbbill/undotree'
     noremap U :UndotreeToggle<CR>
     set undodir='/home/vernon/.vim/undo/'
     set undofile
@@ -514,61 +553,27 @@ elseif g:vimrc_bundle_ctrlp == 1
 endif
 
 if g:vimrc_bundle_windows_dev == 1
+    " Make Wandows work ngrmadly
+
     " ClearCase integration
-    Bundle 'vim-scripts/ccase.vim'
+    if g:vimrc_rsa_1es == 1
+        Plugin 'vim-scripts/ccase.vim'
+    endif
     " Visual Studio integration
-    Bundle 'vim-scripts/visual_studio.vim'
+    Plugin 'vim-scripts/visual_studio.vim'
     let g:visual_studio_output = "C:/temp/vs_output.txt"
     let g:visual_studio_task_list = "C:/temp/vs_task_list.txt"
     let g:visual_studio_find_results_1 = "C:/temp/vs_find_results_1.txt"
     let g:visual_studio_find_results_2 = "C:/temp/vs_find_results_2.txt"
     " Wiki extensions
-    Bundle 'vim-scripts/wikipedia.vim'
+    Plugin 'vim-scripts/wikipedia.vim'
     " I add this to the syntax file, right above sy include @TeX
     "let g:tex_isk="@,48-57,_,192-255"
-    Bundle 'PProvost/vim-ps1'
-endif
-
-if g:vimrc_bundle_git == 1
-    " git integration
-    Bundle 'tpope/vim-fugitive'
-    " Bundle 'gregsexton/gitv'
-endif
-
-if g:vimrc_bundle_ctrlp == 1
-    " Ctrl-p extension
-    Bundle 'kien/ctrlp.vim'
-    nnoremap <C-n> :CtrlPMRU<CR>
-    nnoremap <leader>be :CtrlPBuffer<CR>
-    noremap <Leader>bt :CtrlPTag<CR>
-    " noremap <Leader>r :CtrlPLastMode<CR>
-    noremap <Leader><C-p> :CtrlPMixed<CR>
-    noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
-    noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
-    let g:ctrlp_prompt_mappings = { 'ToggleMRURelative()': ['<F2>']}
-    if g:vimrc_rsa_1es == 1
-        " handle large projects better
-        let g:ctrlp_max_files = 0
-        let g:ctrlp_lazy_update = 1
-    endif
-    " Compilation
-    set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
-    set wildignore+=*.pyo,*.pyc,*.so,*.o
-    " Pictures
-    set wildignore+=*.bmp,*.ico,*.svg,*.png,*.gif
-    " Archives
-    set wildignore+=*.zip,*.rar,*.tar,*.jar,*.tar.gz,*.tar.xz,*.tar.bz,*.7z
-    " Other
-    set wildignore+=*.chm,*.ilk,*.dfl,*.ttf
-    set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
-    set wildignore+=*.doc,*.docx,*.xls,*.xlsx
-else
-    " Buffer explorer
-    Bundle 'bufexplorer.zip'
+    Plugin 'PProvost/vim-ps1'
 endif
 
 if g:vimrc_multiple_cursors == 1
-    Bundle 'terryma/vim-multiple-cursors'
+    Plugin 'terryma/vim-multiple-cursors'
     let g:multi_cursor_next_key='<M-j>'
     let g:multi_cursor_prev_key='<M-k>'
     let g:multi_cursor_skip_key='<M-x>'
@@ -576,14 +581,6 @@ if g:vimrc_multiple_cursors == 1
     let g:multi_cursor_exit_from_visual_mode = 0
     let g:multi_cursor_exit_from_insert_mode = 0
 endif
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TurboMark
-" - better mark functionality
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"nmap <silent> mm :TurboMark<CR>
-"nmap <silent> 'm :TurboFind<CR>
 
 
 
@@ -602,21 +599,22 @@ if has("autocmd")
     "let g:tex_flavor = "latex"
 
     au BufRead,BufNewFile *.json set filetype=json
+    au BufRead,BufNewFile *.ps1 set filetype=ps1
     " Put these in an autocmd group, so that we can delete them easily. (?)
     augroup vimrcEx
     au!
 
     " load the types.vim highlighting file, if it exists
-    autocmd BufRead,BufNewFile *.[ch] let fname = expand('<afile>:p:h') . '/types.vim'
-    autocmd BufRead,BufNewFile *.[ch] if filereadable(fname)
-    autocmd BufRead,BufNewFile *.[ch]   exe 'so ' . fname
-    autocmd BufRead,BufNewFile *.[ch] endif
+    " autocmd BufRead,BufNewFile *.[ch] let fname = expand('<afile>:p:h') . '/types.vim'
+    " autocmd BufRead,BufNewFile *.[ch] if filereadable(fname)
+    " autocmd BufRead,BufNewFile *.[ch]   exe 'so ' . fname
+    " autocmd BufRead,BufNewFile *.[ch] endif
 
-        " When editing a file, always jump to the last known cursor position.
-        " Don't do it when the position is invalid or when inside an event handler
-        " (happens when dropping a file on gvim).
-        " Also don't do it when the mark is in the first line, that is the default
-        " position when opening a file.
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    " Also don't do it when the mark is in the first line, that is the default
+    " position when opening a file.
     autocmd BufReadPost *
       \ if line("'\"") > 1 && line("'\"") <= line("$") |
       \    exe "normal! g`\"" |
@@ -626,24 +624,6 @@ else
    set autoindent   " Always want that autoindent
 endif
 
-
-" Use ranger as vim file manager
-function! Ranger()
-    " Get a temp file name without creating it
-    let tmpfile = substitute(system('mktemp -u'), '\n', '', '')
-    " Launch ranger, passing it the temp file name
-    silent exec '!RANGER_RETURN_FILE='.tmpfile.' ranger'
-    " If the temp file has been written by ranger
-    if filereadable(tmpfile)
-        " Get the selected file name from the temp file
-        let filetoedit = system('cat '.tmpfile)
-        exec 'edit '.filetoedit
-        call delete(tmpfile)
-    endif
-    redraw!
-endfunction
-
-" nmap <leader>e :call Ranger()<cr>
 
 
 
