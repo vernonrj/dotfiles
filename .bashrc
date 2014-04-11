@@ -90,6 +90,7 @@ complete -cf sudo
 complete -cf man
 complete -cf which
 complete -cf pacman
+source /usr/share/git/completion/git-completion.bash
 if [[ -e /usr/bin/pacman-color ]]; then
 	# this might not be working?
 	complete -o default -o nospace -F pacman pacman-color
@@ -100,7 +101,7 @@ fi
 
 # Exports
 
-#function export_path 
+#function export_path
 #{
 	#local array[0]="$HOME/bin"
 	#local array[1]="/usr/lib/colorgcc/bin"
@@ -178,7 +179,7 @@ alias nautilus='nautilus --no-desktop'
 alias df='df -h'
 alias sfeh='feh -FZ --hide-pointer'
 alias clyde='yaourt -a'
-alias grep='grep --color=auto' 
+alias grep='grep --color=auto'
 alias a2ps='a2ps -R --columns=1 -M letter'
 # Grep for less or whatever
 alias cgrep='grep --color=always'
