@@ -600,6 +600,8 @@ if has("autocmd")
 
     au BufRead,BufNewFile *.json set filetype=json
     au BufRead,BufNewFile *.ps1 set filetype=ps1
+    au FileType python setlocal shiftwidth=4 tabstop=4
+    au FileType vim setlocal shiftwidth=4 tabstop=4
     " Put these in an autocmd group, so that we can delete them easily. (?)
     augroup vimrcEx
     au!
