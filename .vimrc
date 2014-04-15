@@ -33,14 +33,16 @@ let g:vimrc_bundle_airline=1
 let g:vimrc_bundle_ycm=0
 " syntax checking
 let g:vimrc_bundle_syntastic=1
-" extra undo functionality
-let g:vimrc_bundle_undo=0
 " CTRL-P replaces bufexplorer
 let g:vimrc_bundle_ctrlp=1
 " work/windows plugins
 let g:vimrc_bundle_windows_dev=0
-" multiple cursors
-let g:vimrc_multiple_cursors = 1
+" in-file movement plugins
+let g:vimrc_enhance_movement=1
+" vim feature enhancements
+let g:vimrc_feature_enhancements=1
+" extra undo functionality
+let g:vimrc_bundle_undo=1
 
 if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
@@ -80,6 +82,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 cnoremap <M-5> <C-R>=expand('%:p:h')<CR>/
 cnoremap <M-2> expand('%:p')
+inoremap <C-t> <C-R>=strftime("TODO:vrj %Y.%m.%d: ")<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Beyond Compare Integration
@@ -177,6 +180,16 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 set splitright
+
+map <M-Up> :copen<CR>
+map <M-Down> :cclose<CR>
+map <M-Left> :colder<CR>
+map <M-Right> :cnewer<CR>
+
+map <M-S-Up> :lopen<CR>
+map <M-S-Down> :lclose<CR>
+map <M-S-Left> :lolder<CR>
+map <M-S-Right> :lnewer<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tab Behavior
@@ -379,33 +392,51 @@ call vundle#rc()
 " Vundle
 Plugin 'gmarik/vundle'
 
-" Navigation
-Plugin 'scrooloose/nerdtree'
-nmap <silent> <F6> :NERDTreeToggle<CR>
-let NERDTreeDirArrows=0
-let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
+if g:vimrc_enhance_movement == 1
+    " in-file movement enhancements
+    Plugin 'EasyMotion'                 " Easier movement
+    Plugin 'tpope/vim-rsi'              " readline in insert mode
+    Plugin 'vim-scripts/matchit.zip'
 
-" Movement
-Plugin 'EasyMotion'                 " Easier movement
+    Plugin 'terryma/vim-multiple-cursors'
+    let g:multi_cursor_next_key='<M-n>'
+    let g:multi_cursor_prev_key='<M-S-n>'
+    let g:multi_cursor_skip_key='<M-m>'
+    let g:multi_cursor_quit_key='<Esc>'
+    let g:multi_cursor_exit_from_visual_mode = 0
+    let g:multi_cursor_exit_from_insert_mode = 0
+endif
 
-" Vim feature enhancement
-Plugin 'mileszs/ack.vim'            " Better vimgrep
-Plugin 'tpope/vim-dispatch'         " Better :make
-Plugin 'tpope/vim-obsession'        " Better :mksession
 
-" Editing
+if g:vimrc_feature_enhancements == 1
+    " Vim feature enhancement
+    Plugin 'mileszs/ack.vim'            " Better vimgrep
+    Plugin 'tpope/vim-dispatch'         " Better :make
+    Plugin 'tpope/vim-obsession'        " Better :mksession
+    " Extra undo support
+    if g:vimrc_bundle_undo == 1
+        " Undo extensions
+        Plugin 'mbbill/undotree'
+        noremap U :UndotreeToggle<CR>
+        set undodir='/home/vernon/.vim/undo/'
+        set undofile
+    elseif g:vimrc_bundle_ctrlp == 1
+        noremap U :CtrlPUndo<CR>
+    endif
+endif
+
+" Editing enhancements
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-rsi'              " readline in insert mode
-Plugin 'vim-scripts/matchit.zip'
 Plugin 'tComment'                   " better commenting
 
-
+" Syntax enhancements
 Plugin 'elzr/vim-json'              " json syntax highlighting
 let g:vim_json_syntax_conceal = 0
 
-" Colorscheme / Look-and-feel
+
+" Colorscheme / Look-and-feel enhancements
 Plugin 'flazz/vim-colorschemes'
 
 " Solarized
@@ -438,6 +469,12 @@ endif
 " git integration
 Plugin 'tpope/vim-fugitive'
 
+
+" File/Dir movement enhancements
+Plugin 'scrooloose/nerdtree'
+nmap <silent> <F6> :NERDTreeToggle<CR>
+let NERDTreeDirArrows=0
+let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 " Ctrl-p extension
 Plugin 'kien/ctrlp.vim'
 nnoremap <C-n> :CtrlPMRU<CR>
@@ -507,6 +544,11 @@ endif
 if g:vimrc_bundle_airline == 1
     " Add heavier statusbar
     Plugin 'bling/vim-airline'
+    " let g:airline#extensions#tabline#enabled = 1
+    " let g:airline#extensions#tabline#show_buffers = 0
+    " let g:airline#extensions#tabline#show_tab_type = 0
+    " let g:airline#extensions#tabline#tab_nr_type = 1
+    " let g:airline#extensions#tabline#tab_min_count = 2
 endif
 
 
@@ -543,17 +585,6 @@ if g:vimrc_bundle_syntastic == 1
 endif
 
 
-" Extra undo support
-if g:vimrc_bundle_undo == 1
-    " Undo extensions
-    Plugin 'mbbill/undotree'
-    noremap U :UndotreeToggle<CR>
-    set undodir='/home/vernon/.vim/undo/'
-    set undofile
-elseif g:vimrc_bundle_ctrlp == 1
-    noremap U :CtrlPUndo<CR>
-endif
-
 if g:vimrc_bundle_windows_dev == 1
     " Make Wandows work ngrmadly
 
@@ -572,16 +603,6 @@ if g:vimrc_bundle_windows_dev == 1
     " I add this to the syntax file, right above sy include @TeX
     "let g:tex_isk="@,48-57,_,192-255"
     Plugin 'PProvost/vim-ps1'
-endif
-
-if g:vimrc_multiple_cursors == 1
-    Plugin 'terryma/vim-multiple-cursors'
-    let g:multi_cursor_next_key='<M-j>'
-    let g:multi_cursor_prev_key='<M-k>'
-    let g:multi_cursor_skip_key='<M-x>'
-    let g:multi_cursor_quit_key='<Esc>'
-    let g:multi_cursor_exit_from_visual_mode = 0
-    let g:multi_cursor_exit_from_insert_mode = 0
 endif
 
 
