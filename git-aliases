@@ -3,7 +3,8 @@
     log-long = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
     log-short-rel = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
     log-file = log -u
-    graph = log --graph --oneline --decorate --all
+    #graph = log --graph --oneline --decorate --all
+    graph = log --graph --full-history --color --pretty=tformat:"%C(red)%h%x09%C(auto)%d%C(reset)%x20%s%x20%C(yellow)(%an)%C(reset)"
     ls-aliases = "!git config -l | grep alias | cut -c 7-"
 
 vim:ft=gitconfig

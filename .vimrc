@@ -309,6 +309,7 @@ noremap gk k
 inoremap <Up> <C-O>gk
 inoremap <Down> <C-O>gj
 " Remap 0/^ and related keys to how I like them
+nnoremap <M-0> 0
 nnoremap 0 ^
 nnoremap ^ 0
 nnoremap g0 g^
@@ -450,6 +451,7 @@ if g:vimrc_rsa_1es == 1
     " handle large projects better
     let g:ctrlp_max_files = 0
     let g:ctrlp_lazy_update = 1
+    let g:ctrlp_root_markers = ['build']
 endif
 " Compilation
 set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
