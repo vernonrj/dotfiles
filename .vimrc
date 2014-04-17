@@ -475,6 +475,7 @@ Plugin 'scrooloose/nerdtree'
 nmap <silent> <F6> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
+Plugin 'dhruvasagar/vim-vinegar'
 " Ctrl-p extension
 Plugin 'kien/ctrlp.vim'
 nnoremap <C-n> :CtrlPMRU<CR>
