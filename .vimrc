@@ -172,6 +172,9 @@ map <M-7> 7gt
 map <M-8> 8gt
 map <M-9> 9gt
 
+map <M-,> :call MoveToPrevTab()<CR>
+map <M-.> :call MoveToNextTab()<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Splits
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -475,10 +478,11 @@ Plugin 'scrooloose/nerdtree'
 nmap <silent> <F6> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
-Plugin 'dhruvasagar/vim-vinegar'
+Plugin 'tpope/vim-vinegar'
 " Ctrl-p extension
 Plugin 'kien/ctrlp.vim'
 nnoremap <C-n> :CtrlPMRU<CR>
+nnoremap <M-p> :CtrlP .<CR>
 noremap <Leader>bt :CtrlPTag<CR>
 " noremap <Leader>r :CtrlPLastMode<CR>
 noremap <Leader><C-p> :CtrlPMixed<CR>
@@ -583,6 +587,7 @@ if g:vimrc_bundle_syntastic == 1
     let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
     nnoremap <F5> :SyntasticCheck<CR>
     nnoremap <C-F5> :SyntasticToggleMode<CR>
+    nnoremap <C-S-F5> :SyntasticReset<CR>
 endif
 
 
@@ -612,6 +617,14 @@ endif
 "----------------------------------------------------------"
 " Helper Functions
 "----------------------------------------------------------"
+function! KillComments()
+   " remove all c-style comments
+   %s/\/\*\(.\|\n\)\{-}\*\/ \{0,}\n//g
+   %s/\/\*\(.\|\n\)\{-}\*\///g
+   %s/^ \+\/\/.*\n//g
+   %s/\/\/.*//g
+   %s/ \+$//g
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype
@@ -624,6 +637,10 @@ if has("autocmd")
 
     au BufRead,BufNewFile *.json set filetype=json
     au BufRead,BufNewFile *.ps1 set filetype=ps1
+    if g:vimrc_rsa_1es == 1
+        au BufRead,BufNewFile *.cmd set filetype=iecwin
+        au FileType iecwin set syntax=cpp
+    endif
     au FileType python setlocal shiftwidth=4 tabstop=4
     au FileType vim setlocal shiftwidth=4 tabstop=4
     " Put these in an autocmd group, so that we can delete them easily. (?)
@@ -753,4 +770,50 @@ function! CtagTypeDefs()
 endfunction
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tab Movement Functions
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! MoveToPrevTab()
+  "there is only one window
+  if tabpagenr('$') == 1 && winnr('$') == 1
+    return
+  endif
+  "preparing new window
+  let l:tab_nr = tabpagenr('$')
+  let l:cur_buf = bufnr('%')
+  if tabpagenr() != 1
+    close!
+    if l:tab_nr == tabpagenr('$')
+      tabprev
+    endif
+    sp
+  else
+    close!
+    exe "0tabnew"
+  endif
+  "opening current buffer in new window
+  exe "b".l:cur_buf
+endfunc
+
+function! MoveToNextTab()
+  "there is only one window
+  if tabpagenr('$') == 1 && winnr('$') == 1
+    return
+  endif
+  "preparing new window
+  let l:tab_nr = tabpagenr('$')
+  let l:cur_buf = bufnr('%')
+  if tabpagenr() < tab_nr
+    close!
+    if l:tab_nr == tabpagenr('$')
+      tabnext
+    endif
+    sp
+  else
+    close!
+    tabnew
+  endif
+  "opening current buffer in new window
+  exe "b".l:cur_buf
+endfunc
 
