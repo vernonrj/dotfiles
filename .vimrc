@@ -476,9 +476,9 @@ Plugin 'tpope/vim-fugitive'
 " File/Dir movement enhancements
 Plugin 'scrooloose/nerdtree'
 nmap <silent> <F6> :NERDTreeToggle<CR>
+nmap <silent> <C-F6> :NERDTreeFind<CR>
 let NERDTreeDirArrows=0
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
-Plugin 'tpope/vim-vinegar'
 " Ctrl-p extension
 Plugin 'kien/ctrlp.vim'
 nnoremap <C-n> :CtrlPMRU<CR>
@@ -495,6 +495,7 @@ if g:vimrc_rsa_1es == 1
     let g:ctrlp_lazy_update = 1
     let g:ctrlp_root_markers = ['build']
 endif
+Plugin 'szw/vim-ctrlspace'
 " Compilation
 set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
 set wildignore+=*.pyo,*.pyc,*.so,*.o
