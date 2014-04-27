@@ -42,7 +42,7 @@ let g:vimrc_enhance_movement=1
 " vim feature enhancements
 let g:vimrc_feature_enhancements=1
 " extra undo functionality
-let g:vimrc_bundle_undo=1
+let g:vimrc_bundle_undo=0
 
 if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
