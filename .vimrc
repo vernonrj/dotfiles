@@ -336,6 +336,7 @@ nnoremap <End> g$
 " ensure backspace works like expected on tabs
 set backspace=indent,eol,start
 
+nmap <silent> gb `[v`]
 
 
 "----------------------------------------------------------"
