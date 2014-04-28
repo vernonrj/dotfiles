@@ -415,6 +415,7 @@ endif
 if g:vimrc_feature_enhancements == 1
     " Vim feature enhancement
     Plugin 'mileszs/ack.vim'            " Better vimgrep
+    Plugin 'rking/ag.vim'               " Better ack
     Plugin 'tpope/vim-dispatch'         " Better :make
     Plugin 'tpope/vim-obsession'        " Better :mksession
     " Extra undo support
