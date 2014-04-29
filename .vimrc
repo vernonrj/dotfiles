@@ -61,6 +61,9 @@ if has("win32") || has("win64")
     "Open .vimrc for editing
     map <Leader>gV :e ~/_vimrc<CR>
     let g:bcomp_path = "C:\\Program Files (x86)\\Beyond Compare 3\\BComp.exe"
+
+    " Can't get unicode font to work correctly...
+    let g:ctrlspace_unicode_font = 0
 else
     " reloading mappings for vimrc on *nix
     map <Leader>gv :source ~/.vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
