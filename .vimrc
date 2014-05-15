@@ -231,7 +231,14 @@ set guicursor+=a:blinkon0
 set ruler   " Show cursor position always
 set mousehide
 if has('mouse')
-    set mouse=ra
+   if has("win32") || has("win64")
+       " I always go into selection mode when I don't want to on windows.
+       " So disable that feature on windows only
+       set mouse=inchr
+    else
+        " Never had that problem on *nix though. No reason to disable there.
+        set mouse=ra
+    endif
 endif
 
 
