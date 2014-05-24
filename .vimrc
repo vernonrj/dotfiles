@@ -253,6 +253,8 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set showcmd     " Display incomplete terms
 set incsearch   " Do incremental searching
+set ignorecase
+set smartcase
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " case sensitive/insensitive searches
@@ -441,9 +443,9 @@ if g:vimrc_feature_enhancements == 1
 endif
 
 " Editing enhancements
-Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'         " Surrounding movements
+Plugin 'wellle/targets.vim'         " Many more movements
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-abolish'
 Plugin 'tComment'                   " better commenting
 
 " Syntax enhancements
