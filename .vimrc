@@ -832,3 +832,4 @@ function! MoveToNextTab()
   exe "b".l:cur_buf
 endfunc
 
+" vim:ft=vim:ts=4:sw=4:
