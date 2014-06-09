@@ -22,27 +22,16 @@ let g:vimrc_rsa_1es=0
 let g:vimrc_bundle_color='solarized'
 " c-like language plugins
 let g:vimrc_bundle_c=1
-" extra ctags plugins
-let g:vimrc_extra_ctags=0
 " lisp-related plugins
 let g:vimrc_bundle_lisp=1
-" statusbar plugin
-let g:vimrc_bundle_airline=1
 " heavier, more complex fuzzy completion (if on, turns on syntastic too)
 " if off, turns on supertab
 let g:vimrc_bundle_ycm=0
 " syntax checking
 let g:vimrc_bundle_syntastic=1
-" CTRL-P replaces bufexplorer
-let g:vimrc_bundle_ctrlp=1
 " work/windows plugins
 let g:vimrc_bundle_windows_dev=0
-" in-file movement plugins
-let g:vimrc_enhance_movement=1
-" vim feature enhancements
-let g:vimrc_feature_enhancements=1
-" extra undo functionality
-let g:vimrc_bundle_undo=0
+
 
 if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
@@ -151,6 +140,7 @@ nnoremap <silent> <Leader>hS :if exists("syntax_on") <Bar>
 
 autocmd BufEnter * :syntax sync fromstart
 syntax enable
+set cino+=(0
 
 
 
@@ -408,45 +398,41 @@ call vundle#rc()
 " Vundle
 Plugin 'gmarik/vundle'
 
-if g:vimrc_enhance_movement == 1
-    " in-file movement enhancements
-    Plugin 'EasyMotion'                 " Easier movement
-    Plugin 'tpope/vim-rsi'              " readline in insert mode
-    Plugin 'vim-scripts/matchit.zip'
+" in-file movement enhancements
+Plugin 'EasyMotion'                 " Easier movement
+Plugin 'tpope/vim-rsi'              " readline in insert mode
+Plugin 'vim-scripts/matchit.zip'
 
-    Plugin 'terryma/vim-multiple-cursors'
-    let g:multi_cursor_next_key='<M-n>'
-    let g:multi_cursor_prev_key='<M-S-n>'
-    let g:multi_cursor_skip_key='<M-m>'
-    let g:multi_cursor_quit_key='<Esc>'
-    let g:multi_cursor_exit_from_visual_mode = 0
-    let g:multi_cursor_exit_from_insert_mode = 0
-endif
+Plugin 'terryma/vim-multiple-cursors'
+let g:multi_cursor_next_key='<M-n>'
+let g:multi_cursor_prev_key='<M-S-n>'
+let g:multi_cursor_skip_key='<M-m>'
+let g:multi_cursor_quit_key='<Esc>'
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
 
 
-if g:vimrc_feature_enhancements == 1
-    " Vim feature enhancement
-    Plugin 'mileszs/ack.vim'            " Better vimgrep
-    Plugin 'rking/ag.vim'               " Better ack
-    Plugin 'tpope/vim-dispatch'         " Better :make
-    Plugin 'tpope/vim-obsession'        " Better :mksession
-    " Extra undo support
-    if g:vimrc_bundle_undo == 1
-        " Undo extensions
-        Plugin 'mbbill/undotree'
-        noremap U :UndotreeToggle<CR>
-        set undodir='/home/vernon/.vim/undo/'
-        set undofile
-    elseif g:vimrc_bundle_ctrlp == 1
-        noremap U :CtrlPUndo<CR>
-    endif
-endif
+" Vim feature enhancement
+Plugin 'mileszs/ack.vim'            " Better vimgrep
+Plugin 'rking/ag.vim'               " Better ack
+Plugin 'tpope/vim-dispatch'         " Better :make
+Plugin 'tpope/vim-obsession'        " Better :mksession
+" Extra undo support
+noremap U :CtrlPUndo<CR>
 
 " Editing enhancements
+Plugin 'vim-scripts/AutoClose'
 Plugin 'tpope/vim-surround'         " Surrounding movements
 Plugin 'wellle/targets.vim'         " Many more movements
 Plugin 'tpope/vim-repeat'
 Plugin 'tComment'                   " better commenting
+Plugin 'godlygeek/tabular'
+map <Leader>gt= :Tabularize /=<CR>
+map <Leader>gt: :Tabularize /:<CR>
+map <Leader>gt:: :Tabularize /:\zs<CR>
+map <Leader>gt, :Tabularize /,<CR>
+map <Leader>gt<Bar> :Tabularize /<Bar><CR>
+map <leader>gT :Tabularize /
 
 " Syntax enhancements
 Plugin 'elzr/vim-json'              " json syntax highlighting
@@ -522,12 +508,9 @@ set wildignore+=*.chm,*.ilk,*.dfl,*.ttf
 set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
 set wildignore+=*.doc,*.docx,*.xls,*.xlsx
 
-if g:vimrc_bundle_ctrlp == 1
-    nnoremap <leader>be :CtrlPBuffer<CR>
-else
-    " Buffer explorer
-    Plugin 'bufexplorer.zip'
-endif
+nnoremap <leader>be :CtrlPBuffer<CR>
+" Buffer explorer
+"Plugin 'bufexplorer.zip'
 
 
 if g:vimrc_bundle_c == 1
@@ -561,15 +544,13 @@ if g:vimrc_bundle_lisp == 1
     Plugin 'kien/rainbow_parentheses.vim'
 endif
 
-if g:vimrc_bundle_airline == 1
-    " Add heavier statusbar
-    Plugin 'bling/vim-airline'
-    " let g:airline#extensions#tabline#enabled = 1
-    " let g:airline#extensions#tabline#show_buffers = 0
-    " let g:airline#extensions#tabline#show_tab_type = 0
-    " let g:airline#extensions#tabline#tab_nr_type = 1
-    " let g:airline#extensions#tabline#tab_min_count = 2
-endif
+" Add heavier statusbar
+Plugin 'bling/vim-airline'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#show_buffers = 0
+" let g:airline#extensions#tabline#show_tab_type = 0
+" let g:airline#extensions#tabline#tab_nr_type = 1
+" let g:airline#extensions#tabline#tab_min_count = 2
 
 
 " Syntax Checking/Completion
