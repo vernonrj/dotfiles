@@ -433,6 +433,7 @@ map <Leader>gt:: :Tabularize /:\zs<CR>
 map <Leader>gt, :Tabularize /,<CR>
 map <Leader>gt<Bar> :Tabularize /<Bar><CR>
 map <leader>gT :Tabularize /
+Plugin 'chrisbra/NrrwRgn'
 
 " Syntax enhancements
 Plugin 'elzr/vim-json'              " json syntax highlighting
