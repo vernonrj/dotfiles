@@ -421,7 +421,8 @@ Plugin 'tpope/vim-obsession'        " Better :mksession
 noremap U :CtrlPUndo<CR>
 
 " Editing enhancements
-Plugin 'Raimondi/delimitMate'
+Plugin 'jiangmiao/auto-pairs'
+" Plugin 'Raimondi/delimitMate'
 " Plugin 'vim-scripts/AutoClose'
 Plugin 'tpope/vim-surround'         " Surrounding movements
 Plugin 'wellle/targets.vim'         " Many more movements
