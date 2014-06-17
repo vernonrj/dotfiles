@@ -421,7 +421,10 @@ Plugin 'tpope/vim-obsession'        " Better :mksession
 noremap U :CtrlPUndo<CR>
 
 " Editing enhancements
-Plugin 'jiangmiao/auto-pairs'
+" Plugin 'jiangmiao/auto-pairs'
+" let g:AutoPairsShortcutToggle = '<M-)>'
+" let g:AutoPairsShortcutJump = '<M-j>'
+" let g:AutoPairsShortcutBackInsert = '<M-k>'
 " Plugin 'Raimondi/delimitMate'
 " Plugin 'vim-scripts/AutoClose'
 Plugin 'tpope/vim-surround'         " Surrounding movements
