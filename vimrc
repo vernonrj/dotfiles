@@ -73,7 +73,7 @@ endif
 " Editing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 cnoremap <M-5> <C-R>=expand('%:p:h')<CR>/
-cnoremap <M-2> expand('%:p')
+cnoremap <M-2> <C-R>=expand('%:p')<CR>
 inoremap <C-t> <C-R>=strftime("TODO:vrj %Y.%m.%d: ")<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -437,6 +437,7 @@ map <Leader>gt: :Tabularize /:<CR>
 map <Leader>gt:: :Tabularize /:\zs<CR>
 map <Leader>gt, :Tabularize /,<CR>
 map <Leader>gt<Bar> :Tabularize /<Bar><CR>
+map <Leader>gtm :Tabularize /m_.*<CR>
 map <leader>gT :Tabularize /
 Plugin 'chrisbra/NrrwRgn'
 
@@ -578,6 +579,11 @@ else
     let g:SuperTabNoCompleteAfter += [']', ')', '}']
     let g:SuperTabNoCompleteAfter += [',', ';', '&', '^', '\s']
     set completeopt+=longest
+    if g:vimrc_rsa_1es == 1
+        " some include lists are too large to allow sane scanning of include
+        " lists. Turn it off
+        set complete-=i
+    endif
 endif
 
 
