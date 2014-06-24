@@ -825,4 +825,7 @@ function! MoveToNextTab()
   exe "b".l:cur_buf
 endfunc
 
+" Make things like search wrap and other warnings way more obvious
+hi WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
+
 " vim:ft=vim:ts=4:sw=4:
