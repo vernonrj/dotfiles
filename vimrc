@@ -440,6 +440,9 @@ map <Leader>gt<Bar> :Tabularize /<Bar><CR>
 map <Leader>gtm :Tabularize /m_.*<CR>
 map <leader>gT :Tabularize /
 Plugin 'chrisbra/NrrwRgn'
+Plugin 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 " Syntax enhancements
 Plugin 'elzr/vim-json'              " json syntax highlighting
