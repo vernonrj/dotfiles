@@ -505,7 +505,6 @@ if g:vimrc_rsa_1es == 1
     let g:ctrlp_lazy_update = 1
     let g:ctrlp_root_markers = ['build']
 endif
-Plugin 'szw/vim-ctrlspace'
 " Compilation
 set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
 set wildignore+=*.pyo,*.pyc,*.so,*.o
@@ -517,10 +516,13 @@ set wildignore+=*.zip,*.rar,*.tar,*.jar,*.tar.gz,*.tar.xz,*.tar.bz,*.7z
 set wildignore+=*.chm,*.ilk,*.dfl,*.ttf
 set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
 set wildignore+=*.doc,*.docx,*.xls,*.xlsx
-
 nnoremap <leader>be :CtrlPBuffer<CR>
 " Buffer explorer
 "Plugin 'bufexplorer.zip'
+
+Plugin 'szw/vim-ctrlspace'
+Plugin 'MattesGroeger/vim-bookmarks'
+
 
 
 if g:vimrc_bundle_c == 1
