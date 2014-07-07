@@ -522,6 +522,17 @@ nnoremap <leader>be :CtrlPBuffer<CR>
 
 Plugin 'szw/vim-ctrlspace'
 Plugin 'MattesGroeger/vim-bookmarks'
+nmap <M-b>m <Plug>ToggleBookmark
+nmap <M-b>a <Plug>Annotate
+nmap <M-b>n <Plug>NextBookmark
+nmap <M-b>p <Plug>PrevBookmark
+nmap <M-b>i <Plug>ShowAllBookmarks
+nmap <M-b>c <Plug>ClearBookmarks
+nmap <M-b>x <Plug>ClearAllBookmarks
+if has("win32") || has("win64")
+    let g:bookmark_sign = '**'
+    let g:bookmark_annotation_sign = '##'
+endif
 
 
 
