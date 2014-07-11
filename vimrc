@@ -36,6 +36,10 @@ let g:vimrc_bundle_windows_dev=0
 if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
 
+    " Language configuration
+    set langmenu=en_US.UTF-8
+    language English_United States
+
     set guifont=Consolas:h11:cANSI
     behave xterm
     " Ensure various split commands work on windows
