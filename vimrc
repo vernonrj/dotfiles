@@ -181,16 +181,6 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 set splitright
 
-map <M-Up> :copen<CR>
-map <M-Down> :cclose<CR>
-map <M-Left> :colder<CR>
-map <M-Right> :cnewer<CR>
-
-map <M-S-Up> :lopen<CR>
-map <M-S-Down> :lclose<CR>
-map <M-S-Left> :lolder<CR>
-map <M-S-Right> :lnewer<CR>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tab Behavior
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -417,6 +407,9 @@ let g:multi_cursor_exit_from_insert_mode = 0
 
 
 " Vim feature enhancement
+Plugin 'ton/vim-bufsurf'            " Tweak on behavior of C-O/C-I
+nnoremap <M-Left> :BufSurfBack<CR>
+nnoremap <M-Right> :BufSurfForward<CR>
 Plugin 'mileszs/ack.vim'            " Better vimgrep
 Plugin 'rking/ag.vim'               " Better ack
 Plugin 'tpope/vim-dispatch'         " Better :make
