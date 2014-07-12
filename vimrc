@@ -495,6 +495,7 @@ let NERDTreeDirArrows=0
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 " Ctrl-p extension
 Plugin 'kien/ctrlp.vim'
+Plugin 'FelikZ/ctrlp-py-matcher'
 nnoremap <C-n> :CtrlPMRU<CR>
 nnoremap <M-p> :CtrlP .<CR>
 noremap <Leader>bt :CtrlPTag<CR>
@@ -505,9 +506,12 @@ noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
 let g:ctrlp_prompt_mappings = { 'ToggleMRURelative()': ['<F2>']}
 if g:vimrc_rsa_1es == 1
     " handle large projects better
-    let g:ctrlp_max_files = 0
-    let g:ctrlp_lazy_update = 1
     let g:ctrlp_root_markers = ['build']
+endif
+let g:ctrlp_max_files = 0
+let g:ctrlp_lazy_update = 1
+if has('python')
+    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 endif
 " Compilation
 set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
@@ -523,6 +527,11 @@ set wildignore+=*.doc,*.docx,*.xls,*.xlsx
 nnoremap <leader>be :CtrlPBuffer<CR>
 " Buffer explorer
 "Plugin 'bufexplorer.zip'
+if executable('ag')
+    " Use ag for grep and ctrlp
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 Plugin 'szw/vim-ctrlspace'
 Plugin 'MattesGroeger/vim-bookmarks'
