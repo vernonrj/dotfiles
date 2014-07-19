@@ -596,6 +596,11 @@ if g:vimrc_bundle_ycm == 1
 elseif has('lua')
     " Use neocomplete if we have lua
     Plugin 'Shougo/neocomplete.vim'
+    let g:neocomplete#enable_at_startup = 1
+    inoremap <expr><Tab>
+    \ neocomplete#complete_common_string() != '' ?
+    \   neocomplete#complete_common_string() :
+    \ pumvisible() ? "\<C-n>" : "\<Tab>"
 else
     " use supertab for completion
     Plugin 'ervandew/supertab'
