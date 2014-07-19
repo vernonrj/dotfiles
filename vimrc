@@ -593,21 +593,29 @@ if g:vimrc_bundle_ycm == 1
     let g:ycm_autoclose_preview_window_after_insertion = 1
     " use syntastic too
     let g:vimrc_bundle_syntastic=1
+elseif has('lua')
+    " Use neocomplete if we have lua
+    Plugin 'Shougo/neocomplete.vim'
 else
-    " use lighter supertab for completion
+    " use supertab for completion
     Plugin 'ervandew/supertab'
     let g:SuperTabNoCompleteAfter = ['=', '+']
     let g:SuperTabNoCompleteAfter += ['[', '(', '{']
     let g:SuperTabNoCompleteAfter += [']', ')', '}']
     let g:SuperTabNoCompleteAfter += [',', ';', '&', '^', '\s']
     set completeopt+=longest
-    if g:vimrc_rsa_1es == 1
-        " some include lists are too large to allow sane scanning of include
-        " lists. Turn it off
-        set complete-=i
-    endif
 endif
-
+if g:vimrc_rsa_1es == 1
+    " some include lists are too large to allow sane scanning of include
+    " lists. Turn it off
+    set complete-=i
+endif
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger='<c-k>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:UltiSnipsEditSplit='vertical'
 
 if g:vimrc_bundle_syntastic == 1
     " Add syntax checking
