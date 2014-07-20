@@ -1,4 +1,3 @@
-" Quit when a (custom) syntax file was already loaded
 if !exists('g:vimrc_sourced_files')
     let g:vimrc_sourced_files = {}
 endif
@@ -130,3 +129,4 @@ function! CtagTypeDefs()
 endfunction
 
 
+" vim:ft=vim:ts=4:sw=4:

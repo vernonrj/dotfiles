@@ -130,3 +130,6 @@ nmap <silent> gb `[v`]
 " Pasting tweaks
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap Y y$
+
+
+" vim:ft=vim:ts=4:sw=4:
