@@ -200,11 +200,9 @@ set smarttab
 "----------------------------------------------------------"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Scrollbars
+" GUI menu config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set guioptions=eg
-nnoremap <Leader>xT :set guioptions+=T<CR>
-nnoremap <Leader>xt :set guioptions-=T<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cursor/Mouse
@@ -281,20 +279,6 @@ vnoremap <Leader>{ <Esc>/<C-R>=<SID>ScopeSearch('[{', 2)<CR><CR>gV
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tag jumping
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
-" map <silent> <F11> :let fname = expand('%:p:h') . '/types.vim'<CR><F12>
-" Just highlight tags based on existing tags.vim file.
-":map <F12>  :so tags.vim<CR>
-" map <silent> <F12> :if filereadable(fname)<Bar>
-"     \   exe 'so ' . fname<CR>
-"     \ endif <CR>
-
-
-
 "----------------------------------------------------------"
 " Indent/Movement
 "----------------------------------------------------------"
@@ -305,7 +289,6 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " Tab completion on commands
 set wildmode=longest,list,full
 set wildmenu
-"set ci
 set cpoptions=aABceFIs
 if g:vimrc_rsa_1es == 1
     " some include lists are too large to allow sane scanning of include
@@ -363,30 +346,11 @@ nmap <silent> gb `[v`]
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autoread
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" git commit filetype tweaks
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Instead of reverting the cursor to the last position in the buffer, we
-" set it to the first line when editing a git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set foldmethod=marker
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" changing directory
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Leader>cd :lcd %:p:h<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Copying tweaks
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Leader>ac ggvG$"+y''
-vnoremap <Leader><C-y> "+y
-nnoremap <Leader><C-v> "+p
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pasting tweaks
@@ -685,6 +649,10 @@ if has("autocmd")
       \    exe "normal! g`\"" |
       \ endif
    augroup END
+
+   " Instead of reverting the cursor to the last position in the buffer, we
+   " set it to the first line when editing a git commit message
+   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 else
    set autoindent
 endif
