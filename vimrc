@@ -3,9 +3,19 @@
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 "----------------------------------------------------------"
+" Extra files (for reference)
+"----------------------------------------------------------"
+let s:vimrc_files_to_source = []
+let s:vimrc_files_to_source += ['vimrc_functions.vim'] "~/dotfiles/vimrc_functions.vim
+let s:vimrc_files_to_source += ['vimrc_mappings.vim']  "~/dotfiles/vimrc_mappings.vim
+let s:vimrc_files_to_source += ['vimrc_plugins.vim']   "~/dotfiles/vimrc_plugins.vim
+
+
+"----------------------------------------------------------"
 " Compatibility
 "----------------------------------------------------------"
 set nocompatible
+
 
 " tab length and other settings
 let g:vimrc_rsa_1es=0
@@ -28,7 +38,9 @@ let g:vimrc_bundle_syntastic=0
 let g:vimrc_bundle_windows_dev=0
 
 
-
+"----------------------------------------------------------"
+" General configuration
+"----------------------------------------------------------"
 set cryptmethod=blowfish
 set history=2000
 set viminfo+=!             " Store upper-case registers in viminfo
@@ -36,6 +48,9 @@ set ssop+=globals
 let g:netrw_liststyle=3
 
 
+"----------------------------------------------------------"
+" Platform-Specific configuration
+"----------------------------------------------------------"
 if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
 
@@ -66,7 +81,9 @@ else
 endif
 
 
-" includes
+"----------------------------------------------------------"
+" Include extra files
+"----------------------------------------------------------"
 let g:vimrc_sourced_files = {}
 if filereadable(expand('~/dotfiles/vimrc'))
     let g:vimrc_resource_path = expand('~/dotfiles')
@@ -77,9 +94,9 @@ else
 endif
 
 if exists('g:vimrc_resource_path')
-    exec("source " . g:vimrc_resource_path . "/vimrc_functions.vim")
-    exec("source " . g:vimrc_resource_path . "/vimrc_mappings.vim")
-    exec("source " . g:vimrc_resource_path . "/vimrc_plugins.vim")
+    for myfile in s:vimrc_files_to_source
+        exec("source " . g:vimrc_resource_path . "/" . myfile)
+    endfor
 endif
 
 
