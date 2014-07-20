@@ -57,9 +57,6 @@ if has("win32") || has("win64")
     "Open .vimrc for editing
     map <Leader>gV :e ~/_vimrc<CR>
     let g:bcomp_path = "C:\\Program Files (x86)\\Beyond Compare 3\\BComp.exe"
-
-    " Can't get unicode font to work correctly...
-    let g:ctrlspace_unicode_font = 0
 else
     " reloading mappings for vimrc on *nix
     map <Leader>gv :source ~/.vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -241,6 +238,44 @@ set autoread
 set foldmethod=marker
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autocmd
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Only use these commands when compiled with support for autocommands
+if has("autocmd")
+    filetype plugin indent on
+
+    au BufRead,BufNewFile *.json set filetype=json
+    au BufRead,BufNewFile *.ps1 set filetype=ps1
+    if g:vimrc_rsa_1es == 1
+        au BufRead,BufNewFile *.cmd set filetype=iecwin
+        au FileType iecwin set syntax=cpp
+    endif
+    au FileType python setlocal shiftwidth=4 tabstop=4
+    au FileType vim setlocal shiftwidth=4 tabstop=4
+    " Put these in an autocmd group, so that we can delete them easily. (?)
+    augroup vimrcEx
+    au!
+
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    " Also don't do it when the mark is in the first line, that is the default
+    " position when opening a file.
+    autocmd BufReadPost *
+      \ if line("'\"") > 1 && line("'\"") <= line("$") |
+      \    exe "normal! g`\"" |
+      \ endif
+   augroup END
+
+   " Instead of reverting the cursor to the last position in the buffer, we
+   " set it to the first line when editing a git commit message
+   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+else
+   set autoindent
+endif
+
+
 
 
 "----------------------------------------------------------"
@@ -269,6 +304,10 @@ Plugin 'chrisbra/NrrwRgn'
 "## Vim feature enhancement ##
 " Session
 Plugin 'szw/vim-ctrlspace'
+if has("win32") || has("win64")
+    " Can't get unicode font to work correctly...
+    let g:ctrlspace_unicode_font = 0
+endif
 " Plugin 'tpope/vim-obsession'        " Better :mksession
 
 " Movement
@@ -494,50 +533,6 @@ if g:vimrc_bundle_windows_dev == 1
     " Extra syntax highlighting
     Plugin 'PProvost/vim-ps1'
 endif
-
-
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Filetype
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Only use these commands when compiled with support for autocommands
-if has("autocmd")
-    filetype plugin indent on
-
-    au BufRead,BufNewFile *.json set filetype=json
-    au BufRead,BufNewFile *.ps1 set filetype=ps1
-    if g:vimrc_rsa_1es == 1
-        au BufRead,BufNewFile *.cmd set filetype=iecwin
-        au FileType iecwin set syntax=cpp
-    endif
-    au FileType python setlocal shiftwidth=4 tabstop=4
-    au FileType vim setlocal shiftwidth=4 tabstop=4
-    " Put these in an autocmd group, so that we can delete them easily. (?)
-    augroup vimrcEx
-    au!
-
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
-    " Also don't do it when the mark is in the first line, that is the default
-    " position when opening a file.
-    autocmd BufReadPost *
-      \ if line("'\"") > 1 && line("'\"") <= line("$") |
-      \    exe "normal! g`\"" |
-      \ endif
-   augroup END
-
-   " Instead of reverting the cursor to the last position in the buffer, we
-   " set it to the first line when editing a git commit message
-   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-else
-   set autoindent
-endif
-
-
-
 
 
 " vim:ft=vim:ts=4:sw=4:
