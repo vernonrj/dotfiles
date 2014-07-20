@@ -10,6 +10,7 @@ set nocompatible
 set cryptmethod=blowfish
 set history=2000
 set viminfo+=!             " Store upper-case registers in viminfo
+set ssop+=globals
 let g:netrw_liststyle=3
 
 " tab length and other settings
@@ -169,9 +170,6 @@ map <M-7> 7gt
 map <M-8> 8gt
 map <M-9> 9gt
 
-map <M-,> :call MoveToPrevTab()<CR>
-map <M-.> :call MoveToNextTab()<CR>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Splits
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -254,6 +252,8 @@ cnoremap <M-6> \<
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <Leader>hs :set hlsearch!<CR>:set hlsearch?<CR>
 nnoremap <Leader>hc :set cursorline! cursorcolumn!<CR>
+" Make things like search wrap and other warnings way more obvious
+hi WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jumping (with menus)
@@ -307,6 +307,23 @@ set wildmode=longest,list,full
 set wildmenu
 "set ci
 set cpoptions=aABceFIs
+if g:vimrc_rsa_1es == 1
+    " some include lists are too large to allow sane scanning of include
+    " lists. Turn it off
+    set complete-=i
+endif
+" Compilation ignores
+set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
+set wildignore+=*.pyo,*.pyc,*.so,*.o
+" Pictures ignores
+set wildignore+=*.bmp,*.ico,*.svg,*.png,*.gif
+" Archives ignores
+set wildignore+=*.zip,*.rar,*.tar,*.jar,*.tar.gz,*.tar.xz,*.tar.bz,*.7z
+" Other ignores
+set wildignore+=*.chm,*.ilk,*.dfl,*.ttf
+set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
+set wildignore+=*.doc,*.docx,*.xls,*.xlsx
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Movement
@@ -392,10 +409,7 @@ call vundle#rc()
 " Vundle
 Plugin 'gmarik/vundle'
 
-" in-file movement enhancements
-Plugin 'EasyMotion'                 " Easier movement
-Plugin 'tpope/vim-rsi'              " readline in insert mode
-Plugin 'vim-scripts/matchit.zip'
+"## Functionality inspired by other editors ##
 
 Plugin 'terryma/vim-multiple-cursors'
 let g:multi_cursor_next_key='<M-n>'
@@ -405,30 +419,62 @@ let g:multi_cursor_quit_key='<Esc>'
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 
+Plugin 'chrisbra/NrrwRgn'
 
-" Vim feature enhancement
-Plugin 'ton/vim-bufsurf'            " Tweak on behavior of C-O/C-I
-nnoremap <M-Left> :BufSurfBack<CR>
-nnoremap <M-Right> :BufSurfForward<CR>
-Plugin 'mileszs/ack.vim'            " Better vimgrep
-Plugin 'rking/ag.vim'               " Better ack
-Plugin 'tpope/vim-dispatch'         " Better :make
-Plugin 'tpope/vim-obsession'        " Better :mksession
-" Extra undo support
-noremap U :CtrlPUndo<CR>
 
-" Editing enhancements
-" Plugin 'jiangmiao/auto-pairs'
-" let g:AutoPairsShortcutToggle = '<M-)>'
-" let g:AutoPairsShortcutJump = '<M-j>'
-" let g:AutoPairsShortcutBackInsert = '<M-k>'
-" Plugin 'Raimondi/delimitMate'
-" Plugin 'vim-scripts/AutoClose'
+
+"## Vim feature enhancement ##
+" Session
+Plugin 'szw/vim-ctrlspace'
+" Plugin 'tpope/vim-obsession'        " Better :mksession
+
+" Movement
+Plugin 'EasyMotion'                 " Easier movement
+Plugin 'tpope/vim-rsi'              " readline in insert mode
+Plugin 'vim-scripts/matchit.zip'
+
+" File/Directory/Buffer
+Plugin 'scrooloose/nerdtree'
+nmap <silent> <F6> :NERDTreeToggle<CR>
+nmap <silent> <C-F6> :NERDTreeFind<CR>
+let NERDTreeDirArrows=0
+let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
+
+" Ctrlp
+Plugin 'kien/ctrlp.vim'
+Plugin 'FelikZ/ctrlp-py-matcher'
+nnoremap <C-n> :CtrlPMRU<CR>
+nnoremap <M-p> :CtrlP .<CR>
+noremap <Leader>bt :CtrlPTag<CR>
+" noremap <Leader>r :CtrlPLastMode<CR>
+noremap <Leader><C-p> :CtrlPMixed<CR>
+noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
+noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
+let g:ctrlp_prompt_mappings = { 'ToggleMRURelative()': ['<F2>']}
+if g:vimrc_rsa_1es == 1
+    " handle large projects better
+    let g:ctrlp_root_markers = ['build']
+endif
+let g:ctrlp_max_files = 0
+let g:ctrlp_lazy_update = 1
+if has('python')
+    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+endif
+if executable('ag')
+    " Use ag for grep and ctrlp
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" Buffer explorer
+"Plugin 'bufexplorer.zip'
+
+" Editing
 Plugin 'tpope/vim-surround'         " Surrounding movements
 Plugin 'wellle/targets.vim'         " Many more movements
 Plugin 'tpope/vim-repeat'
 Plugin 'tComment'                   " better commenting
-Plugin 'godlygeek/tabular'
+Plugin 'godlygeek/tabular'          " Text alignment
 map <Leader>gt= :Tabularize /=<CR>
 map <Leader>gt: :Tabularize /:<CR>
 map <Leader>gt:: :Tabularize /:\zs<CR>
@@ -436,17 +482,47 @@ map <Leader>gt, :Tabularize /,<CR>
 map <Leader>gt<Bar> :Tabularize /<Bar><CR>
 map <Leader>gtm :Tabularize /m_.*<CR>
 map <leader>gT :Tabularize /
-Plugin 'chrisbra/NrrwRgn'
-Plugin 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
 
-" Syntax enhancements
+" Snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger='<c-k>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:UltiSnipsEditSplit='vertical'
+
+Plugin 'agassiyzh/Mark--Karkat'
+let g:mvDefaultHighlightingPalette = 'extended'
+nmap <k0> <Plug>MarkSearchAnyNext
+nmap <C-k0> <Plug>MarkSearchAnyPrev
+
+Plugin 'MattesGroeger/vim-bookmarks'
+nmap <M-b>m <Plug>ToggleBookmark
+nmap <M-b>a <Plug>Annotate
+nmap <M-b>n <Plug>NextBookmark
+nmap <M-b>p <Plug>PrevBookmark
+nmap <M-b>i <Plug>ShowAllBookmarks
+nmap <M-b>c <Plug>ClearBookmarks
+nmap <M-b>x <Plug>ClearAllBookmarks
+if has("win32") || has("win64")
+    " can't get unicode to work correctly on windows :(
+    let g:bookmark_sign = '**'
+    let g:bookmark_annotation_sign = '##'
+endif
+
+
+
+"## Look And Feel ##
+
+" Statusbar
+Plugin 'bling/vim-airline'
+
+" Syntax highlighting
 Plugin 'elzr/vim-json'              " json syntax highlighting
 let g:vim_json_syntax_conceal = 0
 
 
-" Colorscheme / Look-and-feel enhancements
+" Colorscheme / Look-and-feel
 Plugin 'flazz/vim-colorschemes'
 
 " Solarized
@@ -476,71 +552,23 @@ else
 endif
 
 
+
+
+" ## External programs ##
+
 " git integration
 Plugin 'tpope/vim-fugitive'
 
-
-" File/Dir movement enhancements
-Plugin 'scrooloose/nerdtree'
-nmap <silent> <F6> :NERDTreeToggle<CR>
-nmap <silent> <C-F6> :NERDTreeFind<CR>
-let NERDTreeDirArrows=0
-let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
-" Ctrl-p extension
-Plugin 'kien/ctrlp.vim'
-Plugin 'FelikZ/ctrlp-py-matcher'
-nnoremap <C-n> :CtrlPMRU<CR>
-nnoremap <M-p> :CtrlP .<CR>
-noremap <Leader>bt :CtrlPTag<CR>
-" noremap <Leader>r :CtrlPLastMode<CR>
-noremap <Leader><C-p> :CtrlPMixed<CR>
-noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
-noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
-let g:ctrlp_prompt_mappings = { 'ToggleMRURelative()': ['<F2>']}
-if g:vimrc_rsa_1es == 1
-    " handle large projects better
-    let g:ctrlp_root_markers = ['build']
-endif
-let g:ctrlp_max_files = 0
-let g:ctrlp_lazy_update = 1
-if has('python')
-    let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-endif
 " Compilation
-set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
-set wildignore+=*.pyo,*.pyc,*.so,*.o
-" Pictures
-set wildignore+=*.bmp,*.ico,*.svg,*.png,*.gif
-" Archives
-set wildignore+=*.zip,*.rar,*.tar,*.jar,*.tar.gz,*.tar.xz,*.tar.bz,*.7z
-" Other
-set wildignore+=*.chm,*.ilk,*.dfl,*.ttf
-set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
-set wildignore+=*.doc,*.docx,*.xls,*.xlsx
-nnoremap <leader>be :CtrlPBuffer<CR>
-" Buffer explorer
-"Plugin 'bufexplorer.zip'
-if executable('ag')
-    " Use ag for grep and ctrlp
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+Plugin 'tpope/vim-dispatch'         " Better :make
 
-Plugin 'szw/vim-ctrlspace'
-Plugin 'MattesGroeger/vim-bookmarks'
-nmap <M-b>m <Plug>ToggleBookmark
-nmap <M-b>a <Plug>Annotate
-nmap <M-b>n <Plug>NextBookmark
-nmap <M-b>p <Plug>PrevBookmark
-nmap <M-b>i <Plug>ShowAllBookmarks
-nmap <M-b>c <Plug>ClearBookmarks
-nmap <M-b>x <Plug>ClearAllBookmarks
-if has("win32") || has("win64")
-    let g:bookmark_sign = '**'
-    let g:bookmark_annotation_sign = '##'
-endif
+" Searching
+Plugin 'rking/ag.vim'               " Better ack
+" Plugin 'mileszs/ack.vim'            " Better vimgrep
 
 
+
+" ## Optional Plugins ##
 
 if g:vimrc_bundle_c == 1
     " C/C++ related plugins
@@ -557,11 +585,6 @@ if g:vimrc_bundle_c == 1
     nmap <silent> <F7> :TagbarToggle<CR>
     Plugin 'steffanc/cscopemaps.vim'
     Plugin 'octol/vim-cpp-enhanced-highlight'
-    Plugin 'agassiyzh/Mark--Karkat'
-    let g:mvDefaultHighlightingPalette = 'extended'
-    set ssop+=globals
-    nmap <k0> <Plug>MarkSearchAnyNext
-    nmap <C-k0> <Plug>MarkSearchAnyPrev
 endif
 
 if g:vimrc_bundle_lisp == 1
@@ -570,19 +593,8 @@ if g:vimrc_bundle_lisp == 1
     Plugin 'tpope/vim-fireplace'
     Plugin 'tpope/vim-classpath'
     Plugin 'guns/vim-clojure-static'
-    Plugin 'kien/rainbow_parentheses.vim'
 endif
 
-" Add heavier statusbar
-Plugin 'bling/vim-airline'
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#show_buffers = 0
-" let g:airline#extensions#tabline#show_tab_type = 0
-" let g:airline#extensions#tabline#tab_nr_type = 1
-" let g:airline#extensions#tabline#tab_min_count = 2
-
-
-" Syntax Checking/Completion
 
 if g:vimrc_bundle_ycm == 1
     " use heavier YCM for completion
@@ -610,17 +622,6 @@ else
     let g:SuperTabNoCompleteAfter += [',', ';', '&', '^', '\s']
     set completeopt+=longest
 endif
-if g:vimrc_rsa_1es == 1
-    " some include lists are too large to allow sane scanning of include
-    " lists. Turn it off
-    set complete-=i
-endif
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger='<c-k>'
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-let g:UltiSnipsEditSplit='vertical'
 
 if g:vimrc_bundle_syntastic == 1
     " Add syntax checking
@@ -647,27 +648,13 @@ if g:vimrc_bundle_windows_dev == 1
     let g:visual_studio_task_list = "C:/temp/vs_task_list.txt"
     let g:visual_studio_find_results_1 = "C:/temp/vs_find_results_1.txt"
     let g:visual_studio_find_results_2 = "C:/temp/vs_find_results_2.txt"
-    " Wiki extensions
-    Plugin 'vim-scripts/wikipedia.vim'
-    " I add this to the syntax file, right above sy include @TeX
-    "let g:tex_isk="@,48-57,_,192-255"
+    " Extra syntax highlighting
     Plugin 'PProvost/vim-ps1'
 endif
 
 
 
 
-"----------------------------------------------------------"
-" Helper Functions
-"----------------------------------------------------------"
-function! KillComments()
-   " remove all c-style comments
-   %s/\/\*\(.\|\n\)\{-}\*\/ \{0,}\n//g
-   %s/\/\*\(.\|\n\)\{-}\*\///g
-   %s/^ \+\/\/.*\n//g
-   %s/\/\/.*//g
-   %s/ \+$//g
-endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype
@@ -675,8 +662,6 @@ endfunction
 " Only use these commands when compiled with support for autocommands
 if has("autocmd")
     filetype plugin indent on
-    "set grepprg=grep\ -nH\ $*
-    "let g:tex_flavor = "latex"
 
     au BufRead,BufNewFile *.json set filetype=json
     au BufRead,BufNewFile *.ps1 set filetype=ps1
@@ -690,12 +675,6 @@ if has("autocmd")
     augroup vimrcEx
     au!
 
-    " load the types.vim highlighting file, if it exists
-    " autocmd BufRead,BufNewFile *.[ch] let fname = expand('<afile>:p:h') . '/types.vim'
-    " autocmd BufRead,BufNewFile *.[ch] if filereadable(fname)
-    " autocmd BufRead,BufNewFile *.[ch]   exe 'so ' . fname
-    " autocmd BufRead,BufNewFile *.[ch] endif
-
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
     " (happens when dropping a file on gvim).
@@ -707,7 +686,7 @@ if has("autocmd")
       \ endif
    augroup END
 else
-   set autoindent   " Always want that autoindent
+   set autoindent
 endif
 
 
@@ -811,56 +790,5 @@ function! CtagTypeDefs()
         !ctags -R --c-kinds=gstu -o- *.[ch] | awk 'BEGIN{printf("syntax keyword Type\t")} {printf("\%s ",$$1)}END{print ""}' > types.vim
     endif
 endfunction
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tab Movement Functions
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! MoveToPrevTab()
-  "there is only one window
-  if tabpagenr('$') == 1 && winnr('$') == 1
-    return
-  endif
-  "preparing new window
-  let l:tab_nr = tabpagenr('$')
-  let l:cur_buf = bufnr('%')
-  if tabpagenr() != 1
-    close!
-    if l:tab_nr == tabpagenr('$')
-      tabprev
-    endif
-    sp
-  else
-    close!
-    exe "0tabnew"
-  endif
-  "opening current buffer in new window
-  exe "b".l:cur_buf
-endfunc
-
-function! MoveToNextTab()
-  "there is only one window
-  if tabpagenr('$') == 1 && winnr('$') == 1
-    return
-  endif
-  "preparing new window
-  let l:tab_nr = tabpagenr('$')
-  let l:cur_buf = bufnr('%')
-  if tabpagenr() < tab_nr
-    close!
-    if l:tab_nr == tabpagenr('$')
-      tabnext
-    endif
-    sp
-  else
-    close!
-    tabnew
-  endif
-  "opening current buffer in new window
-  exe "b".l:cur_buf
-endfunc
-
-" Make things like search wrap and other warnings way more obvious
-hi WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 
 " vim:ft=vim:ts=4:sw=4:
