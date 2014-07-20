@@ -6,6 +6,16 @@ if has_key(g:vimrc_sourced_files, 'functions')
 endif
 let g:vimrc_sourced_files['functions'] = 1
 
+let g:vimrc_warnings = []
+function! WarnFnNotAvailable(compileopt, functionality)
+    let g:vimrc_warnings += [
+                \ 'vim not compiled with "'
+                \ . a:compileopt
+                \ . '" feature, lost functionality "'
+                \ . a:functionality
+                \ . '"'
+                \]
+endfunction
 
 " Diff original file
 command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis

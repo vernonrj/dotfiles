@@ -13,6 +13,8 @@ if has_key(g:vimrc_sourced_files, 'mappings')
 endif
 let g:vimrc_sourced_files['mappings'] = 1
 
+exec("source " . expand('<sfile>:h') . '/vimrc_functions.vim')
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing
@@ -27,13 +29,13 @@ inoremap <C-t> <C-R>=strftime("TODO:vrj %Y.%m.%d: ")<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Search
-nnoremap <Leader>fi :set ic! <CR>:set ic?<CR>
+nnoremap <Leader>fi :set ignorecase! <CR>:set ignorecase?<CR>
 cnoremap <M-4> \>
 cnoremap <M-6> \<
 
 " Line numbering
-nnoremap <silent> <Leader>fn :set nu!<CR> :set rnu!<CR>
-nnoremap <silent> <Leader>fN :set nornu<CR> :set nu!<CR>
+nnoremap <silent> <Leader>fn :set number!<CR> :set relativenumber!<CR>
+nnoremap <silent> <Leader>fN :set norelativenumber<CR> :set number!<CR>
 
 " Jumping (with menus)
 " nnoremap <Leader>* :call <SID>JumpOccurrence()<CR>
@@ -62,9 +64,15 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " highlight current search
 nnoremap <silent> <Leader>hs :set hlsearch!<CR>:set hlsearch?<CR>
+if has('extra_search')
+    call WarnFnNotAvailable('extra_search', 'search highlight toggle mapping')
+endif
 
 " highlight cursor line and cursor column
 nnoremap <Leader>hc :set cursorline! cursorcolumn!<CR>
+if !has('syntax')
+    call WarnFnNotAvailable('syntax', 'cursorline/cursorcolumn toggle mapping')
+endif
 
 " highlight Syntax
 nnoremap <silent> <Leader>hS :if exists("syntax_on") <Bar>
@@ -90,6 +98,9 @@ map <M-6> 6gt
 map <M-7> 7gt
 map <M-8> 8gt
 map <M-9> 9gt
+if !has('windows')
+    call WarnFnNotAvailable('windows', 'tab mappings')
+endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""

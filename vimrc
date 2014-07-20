@@ -131,9 +131,12 @@ set laststatus=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufEnter * :syntax sync fromstart
 syntax enable
-set cino+=(0
+if has('cindent')
+    set cinoptions+=(0
+else
+    call WarnFnNotAvailable('cindent', ':set cinoptions')
+endif
 
 
 
@@ -168,15 +171,24 @@ set smarttab
 "----------------------------------------------------------"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GUI menu config
+" GUI menu config, cursor
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set guioptions=eg
+if has('gui')
+    set guioptions=eg
+    set guicursor+=a:blinkon0
+endif
+if has('cmdline_info')
+    set ruler       " Show cursor position always
+    set showcmd     " Display incomplete terms
+else
+    call WarnFnNotAvailable('cmdline_info', ':set ruler')
+    call WarnFnNotAvailable('cmdline_info', ':set showcmd')
+endif
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Cursor/Mouse
+" Mouse
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set guicursor+=a:blinkon0
-set ruler   " Show cursor position always
 set mousehide
 if has('mouse')
    if has("win32") || has("win64")
@@ -199,8 +211,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Incremental Search
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set showcmd     " Display incomplete terms
-set incsearch   " Do incremental searching
+if has('extra_search')
+    set incsearch   " Do incremental searching
+else
+    call WarnFnNotAvailable('extra_search', ':set incsearch')
+endif
 set ignorecase
 set smartcase
 
@@ -209,32 +224,46 @@ set smartcase
 " highlight
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make things like search wrap and other warnings way more obvious
-hi WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
+highlight WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indent/Completion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("autocmd")
+    filetype plugin indent on
+else
+    call WarnFnNotAvailable('autocmd', 'filetype plugin indent')
+    set autoindent
+endif
 " Tab completion on commands
 set wildmode=longest,list,full
-set wildmenu
+if has('wildmenu')
+    set wildmenu
+else
+    call WarnFnNotAvailable('wildmenu', ':set wildmenu')
+endif
 set cpoptions=aABceFIs
 if g:vimrc_rsa_1es == 1
     " some include lists are too large to allow sane scanning of include
     " lists. Turn it off
     set complete-=i
 endif
-" Compilation ignores
-set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
-set wildignore+=*.pyo,*.pyc,*.so,*.o
-" Pictures ignores
-set wildignore+=*.bmp,*.ico,*.svg,*.png,*.gif
-" Archives ignores
-set wildignore+=*.zip,*.rar,*.tar,*.jar,*.tar.gz,*.tar.xz,*.tar.bz,*.7z
-" Other ignores
-set wildignore+=*.chm,*.ilk,*.dfl,*.ttf
-set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
-set wildignore+=*.doc,*.docx,*.xls,*.xlsx
+if has('wildignore')
+    " Compilation ignores
+    set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
+    set wildignore+=*.pyo,*.pyc,*.so,*.o
+    " Pictures ignores
+    set wildignore+=*.bmp,*.ico,*.svg,*.png,*.gif
+    " Archives ignores
+    set wildignore+=*.zip,*.rar,*.tar,*.jar,*.tar.gz,*.tar.xz,*.tar.bz,*.7z
+    " Other ignores
+    set wildignore+=*.chm,*.ilk,*.dfl,*.ttf
+    set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
+    set wildignore+=*.doc,*.docx,*.xls,*.xlsx
+else
+    call WarnFnNotAvailable('wildignore', ':set wildignore')
+endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -253,7 +282,11 @@ set autoread
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set foldmethod=marker
+if has('folding')
+    set foldmethod=marker
+else
+    call WarnFnNotAvailable('folding', ':set foldmethod')
+endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -261,36 +294,43 @@ set foldmethod=marker
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Only use these commands when compiled with support for autocommands
 if has("autocmd")
-    filetype plugin indent on
+    augroup vimrcExtraSyntax
+        autocmd!
+        autocmd BufEnter * :syntax sync fromstart
+        autocmd FileType python setlocal shiftwidth=4 tabstop=4
+        autocmd FileType vim setlocal shiftwidth=4 tabstop=4
+    augroup END
 
-    au BufRead,BufNewFile *.json set filetype=json
-    au BufRead,BufNewFile *.ps1 set filetype=ps1
-    if g:vimrc_rsa_1es == 1
-        au BufRead,BufNewFile *.cmd set filetype=iecwin
-        au FileType iecwin set syntax=cpp
-    endif
-    au FileType python setlocal shiftwidth=4 tabstop=4
-    au FileType vim setlocal shiftwidth=4 tabstop=4
-    " Put these in an autocmd group, so that we can delete them easily. (?)
+    augroup vimrcExtraFileTypes
+        autocmd!
+        autocmd BufRead,BufNewFile *.json set filetype=json
+        autocmd BufRead,BufNewFile *.ps1 set filetype=ps1
+        if g:vimrc_rsa_1es == 1
+            autocmd BufRead,BufNewFile *.cmd set filetype=iecwin
+            autocmd FileType iecwin set syntax=cpp
+        endif
+    augroup END
+
     augroup vimrcEx
-    au!
+        autocmd!
 
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
-    " Also don't do it when the mark is in the first line, that is the default
-    " position when opening a file.
-    autocmd BufReadPost *
-      \ if line("'\"") > 1 && line("'\"") <= line("$") |
-      \    exe "normal! g`\"" |
-      \ endif
-   augroup END
+        " When editing a file, always jump to the last known cursor position.
+        " Don't do it when the position is invalid or when inside an event handler
+        " (happens when dropping a file on gvim).
+        " Also don't do it when the mark is in the first line, that is the default
+        " position when opening a file.
+        autocmd BufReadPost *
+                    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+                    \    exe "normal! g`\"" |
+                    \ endif
+        " Instead of reverting the cursor to the last position in the buffer, we
+        " set it to the first line when editing a git commit message
+        autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
-   " Instead of reverting the cursor to the last position in the buffer, we
-   " set it to the first line when editing a git commit message
-   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+    augroup END
+
 else
-   set autoindent
+    call WarnFnNotAvailable('autocmd', 'autocmd')
 endif
 
 
