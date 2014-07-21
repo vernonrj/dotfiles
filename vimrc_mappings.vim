@@ -64,7 +64,7 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " highlight current search
 nnoremap <silent> <Leader>hs :set hlsearch!<CR>:set hlsearch?<CR>
-if has('extra_search')
+if !has('extra_search')
     call WarnFnNotAvailable('extra_search', 'search highlight toggle mapping')
 endif
 
