@@ -307,7 +307,8 @@ if has("autocmd")
         autocmd BufRead,BufNewFile *.ps1 set filetype=ps1
         if g:vimrc_rsa_1es == 1
             autocmd BufRead,BufNewFile *.cmd set filetype=iecwin
-            autocmd FileType iecwin set syntax=cpp
+            autocmd BufRead,BufNewFile *.inp set filetype=iecwin
+            " autocmd FileType iecwin set syntax=cpp
         endif
     augroup END
 

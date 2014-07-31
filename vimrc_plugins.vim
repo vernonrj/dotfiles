@@ -21,6 +21,7 @@ call vundle#rc()
 " Vundle
 Plugin 'gmarik/vundle'
 
+
 "## Functionality inspired by other editors ##
 
 Plugin 'terryma/vim-multiple-cursors'
@@ -76,11 +77,6 @@ let g:ctrlp_lazy_update = 1
 if has('python')
     let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 endif
-if executable('ag')
-    " Use ag for grep and ctrlp
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
 
 " Buffer explorer
 "Plugin 'bufexplorer.zip'
@@ -113,13 +109,13 @@ nmap <k0> <Plug>MarkSearchAnyNext
 nmap <C-k0> <Plug>MarkSearchAnyPrev
 
 Plugin 'MattesGroeger/vim-bookmarks'
-nmap <M-b>m <Plug>ToggleBookmark
-nmap <M-b>a <Plug>Annotate
-nmap <M-b>n <Plug>NextBookmark
-nmap <M-b>p <Plug>PrevBookmark
-nmap <M-b>i <Plug>ShowAllBookmarks
-nmap <M-b>c <Plug>ClearBookmarks
-nmap <M-b>x <Plug>ClearAllBookmarks
+nmap <M-b>m <Plug>BookmarkToggle
+nmap <M-b>a <Plug>BookmarkAnnotate
+nmap <M-b>n <Plug>BookmarkNext
+nmap <M-b>p <Plug>BookmarkPrev
+nmap <M-b>i <Plug>BookmarkShowAll
+nmap <M-b>c <Plug>BookmarkClear
+nmap <M-b>x <Plug>BookmarkClearAll
 if has("win32") || has("win64")
     " can't get unicode to work correctly on windows :(
     let g:bookmark_sign = '**'
@@ -136,6 +132,7 @@ Plugin 'bling/vim-airline'
 " Syntax highlighting
 Plugin 'elzr/vim-json'              " json syntax highlighting
 let g:vim_json_syntax_conceal = 0
+Plugin 'vjones/vim-iecwin'
 
 
 " Colorscheme / Look-and-feel
