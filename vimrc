@@ -9,6 +9,7 @@ let s:vimrc_files_to_source = []
 let s:vimrc_files_to_source += ['vimrc_functions.vim'] "~/dotfiles/vimrc_functions.vim
 let s:vimrc_files_to_source += ['vimrc_mappings.vim']  "~/dotfiles/vimrc_mappings.vim
 let s:vimrc_files_to_source += ['vimrc_plugins.vim']   "~/dotfiles/vimrc_plugins.vim
+let s:vimrc_files_to_source += ['vimrc_local.vim']     "~/dotfiles/vimrc_local.vim
 
 
 "----------------------------------------------------------"
@@ -115,9 +116,10 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lines
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set so=2
+set scrolloff=2
+set display+=lastline
 " Line Breaks
-setlocal lbr
+setlocal linebreak
 "set textwidth=110
 let &showbreak = '+++'  " Show line breaks using given symbol
 

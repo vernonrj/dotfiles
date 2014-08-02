@@ -82,6 +82,7 @@ endif
 "Plugin 'bufexplorer.zip'
 
 " Editing
+Plugin 'tpope/vim-capslock'
 Plugin 'tpope/vim-surround'         " Surrounding movements
 Plugin 'wellle/targets.vim'         " Many more movements
 Plugin 'tpope/vim-repeat'
@@ -132,7 +133,6 @@ Plugin 'bling/vim-airline'
 " Syntax highlighting
 Plugin 'elzr/vim-json'              " json syntax highlighting
 let g:vim_json_syntax_conceal = 0
-Plugin 'vjones/vim-iecwin'
 
 
 " Colorscheme / Look-and-feel
