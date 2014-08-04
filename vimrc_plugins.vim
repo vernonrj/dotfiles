@@ -47,7 +47,7 @@ endif
 
 " Movement
 Plugin 'EasyMotion'                 " Easier movement
-Plugin 'tpope/vim-rsi'              " readline in insert mode
+" Plugin 'tpope/vim-rsi'              " readline in insert mode
 Plugin 'vim-scripts/matchit.zip'
 
 " File/Directory/Buffer
@@ -82,19 +82,19 @@ endif
 "Plugin 'bufexplorer.zip'
 
 " Editing
-Plugin 'tpope/vim-capslock'
-Plugin 'tpope/vim-surround'         " Surrounding movements
-Plugin 'wellle/targets.vim'         " Many more movements
+Plugin 'tpope/vim-capslock'                 " virtual capslock in insert
+Plugin 'tpope/vim-surround'                 " Surrounding movements
+" Plugin 'wellle/targets.vim'                 " Many more movements
 Plugin 'tpope/vim-repeat'
-Plugin 'tComment'                   " better commenting
-Plugin 'godlygeek/tabular'          " Text alignment
-map <Leader>gt= :Tabularize /=<CR>
-map <Leader>gt: :Tabularize /:<CR>
-map <Leader>gt:: :Tabularize /:\zs<CR>
-map <Leader>gt, :Tabularize /,<CR>
-map <Leader>gt<Bar> :Tabularize /<Bar><CR>
-map <Leader>gtm :Tabularize /m_.*<CR>
-map <leader>gT :Tabularize /
+Plugin 'tComment'                           " better commenting
+" Plugin 'godlygeek/tabular'          " Text alignment
+" map <Leader>gt= :Tabularize /=<CR>
+" map <Leader>gt: :Tabularize /:<CR>
+" map <Leader>gt:: :Tabularize /:\zs<CR>
+" map <Leader>gt, :Tabularize /,<CR>
+" map <Leader>gt<Bar> :Tabularize /<Bar><CR>
+" map <Leader>gtm :Tabularize /m_.*<CR>
+" map <leader>gT :Tabularize /
 
 " Snippets
 Plugin 'SirVer/ultisnips'
@@ -202,7 +202,7 @@ endif
 
 if g:vimrc_bundle_lisp == 1
     " Load bundles related to LISP coding
-    Plugin 'guns/paredit'
+    " Plugin 'guns/paredit'
     Plugin 'tpope/vim-fireplace'
     Plugin 'tpope/vim-classpath'
     Plugin 'guns/vim-clojure-static'
