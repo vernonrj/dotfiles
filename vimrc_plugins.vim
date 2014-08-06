@@ -108,6 +108,8 @@ Plugin 'agassiyzh/Mark--Karkat'
 let g:mvDefaultHighlightingPalette = 'extended'
 nmap <k0> <Plug>MarkSearchAnyNext
 nmap <C-k0> <Plug>MarkSearchAnyPrev
+nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
+nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
 
 Plugin 'MattesGroeger/vim-bookmarks'
 nmap <M-b>m <Plug>BookmarkToggle

@@ -96,7 +96,10 @@ endif
 
 if exists('g:vimrc_resource_path')
     for myfile in s:vimrc_files_to_source
-        exec("source " . g:vimrc_resource_path . "/" . myfile)
+        let file_to_source = g:vimrc_resource_path . "/" . myfile
+        if filereadable(file_to_source)
+            exec("source " . file_to_source)
+        endif
     endfor
 endif
 
