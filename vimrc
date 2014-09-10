@@ -73,6 +73,10 @@ if has("win32") || has("win64")
     "Open .vimrc for editing
     map <Leader>gV :e ~/_vimrc<CR>
     let g:bcomp_path = "C:\\Program Files (x86)\\Beyond Compare 3\\BComp.exe"
+
+    " Disable annoying beeps in windows.
+    set noerrorbells visualbell t_vb=
+    autocmd GUIEnter * set visualbell t_vb=
 else
     " reloading mappings for vimrc on *nix
     map <Leader>gv :source ~/.vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -301,7 +305,7 @@ endif
 if has("autocmd")
     augroup vimrcExtraSyntax
         autocmd!
-        autocmd BufEnter * :syntax sync fromstart
+        " autocmd BufEnter * :syntax sync fromstart
         autocmd FileType python setlocal shiftwidth=4 tabstop=4
         autocmd FileType vim setlocal shiftwidth=4 tabstop=4
     augroup END
