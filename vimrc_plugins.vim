@@ -43,6 +43,7 @@ if has("win32") || has("win64")
     " Can't get unicode font to work correctly...
     let g:ctrlspace_unicode_font = 0
 endif
+
 " Plugin 'tpope/vim-obsession'        " Better :mksession
 
 " Movement
@@ -82,7 +83,6 @@ endif
 "Plugin 'bufexplorer.zip'
 
 " Editing
-Plugin 'tpope/vim-capslock'                 " virtual capslock in insert
 Plugin 'tpope/vim-surround'                 " Surrounding movements
 " Plugin 'wellle/targets.vim'                 " Many more movements
 Plugin 'tpope/vim-repeat'
