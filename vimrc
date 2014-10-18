@@ -245,6 +245,11 @@ else
     call WarnFnNotAvailable('autocmd', 'filetype plugin indent')
     set autoindent
 endif
+if has('linebreak')
+    " wrapping is indented to create blocks of text
+    set breakindent
+endif
+
 " Tab completion on commands
 set wildmode=longest,list,full
 if has('wildmenu')
