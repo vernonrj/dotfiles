@@ -131,6 +131,7 @@ endif
 
 " Statusbar
 Plugin 'bling/vim-airline'
+let g:airline#extensions#whitespace#enabled = 0
 
 " Syntax highlighting
 Plugin 'elzr/vim-json'              " json syntax highlighting

@@ -139,4 +139,13 @@ function! CtagTypeDefs()
 endfunction
 
 
+function! CtrlSpaceBufDo(command)
+    for s:bufnumber in keys(ctrlspace#bufferlist(tabpagenr()))
+        echo a:command
+        execute(a:command)
+        CtrlSpaceGoNext
+    endfor
+endfunction
+command! -nargs=* CtrlSpaceBufDo call CtrlSpaceBufDo(<f-args>)
+
 " vim:ft=vim:ts=4:sw=4:

@@ -103,6 +103,8 @@ map <M-9> 9gt
 if !has('windows')
     call WarnFnNotAvailable('windows', 'tab mappings')
 endif
+" Switch to previous buffer
+nmap <Leader>` :b#<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -138,6 +140,13 @@ nnoremap <End> g$
 " Highlight last pasted text
 nmap <silent> gb `[v`]
 
+" Some readline functions
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <M-b> <S-Left>
+cnoremap <M-f> <S-Right>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pasting tweaks
