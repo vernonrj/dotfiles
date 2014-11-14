@@ -54,12 +54,6 @@ vnoremap <Leader>{ <Esc>/<C-R>=<SID>ScopeSearch('[{', 2)<CR><CR>gV
 " nnoremap <Leader>/ /<C-R>=<SID>ScopeSearch('[[', 0)<CR>
 " vnoremap <Leader>/ <Esc>/<C-R>=<SID>ScopeSearch('[[', 2)<CR><CR>
 
-" Visual Jumping
-" Visual mode pressing * or # searches for the current selection
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Highlighting
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""

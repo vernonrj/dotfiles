@@ -182,7 +182,8 @@ Plugin 'tpope/vim-dispatch'         " Better :make
 Plugin 'rking/ag.vim'               " Better ack
 " Plugin 'mileszs/ack.vim'            " Better vimgrep
 
-
+" * and # searching
+Bundle 'bronson/vim-visual-star-search'
 
 " ## Optional Plugins ##
 
