@@ -9,7 +9,6 @@ let s:vimrc_files_to_source = []
 let s:vimrc_files_to_source += ['vimrc_functions.vim'] "~/dotfiles/vimrc_functions.vim
 let s:vimrc_files_to_source += ['vimrc_mappings.vim']  "~/dotfiles/vimrc_mappings.vim
 let s:vimrc_files_to_source += ['vimrc_plugins.vim']   "~/dotfiles/vimrc_plugins.vim
-let s:vimrc_files_to_source += ['vimrc_local.vim']     "~/dotfiles/vimrc_local.vim
 
 
 "----------------------------------------------------------"
@@ -20,25 +19,45 @@ if has('nvim')
     runtime! python_setup.vim
 endif
 
-" tab length and other settings
-let g:vimrc_rsa_1es=0
+if !exists('g:vimrc_rsa_1es')
+    " tab length and other settings
+    let g:vimrc_rsa_1es=0
+endif
 
 "----------------------------------------------------------"
 " Bundle Configuration
 "----------------------------------------------------------"
-" colorscheme (zenburn or solarized)
-let g:vimrc_bundle_color='solarized'
-" c-like language plugins
-let g:vimrc_bundle_c=0
-" lisp-related plugins
-let g:vimrc_bundle_lisp=0
-" heavier, more complex fuzzy completion (if on, turns on syntastic too)
-" if off, turns on supertab
-let g:vimrc_bundle_ycm=0
-" syntax checking
-let g:vimrc_bundle_syntastic=0
-" work/windows plugins
-let g:vimrc_bundle_windows_dev=0
+
+if !exists('g:vimrc_bundle_color')
+    " colorscheme (zenburn or solarized)
+    let g:vimrc_bundle_color='solarized'
+endif
+
+if !exists('g:vimrc_bundle_c')
+    " c-like language plugins
+    let g:vimrc_bundle_c=0
+endif
+
+if !exists('g:vimrc_bundle_lisp')
+    " lisp-related plugins
+    let g:vimrc_bundle_lisp=0
+endif
+
+if !exists('g:vimrc_bundle_ycm')
+    " heavier, more complex fuzzy completion (if on, turns on syntastic too)
+    " if off, turns on supertab
+    let g:vimrc_bundle_ycm=0
+endif
+
+if !exists('g:vimrc_bundle_syntastic')
+    " syntax checking
+    let g:vimrc_bundle_syntastic=0
+endif
+
+if !exists('g:vimrc_bundle_windows_dev')
+    " work/windows plugins
+    let g:vimrc_bundle_windows_dev=0
+endif
 
 
 "----------------------------------------------------------"
@@ -97,23 +116,13 @@ endif
 "----------------------------------------------------------"
 " Include extra files
 "----------------------------------------------------------"
-let g:vimrc_sourced_files = {}
-if filereadable(expand('~/dotfiles/vimrc'))
-    let g:vimrc_resource_path = expand('~/dotfiles')
-elseif filereadable('vimrc')
-    let g:vimrc_resource_path = expand('.')
-else
-    echoerr("Can't find vimrc resource files, some functionality may be missing")
-endif
 
-if exists('g:vimrc_resource_path')
-    for myfile in s:vimrc_files_to_source
-        let file_to_source = g:vimrc_resource_path . "/" . myfile
-        if filereadable(file_to_source)
-            exec("source " . file_to_source)
-        endif
-    endfor
-endif
+for myfile in s:vimrc_files_to_source
+    let file_to_source = expand('<sfile>:h') . "/" . myfile
+    if filereadable(file_to_source)
+        exec("source " . file_to_source)
+    endif
+endfor
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
