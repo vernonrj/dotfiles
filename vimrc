@@ -16,7 +16,9 @@ let s:vimrc_files_to_source += ['vimrc_local.vim']     "~/dotfiles/vimrc_local.v
 " Compatibility
 "----------------------------------------------------------"
 set nocompatible
-
+if has('nvim')
+    runtime! python_setup.vim
+endif
 
 " tab length and other settings
 let g:vimrc_rsa_1es=0
@@ -42,7 +44,9 @@ let g:vimrc_bundle_windows_dev=0
 "----------------------------------------------------------"
 " General configuration
 "----------------------------------------------------------"
-set cryptmethod=blowfish
+if !has('nvim')
+    set cryptmethod=blowfish
+endif
 set history=2000
 set viminfo+=!             " Store upper-case registers in viminfo
 set ssop+=globals
@@ -83,6 +87,10 @@ else
     "Open .vimrc for editing
     map <Leader>gV :e ~/.vimrc<CR>
     let g:bcomp_path = "bcompare"
+endif
+
+if !has("python")
+    let g:vimrc_bundle_ycm=0
 endif
 
 
@@ -147,6 +155,13 @@ else
     call WarnFnNotAvailable('cindent', ':set cinoptions')
 endif
 
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Drawing
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set ttyfast
+set lazyredraw
 
 
 "----------------------------------------------------------"

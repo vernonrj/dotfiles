@@ -96,13 +96,15 @@ Plugin 'tComment'                           " better commenting
 " map <Leader>gtm :Tabularize /m_.*<CR>
 " map <leader>gT :Tabularize /
 
-" Snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger='<c-k>'
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-let g:UltiSnipsEditSplit='vertical'
+if has('python')
+    " Snippets
+    Plugin 'SirVer/ultisnips'
+    Plugin 'honza/vim-snippets'
+    let g:UltiSnipsExpandTrigger='<c-k>'
+    let g:UltiSnipsJumpForwardTrigger='<c-b>'
+    let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+    let g:UltiSnipsEditSplit='vertical'
+endif
 
 Plugin 'agassiyzh/Mark--Karkat'
 let g:mvDefaultHighlightingPalette = 'extended'
@@ -275,6 +277,10 @@ if g:vimrc_bundle_windows_dev == 1
     let g:visual_studio_find_results_2 = "C:/temp/vs_find_results_2.txt"
     " Extra syntax highlighting
     Plugin 'PProvost/vim-ps1'
+endif
+
+if has('nvim')
+    Plugin 'benekastah/neomake'
 endif
 
 " vim:ft=vim:ts=4:sw=4:
