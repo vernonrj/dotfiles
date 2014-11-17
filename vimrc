@@ -43,6 +43,11 @@ if !exists('g:vimrc_bundle_lisp')
     let g:vimrc_bundle_lisp=0
 endif
 
+if !exists('g:vimrc_bundle_airline')
+    " heavier statusline
+    let g:vimrc_bundle_airline=1
+endif
+
 if !exists('g:vimrc_bundle_ycm')
     " heavier, more complex fuzzy completion (if on, turns on syntastic too)
     " if off, turns on supertab

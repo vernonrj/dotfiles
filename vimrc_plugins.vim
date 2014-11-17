@@ -132,16 +132,35 @@ endif
 "## Look And Feel ##
 
 " Statusbar
-" Plugin 'bling/vim-airline'
-" let g:airline#extensions#whitespace#enabled = 0
-Plugin 'itchyny/lightline.vim'
-let g:lightline = {
-            \ 'colorscheme': 'solarized',
-            \ 'component': {
-            \   'readonly': '%{&readonly?"RO":""}',
-            \ }
-            \ }
-set noshowmode
+if g:vimrc_bundle_airline == 1
+    Plugin 'bling/vim-airline'
+    let g:airline#extensions#whitespace#enabled = 0
+else
+    Plugin 'itchyny/lightline.vim'
+    let g:lightline = {
+                \ 'colorscheme': 'solarized',
+                \ 'active': {
+                \   'right': [
+                \       [ 'syntastic', 'lineinfo'],
+                \       [ 'percent' ],
+                \       ['fileformat', 'fileencoding', 'filetype'],
+                \       [ 'tagbar' ]
+                \   ]
+                \ },
+                \ 'component': {
+                \   'readonly': '%{&readonly?"RO":""}',
+                \ },
+                \ 'component_function': {
+                \   'tagbar': 'TagbarStatusFunc'
+                \ }
+                \ }
+    set noshowmode
+endif
+
+
+function! TagbarStatusFunc()
+    return tagbar#currenttag('%s','')
+endfunction
 
 " Syntax highlighting
 Plugin 'elzr/vim-json'              " json syntax highlighting
