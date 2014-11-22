@@ -276,7 +276,9 @@ else
 endif
 if has('linebreak')
     " wrapping is indented to create blocks of text
-    set breakindent
+    if g:vimrc_rsa_1es == 0
+        set breakindent
+    endif
 endif
 
 " Tab completion on commands

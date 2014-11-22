@@ -99,6 +99,9 @@ if !has('windows')
 endif
 " Switch to previous buffer
 nmap <Leader>` :b#<CR>
+let g:lasttab = tabpagenr()
+nmap <M-`> :exe "tabn ".g:lasttab<CR>
+autocmd TabLeave * let g:lasttab = tabpagenr()
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
