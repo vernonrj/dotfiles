@@ -1,8 +1,7 @@
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 " Vernon Jones' vim plugin file
 "
-" This contains my general keybindings. Plugin-specific
-" keybindings are elsewhere
+" This contains all Plugins
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 if !exists('g:vimrc_sourced_files')
     let g:vimrc_sourced_files = {}
@@ -59,7 +58,8 @@ let NERDTreeDirArrows=0
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 
 " Ctrlp
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 nnoremap <C-n> :CtrlPMRU<CR>
 nnoremap <M-p> :CtrlP .<CR>

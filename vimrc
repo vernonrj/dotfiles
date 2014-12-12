@@ -9,7 +9,7 @@ let s:vimrc_files_to_source = []
 let s:vimrc_files_to_source += ['vimrc_functions.vim'] "~/dotfiles/vimrc_functions.vim
 let s:vimrc_files_to_source += ['vimrc_mappings.vim']  "~/dotfiles/vimrc_mappings.vim
 let s:vimrc_files_to_source += ['vimrc_plugins.vim']   "~/dotfiles/vimrc_plugins.vim
-
+let g:vimrc_sourced_files = {}
 
 "----------------------------------------------------------"
 " Compatibility
