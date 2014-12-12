@@ -105,6 +105,18 @@ if has("win32") || has("win64")
     " Disable annoying beeps in windows.
     set noerrorbells visualbell t_vb=
     autocmd GUIEnter * set visualbell t_vb=
+
+    if g:vimrc_rsa_1es == 1
+        " Checking with PC-Lint
+        function! PcLintSetup()
+            set errorformat=
+                        \%f(%l)\ :\ %t%*\\D%n:\ %m,
+                        \%f(%l)\ :\ %m,
+                        \%f(%l):%m,
+                        \%D%f>%.%#nmake%.%#
+            let &makeprg="cd %:h & makeit.bat /lnt %:t"
+        endfunction
+    endif
 else
     " reloading mappings for vimrc on *nix
     map <Leader>gv :source ~/.vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
