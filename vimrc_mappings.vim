@@ -138,12 +138,12 @@ nnoremap <End> g$
 nmap <silent> gb `[v`]
 
 " Some readline functions
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
-cnoremap <M-b> <S-Left>
-cnoremap <M-f> <S-Right>
+noremap! <C-a> <Home>
+noremap! <C-e> <End>
+noremap! <C-b> <Left>
+noremap! <C-f> <Right>
+noremap! <M-b> <S-Left>
+noremap! <M-f> <S-Right>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pasting tweaks
