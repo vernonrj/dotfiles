@@ -127,6 +127,9 @@ if has("win32") || has("win64")
     let g:bookmark_annotation_sign = '##'
 endif
 
+" Plugin 'osyo-manga/vim-brightest'
+" BrightestDisable
+" let g:brightest#enable_on_CursorHold = 1
 
 
 "## Look And Feel ##
