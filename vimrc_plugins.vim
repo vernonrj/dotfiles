@@ -133,6 +133,7 @@ let g:bookmark_auto_save = 1
 " BrightestDisable
 " let g:brightest#enable_on_CursorHold = 1
 
+" Plugin 'dahu/vim-lotr'
 
 "## Look And Feel ##
 

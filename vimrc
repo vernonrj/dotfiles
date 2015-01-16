@@ -104,7 +104,6 @@ if has("win32") || has("win64")
 
     " Disable annoying beeps in windows.
     set noerrorbells visualbell t_vb=
-    autocmd GUIEnter * set visualbell t_vb=
 
     if g:vimrc_rsa_1es == 1
         " Checking with PC-Lint
@@ -390,6 +389,13 @@ if has("autocmd")
         autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
     augroup END
+
+    if has("win32") || has("win64")
+        augroup vimrcWindows
+            autocmd!
+            autocmd GUIEnter * set visualbell t_vb=
+        augroup END
+    endif
 
 else
     call WarnFnNotAvailable('autocmd', 'autocmd')
