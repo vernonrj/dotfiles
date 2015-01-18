@@ -106,7 +106,7 @@ if has('python')
     let g:UltiSnipsEditSplit='vertical'
 endif
 
-Plugin 'agassiyzh/Mark--Karkat'
+Plugin 'vernonrj/Mark--Karkat'
 let g:mvDefaultHighlightingPalette = 'extended'
 nmap <k0> <Plug>MarkSearchAnyNext
 nmap <C-k0> <Plug>MarkSearchAnyPrev
