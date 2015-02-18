@@ -107,7 +107,8 @@ if has('python')
 endif
 
 Plugin 'vernonrj/Mark--Karkat'
-let g:mvDefaultHighlightingPalette = 'extended'
+let g:mwDefaultHighlightingPalette = 'maximum'
+let g:mwDefaultHighlightingNum = 12
 nmap <k0> <Plug>MarkSearchAnyNext
 nmap <C-k0> <Plug>MarkSearchAnyPrev
 nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
@@ -254,12 +255,37 @@ endif
 if g:vimrc_bundle_ycm == 1
     " use heavier YCM for completion
     Plugin 'Valloric/YouCompleteMe'
+    augroup vimrcYcm
+        autocmd!
+        autocmd BufReadPost *
+                    \ if getfsize(expand('%')) > (g:ycm_disable_for_files_larger_than_kb * 1024) |
+                    \   imap <buffer> <Tab> <Plug>SuperTabForward|
+                    \   imap <buffer> <S-Tab> <Plug>SuperTabBackward|
+                    \ endif
+    augroup END
     let g:ycm_key_invoke_completion = '<C-y>'
     let g:ycm_confirm_extra_conf = 0
     "let g:ycm_filetype_blacklist = { 'python': 1}
     let g:ycm_autoclose_preview_window_after_insertion = 1
     " use syntastic too
     let g:vimrc_bundle_syntastic=1
+    let g:ycm_filetype_blacklist = {
+          \ 'tagbar' : 1,
+          \ 'qf' : 1,
+          \ 'notes' : 1,
+          \ 'markdown' : 1,
+          \ 'unite' : 1,
+          \ 'text' : 1,
+          \ 'vimwiki' : 1,
+          \ 'pandoc' : 1,
+          \ 'infolog' : 1,
+          \ 'mail' : 1,
+          \ 'log' : 1
+          \}
+    function! VimrcUseSupertab()
+        imap <buffer> <Tab> <Plug>SuperTabForward
+        imap <buffer> <S-Tab> <Plug>SuperTabBackward
+    endfunction
 elseif has('lua')
     " Use neocomplete if we have lua
     Plugin 'Shougo/neocomplete.vim'
@@ -268,15 +294,15 @@ elseif has('lua')
     \ neocomplete#complete_common_string() != '' ?
     \   neocomplete#complete_common_string() :
     \ pumvisible() ? "\<C-n>" : "\<Tab>"
-else
-    " use supertab for completion
-    Plugin 'ervandew/supertab'
-    let g:SuperTabNoCompleteAfter = ['=', '+']
-    let g:SuperTabNoCompleteAfter += ['[', '(', '{']
-    let g:SuperTabNoCompleteAfter += [']', ')', '}']
-    let g:SuperTabNoCompleteAfter += [',', ';', '&', '^', '\s']
-    set completeopt+=longest
 endif
+
+" use supertab for fallback completion
+Plugin 'ervandew/supertab'
+let g:SuperTabNoCompleteAfter = ['=', '+']
+let g:SuperTabNoCompleteAfter += ['[', '(', '{']
+let g:SuperTabNoCompleteAfter += [']', ')', '}']
+let g:SuperTabNoCompleteAfter += [',', ';', '&', '^', '\s']
+set completeopt+=longest
 
 if g:vimrc_bundle_syntastic == 1
     " Add syntax checking

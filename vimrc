@@ -364,6 +364,7 @@ if has("autocmd")
         autocmd!
         autocmd BufRead,BufNewFile *.json set filetype=json
         autocmd BufRead,BufNewFile *.ps1 set filetype=ps1
+        autocmd BufRead,BufNewFile *.log set filetype=log
         if g:vimrc_rsa_1es == 1
             autocmd BufRead,BufNewFile *.cmd set filetype=iecwin
             autocmd BufRead,BufNewFile *.inp set filetype=iecwin
