@@ -75,6 +75,7 @@ set history=2000
 set viminfo+=!             " Store upper-case registers in viminfo
 set ssop+=globals
 let g:netrw_liststyle=3
+" set hidden                  " Buffers are not unloaded when hidden
 
 
 "----------------------------------------------------------"
@@ -95,12 +96,12 @@ if has("win32") || has("win64")
     set dir=c:\tmp
     " Disable YCM on windows because it's too difficult
     " to get up and running
-    let g:vimrc_bundle_ycm=0
+    "let g:vimrc_bundle_ycm=0
     " reloading mappings for vimrc on windows
     map <Leader>gv :source ~/_vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
     "Open .vimrc for editing
     map <Leader>gV :e ~/_vimrc<CR>
-    let g:bcomp_path = "C:\\Program Files (x86)\\Beyond Compare 3\\BComp.exe"
+    let g:bcomp_path = "C:\\Program Files (x86)\\Beyond Compare 4\\BComp.exe"
 
     " Disable annoying beeps in windows.
     set noerrorbells visualbell t_vb=
@@ -291,9 +292,7 @@ else
 endif
 if has('linebreak')
     " wrapping is indented to create blocks of text
-    if g:vimrc_rsa_1es == 0
-        set breakindent
-    endif
+    set breakindent
 endif
 
 " Tab completion on commands

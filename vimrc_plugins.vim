@@ -141,6 +141,9 @@ let g:bookmark_auto_save = 1
 if g:vimrc_bundle_airline == 1
     Plugin 'bling/vim-airline'
     let g:airline#extensions#whitespace#enabled = 0
+    if g:vimrc_rsa_1es == 1
+        let g:airline#extensions#branch#enabled = 0
+    endif
 else
     Plugin 'itchyny/lightline.vim'
     let g:lightline = {
