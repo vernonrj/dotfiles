@@ -283,6 +283,7 @@ if g:vimrc_bundle_ycm == 1
           \ 'log' : 1
           \}
     function! VimrcUseSupertab()
+        setlocal completefunc=
         imap <buffer> <Tab> <Plug>SuperTabForward
         imap <buffer> <S-Tab> <Plug>SuperTabBackward
     endfunction
