@@ -85,6 +85,7 @@ if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
 
     " Language configuration
+    set encoding=utf-8
     set langmenu=en_US.UTF-8
     language English_United States
 

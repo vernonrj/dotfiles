@@ -106,13 +106,15 @@ if has('python')
     let g:UltiSnipsEditSplit='vertical'
 endif
 
-Plugin 'vernonrj/Mark--Karkat'
-let g:mwDefaultHighlightingPalette = 'maximum'
-let g:mwDefaultHighlightingNum = 12
-nmap <k0> <Plug>MarkSearchAnyNext
-nmap <C-k0> <Plug>MarkSearchAnyPrev
-nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
-nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
+if has('gui_running') || !(has("win32") || has("win64"))
+    Plugin 'vernonrj/Mark--Karkat'
+    let g:mwDefaultHighlightingPalette = 'maximum'
+    let g:mwDefaultHighlightingNum = 12
+    nmap <k0> <Plug>MarkSearchAnyNext
+    nmap <C-k0> <Plug>MarkSearchAnyPrev
+    nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
+    nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
+endif
 
 Plugin 'MattesGroeger/vim-bookmarks'
 nmap <M-b>m <Plug>BookmarkToggle
