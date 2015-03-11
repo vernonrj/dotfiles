@@ -226,6 +226,8 @@ Plugin 'rking/ag.vim'               " Better ack
 " * and # searching
 Bundle 'bronson/vim-visual-star-search'
 
+Bundle 'chrisbra/vim-diff-enhanced'
+
 " ## Optional Plugins ##
 
 if g:vimrc_bundle_c == 1
