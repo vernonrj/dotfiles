@@ -19,8 +19,8 @@ exec("source " . expand('<sfile>:h') . '/vimrc_functions.vim')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Space> :
-nnoremap <S-Space> :
+" nnoremap <Space> :
+" nnoremap <S-Space> :
 
 cnoremap <M-5> <C-R>=expand('%:p:h')<CR>/
 cnoremap <M-2> <C-R>=expand('%:p')<CR>

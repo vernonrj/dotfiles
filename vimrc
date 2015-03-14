@@ -118,6 +118,8 @@ if has("win32") || has("win64")
             let &makeprg="cd %:h & makeit.bat /lnt %:t"
         endfunction
     endif
+    nmap <X2Mouse> [[
+    nmap <X1Mouse> ]]
 else
     " reloading mappings for vimrc on *nix
     map <Leader>gv :source ~/.vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
