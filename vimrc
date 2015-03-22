@@ -64,6 +64,10 @@ if !exists('g:vimrc_bundle_windows_dev')
     let g:vimrc_bundle_windows_dev=0
 endif
 
+if !exists('g:vimrc_bundle_command_t')
+    " Use ctrlp by default
+    let g:vimrc_bundle_command_t = 0
+endif
 
 "----------------------------------------------------------"
 " General configuration
