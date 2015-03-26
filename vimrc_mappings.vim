@@ -60,7 +60,7 @@ vnoremap <Leader>{ <Esc>/<C-R>=<SID>ScopeSearch('[{', 2)<CR><CR>gV
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " highlight current search
-nnoremap <silent> <Leader>hs :set hlsearch!<CR>:set hlsearch?<CR>
+nnoremap <silent> <BS> :set hlsearch! hlsearch?<CR>
 if !has('extra_search')
     call WarnFnNotAvailable('extra_search', 'search highlight toggle mapping')
 endif
@@ -104,6 +104,8 @@ let g:lasttab = tabpagenr()
 nmap <M-`> :exe "tabn ".g:lasttab<CR>
 autocmd TabLeave * let g:lasttab = tabpagenr()
 
+nmap <Left> :bprev<CR>
+nmap <Right> :bnext<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Splits
