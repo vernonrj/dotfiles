@@ -24,10 +24,10 @@ Plugin 'gmarik/vundle'
 "## Functionality inspired by other editors ##
 
 Plugin 'terryma/vim-multiple-cursors'
-let g:multi_cursor_next_key='<M-n>'
-let g:multi_cursor_prev_key='<M-S-n>'
-let g:multi_cursor_skip_key='<M-m>'
-let g:multi_cursor_quit_key='<Esc>'
+" let g:multi_cursor_next_key='<M-n>'
+" let g:multi_cursor_prev_key='<M-S-n>'
+" let g:multi_cursor_skip_key='<M-m>'
+" let g:multi_cursor_quit_key='<Esc>'
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 
@@ -87,7 +87,14 @@ if g:vimrc_bundle_command_t == 0
 else
     Plugin 'wincent/command-t'
     nnoremap <silent> <C-p> :CommandT<CR>
-    let g:CommandTSCMDirectories = '.git,.hg,.svn,.bzr,_darcs,build'
+    nnoremap <silent> <M-p> :CommandT .<CR>
+    if vimrc_rsa_1es == 1
+        let g:CommandTMaxFiles=1000000
+        let g:CommandTSCMDirectories = '.git,.hg,.svn,.bzr,_darcs,build'
+    endif
+    if executable('watchman')
+        let g:CommandTFileScanner = 'watchman'
+    endif
 endif
 
 " Buffer explorer
