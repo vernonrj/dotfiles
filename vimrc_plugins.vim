@@ -115,13 +115,15 @@ Plugin 'tComment'                           " better commenting
 " map <leader>gT :Tabularize /
 
 if has('python')
-    " Snippets
-    Plugin 'SirVer/ultisnips'
-    Plugin 'honza/vim-snippets'
-    let g:UltiSnipsExpandTrigger='<c-k>'
-    let g:UltiSnipsJumpForwardTrigger='<c-b>'
-    let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-    let g:UltiSnipsEditSplit='vertical'
+    if !has('nvim')
+        " Snippets
+        Plugin 'SirVer/ultisnips'
+        Plugin 'honza/vim-snippets'
+        let g:UltiSnipsExpandTrigger='<c-k>'
+        let g:UltiSnipsJumpForwardTrigger='<c-b>'
+        let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+        let g:UltiSnipsEditSplit='vertical'
+    endif
 endif
 
 if has('gui_running') || !(has("win32") || has("win64"))

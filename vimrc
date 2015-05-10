@@ -132,7 +132,7 @@ else
     let g:bcomp_path = "bcompare"
 endif
 
-if !has("python")
+if !has("python") || has("nvim")
     let g:vimrc_bundle_ycm=0
 endif
 
@@ -319,6 +319,7 @@ if has('wildignore')
     " Compilation ignores
     set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
     set wildignore+=*.pyo,*.pyc,*.so,*.o
+    set wildignore+=*.class,*.properties,*.dependencies
     " Pictures ignores
     set wildignore+=*.bmp,*.ico,*.svg,*.png,*.gif
     " Archives ignores
