@@ -15,7 +15,7 @@ let g:vimrc_sourced_files['plugins'] = 1
 " Plugins
 "----------------------------------------------------------"
 set runtimepath+=~/.vim/bundle/vundle
-call vundle#rc()
+call vundle#begin()
 
 " Vundle
 Plugin 'gmarik/vundle'
@@ -24,10 +24,6 @@ Plugin 'gmarik/vundle'
 "## Functionality inspired by other editors ##
 
 Plugin 'terryma/vim-multiple-cursors'
-" let g:multi_cursor_next_key='<M-n>'
-" let g:multi_cursor_prev_key='<M-S-n>'
-" let g:multi_cursor_skip_key='<M-m>'
-" let g:multi_cursor_quit_key='<Esc>'
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 
@@ -47,8 +43,6 @@ if executable("ag")
 endif
 let g:ctrlspace_default_mapping_key = "<Space>"
 nnoremap <C-Space> :CtrlSpace<CR>l
-
-" Plugin 'tpope/vim-obsession'        " Better :mksession
 
 " Movement
 Plugin 'EasyMotion'                 " Easier movement
@@ -70,7 +64,6 @@ if g:vimrc_bundle_command_t == 0
     nnoremap <C-n> :CtrlPMRU<CR>
     nnoremap <M-p> :CtrlP .<CR>
     noremap <Leader>bt :CtrlPTag<CR>
-    " noremap <Leader>r :CtrlPLastMode<CR>
     noremap <Leader><C-p> :CtrlPMixed<CR>
     noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
     noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
@@ -97,22 +90,12 @@ else
     endif
 endif
 
-" Buffer explorer
-"Plugin 'bufexplorer.zip'
-
 " Editing
 Plugin 'tpope/vim-surround'                 " Surrounding movements
 " Plugin 'wellle/targets.vim'                 " Many more movements
 Plugin 'tpope/vim-repeat'
 Plugin 'tComment'                           " better commenting
-" Plugin 'godlygeek/tabular'          " Text alignment
-" map <Leader>gt= :Tabularize /=<CR>
-" map <Leader>gt: :Tabularize /:<CR>
-" map <Leader>gt:: :Tabularize /:\zs<CR>
-" map <Leader>gt, :Tabularize /,<CR>
-" map <Leader>gt<Bar> :Tabularize /<Bar><CR>
-" map <Leader>gtm :Tabularize /m_.*<CR>
-" map <leader>gT :Tabularize /
+
 
 if has('python')
     if !has('nvim')
@@ -210,26 +193,6 @@ let g:solarized_termcolors=256
 "let g:solarized_contrast="high"
 "let g:solarized_visibility="high"
 
-" Zenburn
-" Plugin 'Zenburn'
-let g:zenburn_high_Contrast=1
-
-if g:vimrc_bundle_color == 'solarized'
-    if has('gui_running')
-        colorscheme solarized
-    else
-        colorscheme zenburn
-    endif
-elseif g:vimrc_bundle_color == 'zenburn'
-    colorscheme zenburn
-    " Fix some weird urxvt behavior
-    "hi TabLineFill cterm=none
-else
-    exec("colorscheme ".g:vimrc_bundle_color)
-endif
-
-
-
 
 " ## External programs ##
 
@@ -246,7 +209,7 @@ Plugin 'rking/ag.vim'               " Better ack
 " * and # searching
 Bundle 'bronson/vim-visual-star-search'
 
-Bundle 'chrisbra/vim-diff-enhanced'
+" Bundle 'chrisbra/vim-diff-enhanced'
 
 " ## Optional Plugins ##
 

@@ -14,7 +14,6 @@ let g:vimrc_sourced_files = {}
 "----------------------------------------------------------"
 " Compatibility
 "----------------------------------------------------------"
-set nocompatible
 if has('nvim')
     runtime! python_setup.vim
 endif
@@ -181,7 +180,6 @@ set laststatus=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
 if has('cindent')
     set cinoptions+=(0
 else
@@ -291,12 +289,12 @@ highlight WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indent/Completion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("autocmd")
-    filetype plugin indent on
-else
-    call WarnFnNotAvailable('autocmd', 'filetype plugin indent')
-    set autoindent
-endif
+" if has("autocmd")
+"     filetype plugin indent on
+" else
+"     call WarnFnNotAvailable('autocmd', 'filetype plugin indent')
+"     set autoindent
+" endif
 if has('linebreak')
     " wrapping is indented to create blocks of text
     set breakindent
