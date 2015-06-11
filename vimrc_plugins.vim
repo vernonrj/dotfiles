@@ -361,7 +361,7 @@ if g:vimrc_bundle_windows_dev == 1
 
     " ClearCase integration
     if g:vimrc_rsa_1es == 1
-        Plugin 'vim-scripts/ccase.vim'
+        " Plugin 'vim-scripts/ccase.vim'
     endif
     " Visual Studio integration
     Plugin 'vim-scripts/visual_studio.vim'
