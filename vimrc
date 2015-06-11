@@ -14,7 +14,6 @@ let g:vimrc_sourced_files = {}
 "----------------------------------------------------------"
 " Compatibility
 "----------------------------------------------------------"
-set nocompatible
 if has('nvim')
     runtime! python_setup.vim
 endif
@@ -132,7 +131,7 @@ else
     let g:bcomp_path = "bcompare"
 endif
 
-if !has("python")
+if !has("python") || has("nvim")
     let g:vimrc_bundle_ycm=0
 endif
 
@@ -181,7 +180,6 @@ set laststatus=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntax
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
 if has('cindent')
     set cinoptions+=(0
 else
@@ -291,12 +289,12 @@ highlight WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indent/Completion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("autocmd")
-    filetype plugin indent on
-else
-    call WarnFnNotAvailable('autocmd', 'filetype plugin indent')
-    set autoindent
-endif
+" if has("autocmd")
+"     filetype plugin indent on
+" else
+"     call WarnFnNotAvailable('autocmd', 'filetype plugin indent')
+"     set autoindent
+" endif
 if has('linebreak')
     " wrapping is indented to create blocks of text
     set breakindent
@@ -319,6 +317,7 @@ if has('wildignore')
     " Compilation ignores
     set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
     set wildignore+=*.pyo,*.pyc,*.so,*.o
+    set wildignore+=*.class,*.properties,*.dependencies
     " Pictures ignores
     set wildignore+=*.bmp,*.ico,*.svg,*.png,*.gif
     " Archives ignores
