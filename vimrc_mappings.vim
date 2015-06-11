@@ -104,8 +104,10 @@ let g:lasttab = tabpagenr()
 nmap <M-`> :exe "tabn ".g:lasttab<CR>
 autocmd TabLeave * let g:lasttab = tabpagenr()
 
-nmap <Left> :bprev<CR>
-nmap <Right> :bnext<CR>
+nnoremap <Left> 5zh
+nnoremap <Right> 5zl
+nnoremap <Up> <C-y>
+nnoremap <Down> <C-e>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Splits
