@@ -365,6 +365,7 @@ if has("autocmd")
         " autocmd BufEnter * :syntax sync fromstart
         autocmd FileType python setlocal shiftwidth=4 tabstop=4
         autocmd FileType vim setlocal shiftwidth=4 tabstop=4
+        autocmd FileType org setlocal shiftwidth=4 tabstop=4
     augroup END
 
     augroup vimrcExtraFileTypes
@@ -378,6 +379,7 @@ if has("autocmd")
             " autocmd FileType iecwin set syntax=cpp
         endif
     augroup END
+
 
     augroup vimrcEx
         autocmd!
