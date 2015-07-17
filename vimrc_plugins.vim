@@ -41,8 +41,8 @@ endif
 if executable("ag")
     let g:ctrlspace_glob_command = 'ag -l --nocolor -g ""'
 endif
-let g:ctrlspace_default_mapping_key = "<Space>"
-nnoremap <C-Space> :CtrlSpace<CR>l
+" let g:ctrlspace_default_mapping_key = "<Space>"
+" nnoremap <C-Space> :CtrlSpace<CR>l
 
 " Movement
 Plugin 'EasyMotion'                 " Easier movement
@@ -56,7 +56,7 @@ nmap <silent> <C-F6> :NERDTreeFind<CR>
 let NERDTreeDirArrows=0
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 
-if g:vimrc_bundle_command_t == 0
+if g:vimrc_bundle_command_t == 0 || !has('ruby')
     " Ctrlp
     " Plugin 'kien/ctrlp.vim'
     Plugin 'ctrlpvim/ctrlp.vim'
@@ -78,13 +78,22 @@ if g:vimrc_bundle_command_t == 0
         let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
     endif
 else
+    " Command-T
+    " faster than ctrl-p, but more difficult to set up
     Plugin 'wincent/command-t'
-    nnoremap <silent> <C-p> :CommandT<CR>
-    nnoremap <silent> <M-p> :CommandT .<CR>
+
+    let g:CommandTMaxCachedDirectories = 5
+    let g:CommandTMatchWindowReverse = 1
+    let g:CommandTMaxHeight = 20
+
     if vimrc_rsa_1es == 1
-        let g:CommandTMaxFiles=1000000
+        let g:CommandTMaxFiles = 1000000
         let g:CommandTSCMDirectories = '.git,.hg,.svn,.bzr,_darcs,build'
     endif
+
+    nnoremap <silent> <C-p> :CommandT<CR>
+    nnoremap <silent> <M-p> :CommandT .<CR>
+
     if executable('watchman')
         let g:CommandTFileScanner = 'watchman'
     endif
@@ -317,7 +326,7 @@ if g:vimrc_bundle_windows_dev == 1
 
     " ClearCase integration
     if g:vimrc_rsa_1es == 1
-        Plugin 'vim-scripts/ccase.vim'
+        " Plugin 'vim-scripts/ccase.vim'
     endif
     " Visual Studio integration
     Plugin 'vim-scripts/visual_studio.vim'
