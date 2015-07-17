@@ -45,16 +45,16 @@ endif
 " nnoremap <C-Space> :CtrlSpace<CR>l
 
 " Movement
-Plugin 'EasyMotion'                 " Easier movement
+" Plugin 'EasyMotion'                 " Easier movement
 " Plugin 'tpope/vim-rsi'              " readline in insert mode
 Plugin 'vim-scripts/matchit.zip'
 
 " File/Directory/Buffer
-Plugin 'scrooloose/nerdtree'
-nmap <silent> <F6> :NERDTreeToggle<CR>
-nmap <silent> <C-F6> :NERDTreeFind<CR>
-let NERDTreeDirArrows=0
-let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
+" Plugin 'scrooloose/nerdtree'
+" nmap <silent> <F6> :NERDTreeToggle<CR>
+" nmap <silent> <C-F6> :NERDTreeFind<CR>
+" let NERDTreeDirArrows=0
+" let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 
 if g:vimrc_bundle_command_t == 0 || !has('ruby')
     " Ctrlp
