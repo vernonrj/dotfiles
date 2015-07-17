@@ -316,6 +316,7 @@ endif
 if has('wildignore')
     " Compilation ignores
     set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
+    set wildignore+=*.rlib
     set wildignore+=*.pyo,*.pyc,*.so,*.o
     set wildignore+=*.class,*.properties,*.dependencies
     " Pictures ignores
