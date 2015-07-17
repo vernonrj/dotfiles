@@ -342,4 +342,6 @@ if has('nvim')
     Plugin 'benekastah/neomake'
 endif
 
+Plugin 'tommcdo/vim-exchange'
+
 " vim:ft=vim:ts=4:sw=4:
