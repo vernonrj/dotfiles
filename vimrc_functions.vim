@@ -65,9 +65,9 @@ command! -nargs=* -complete=file BComp call BComp()
 
 " Cleartool functions
 command! -nargs=0 -complete=command CTree exec 
-    \ ":Start! clearvtree.exe ".expand("%")
+    \ ":Spawn! clearvtree.exe ".expand("%")
 command! -nargs=0 -complete=command CDiff exec
-    \ ":Start! cleartool diff -graphical -pred \"".expand("%")."\""
+    \ ":Spawn! cleartool diff -graphical -pred \"".expand("%")."\""
 command! -nargs=0 -complete=command CCheckout exec
     \ "!start cleartool checkout \"".expand("%")."\""
 command! -nargs=0 -complete=command CCommit exec

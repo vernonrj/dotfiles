@@ -27,7 +27,7 @@ Plugin 'terryma/vim-multiple-cursors'
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 
-Plugin 'chrisbra/NrrwRgn'
+" Plugin 'chrisbra/NrrwRgn'
 
 
 
@@ -106,17 +106,17 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tComment'                           " better commenting
 
 
-if has('python')
-    if !has('nvim')
-        " Snippets
-        Plugin 'SirVer/ultisnips'
-        Plugin 'honza/vim-snippets'
-        let g:UltiSnipsExpandTrigger='<c-k>'
-        let g:UltiSnipsJumpForwardTrigger='<c-b>'
-        let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-        let g:UltiSnipsEditSplit='vertical'
-    endif
-endif
+" if has('python')
+"     if !has('nvim')
+"         " Snippets
+"         Plugin 'SirVer/ultisnips'
+"         Plugin 'honza/vim-snippets'
+"         let g:UltiSnipsExpandTrigger='<c-k>'
+"         let g:UltiSnipsJumpForwardTrigger='<c-b>'
+"         let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+"         let g:UltiSnipsEditSplit='vertical'
+"     endif
+" endif
 
 if has('gui_running') || !(has("win32") || has("win64"))
     Plugin 'vernonrj/Mark--Karkat'
@@ -227,6 +227,10 @@ if g:vimrc_bundle_c == 1
     " C/C++ related plugins
     Plugin 'a.vim'
     Plugin 'majutsushi/tagbar'
+    augroup vimrcPluginTagbarExtra
+        autocmd!
+        autocmd FileType qf let b:tagbar_ignore = 1
+    augroup END
     let g:tagbar_sort=0
     let g:tagbar_type_idl = {
         \ 'ctagstype' : 'idl',

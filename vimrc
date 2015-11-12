@@ -88,9 +88,11 @@ if has("win32") || has("win64")
     " ==== Windows Configuration goes here ==== "
 
     " Language configuration
-    set encoding=utf-8
-    set langmenu=en_US.UTF-8
-    language English_United States
+    if !has('nvim')
+       set encoding=utf-8
+       set langmenu=en_US.UTF-8
+       language English_United States
+    endif
 
     set guifont=Consolas:h11:cANSI
     behave xterm
