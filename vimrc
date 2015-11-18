@@ -19,11 +19,6 @@ endif
 " Bundle Configuration
 "----------------------------------------------------------"
 
-if !exists('g:vimrc_bundle_color')
-    " colorscheme (zenburn or solarized)
-    let g:vimrc_bundle_color='solarized'
-endif
-
 if !exists('g:vimrc_bundle_c')
     " c-like language plugins
     let g:vimrc_bundle_c=0
@@ -90,11 +85,7 @@ if has("win32") || has("win64")
     behave xterm
     " Ensure various split commands work on windows
     " like :Gdiff
-    " set directory+=,~/tmp,$TMP
     set dir=c:\tmp
-    " Disable YCM on windows because it's too difficult
-    " to get up and running
-    "let g:vimrc_bundle_ycm=0
     " reloading mappings for vimrc on windows
     map <Leader>gv :source ~/_vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
     "Open .vimrc for editing
@@ -104,17 +95,6 @@ if has("win32") || has("win64")
     " Disable annoying beeps in windows.
     set noerrorbells visualbell t_vb=
 
-    if g:vimrc_rsa_1es == 1
-        " Checking with PC-Lint
-        function! PcLintSetup()
-            set errorformat=
-                        \%f(%l)\ :\ %t%*\\D%n:\ %m,
-                        \%f(%l)\ :\ %m,
-                        \%f(%l):%m,
-                        \%D%f>%.%#nmake%.%#
-            let &makeprg="cd %:h & makeit.bat /lnt %:t"
-        endfunction
-    endif
     nmap <X2Mouse> [[
     nmap <X1Mouse> ]]
 else
@@ -260,12 +240,6 @@ highlight WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indent/Completion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" if has("autocmd")
-"     filetype plugin indent on
-" else
-"     call WarnFnNotAvailable('autocmd', 'filetype plugin indent')
-"     set autoindent
-" endif
 if has('linebreak')
     " wrapping is indented to create blocks of text
     set breakindent
