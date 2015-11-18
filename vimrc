@@ -425,29 +425,6 @@ command! -nargs=0 -complete=command CCommit exec
 command! -nargs=0 -complete=command CUnco exec
     \ "!start cleartool uncheckout \"".expand("%")."\""
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tagging Functions
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! CtagTypeDefs()
-    let fname = expand('%:p:h') . '/types.vim'
-    let thisfile = expand("%:e")
-    if filereadable(fname)
-        exe 'so ' . fname
-    elseif thisfile == "c"
-        !ctags -R --c-kinds=gstu -o- *.[ch] | awk 'BEGIN{printf("syntax keyword Type\t")} {printf("\%s ",$$1)}END{print ""}' > types.vim
-    endif
-endfunction
-
-
-function! CtrlSpaceBufDo(command)
-    for s:bufnumber in keys(ctrlspace#bufferlist(tabpagenr()))
-        echo a:command
-        execute(a:command)
-        CtrlSpaceGoNext
-    endfor
-endfunction
-command! -nargs=* CtrlSpaceBufDo call CtrlSpaceBufDo(<f-args>)
-
 
 if !exists('g:highlight_under_cursor')
     let g:highlight_under_cursor = 0
@@ -502,36 +479,7 @@ endfunction
 
 cnoremap <M-5> <C-R>=expand('%:p:h')<CR>/
 cnoremap <M-2> <C-R>=expand('%:p')<CR>
-inoremap <C-t> <C-R>=strftime("TODO:vrj %Y.%m.%d: ")<CR>
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Formatting/Search
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Search
-nnoremap <Leader>fi :set ignorecase! <CR>:set ignorecase?<CR>
-cnoremap <M-4> \>
-cnoremap <M-6> \<
-
-" Line numbering
-nnoremap <silent> <Leader>fn :set number!<CR> :set relativenumber!<CR>
-nnoremap <silent> <Leader>fN :set norelativenumber<CR> :set number!<CR>
-
-" Jumping (with menus)
-" nnoremap <Leader>* :call <SID>JumpOccurrence()<CR>
-" nnoremap <Leader>? :call <SID>JumpPrompt()<CR>
-
-" Jump-searching (in blocks)
-" Search within top-level block for word at cursor, or selected text.
-nnoremap <Leader>[ /<C-R>=<SID>ScopeSearch('[[', 1)<CR><CR>
-vnoremap <Leader>[ <Esc>/<C-R>=<SID>ScopeSearch('[[', 2)<CR><CR>gV
-" Search within current block for word at cursor, or selected text.
-nnoremap <Leader>{ /<C-R>=<SID>ScopeSearch('[{', 1)<CR><CR>
-vnoremap <Leader>{ <Esc>/<C-R>=<SID>ScopeSearch('[{', 2)<CR><CR>gV
-" Search within current top-level block for user-entered text.
-" nnoremap <Leader>/ /<C-R>=<SID>ScopeSearch('[[', 0)<CR>
-" vnoremap <Leader>/ <Esc>/<C-R>=<SID>ScopeSearch('[[', 2)<CR><CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Highlighting
@@ -539,18 +487,6 @@ vnoremap <Leader>{ <Esc>/<C-R>=<SID>ScopeSearch('[{', 2)<CR><CR>gV
 
 " highlight current search
 nnoremap <silent> <BS> :set hlsearch! hlsearch?<CR>
-
-" highlight cursor line and cursor column
-nnoremap <Leader>hc :set cursorline! cursorcolumn!<CR>
-
-" highlight Syntax
-nnoremap <silent> <Leader>hS :if exists("syntax_on") <Bar>
-    \   syntax off <Bar>
-    \   set nonumber <Bar>
-    \ else <Bar>
-    \   syntax enable <Bar>
-    \ endif <CR>
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Buffers/Tabs
@@ -572,11 +508,6 @@ nmap <Leader>` :b#<CR>
 let g:lasttab = tabpagenr()
 nmap <M-`> :exe "tabn ".g:lasttab<CR>
 autocmd TabLeave * let g:lasttab = tabpagenr()
-
-nnoremap <Left> 5zh
-nnoremap <Right> 5zl
-nnoremap <Up> <C-y>
-nnoremap <Down> <C-e>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Splits
@@ -620,11 +551,6 @@ noremap! <M-b> <S-Left>
 noremap! <M-f> <S-Right>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pasting tweaks
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap Y y$
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F1> <nop>
@@ -664,20 +590,9 @@ endif
 if executable("ag")
     let g:ctrlspace_glob_command = 'ag -l --nocolor -g ""'
 endif
-" let g:ctrlspace_default_mapping_key = "<Space>"
-" nnoremap <C-Space> :CtrlSpace<CR>l
 
 " Movement
-" Plugin 'EasyMotion'                 " Easier movement
-" Plugin 'tpope/vim-rsi'              " readline in insert mode
 Plugin 'vim-scripts/matchit.zip'
-
-" File/Directory/Buffer
-" Plugin 'scrooloose/nerdtree'
-" nmap <silent> <F6> :NERDTreeToggle<CR>
-" nmap <silent> <C-F6> :NERDTreeFind<CR>
-" let NERDTreeDirArrows=0
-" let NERDTreeIgnore=['\.vim$', '\~$', '\.o', '\.gch', '\.am', '\.in']
 
 if g:vimrc_bundle_command_t == 0 || !has('ruby')
     " Ctrlp
@@ -724,22 +639,9 @@ endif
 
 " Editing
 Plugin 'tpope/vim-surround'                 " Surrounding movements
-" Plugin 'wellle/targets.vim'                 " Many more movements
 Plugin 'tpope/vim-repeat'
 Plugin 'tComment'                           " better commenting
 
-
-" if has('python')
-"     if !has('nvim')
-"         " Snippets
-"         Plugin 'SirVer/ultisnips'
-"         Plugin 'honza/vim-snippets'
-"         let g:UltiSnipsExpandTrigger='<c-k>'
-"         let g:UltiSnipsJumpForwardTrigger='<c-b>'
-"         let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-"         let g:UltiSnipsEditSplit='vertical'
-"     endif
-" endif
 
 if has('gui_running') || !(has("win32") || has("win64"))
     Plugin 'vernonrj/Mark--Karkat'
@@ -768,11 +670,6 @@ let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 let g:bookmark_manage_per_buffer = 1
 
-" Plugin 'osyo-manga/vim-brightest'
-" BrightestDisable
-" let g:brightest#enable_on_CursorHold = 1
-
-" Plugin 'dahu/vim-lotr'
 
 "## Look And Feel ##
 
@@ -855,17 +752,9 @@ if g:vimrc_bundle_c == 1
         autocmd FileType qf let b:tagbar_ignore = 1
     augroup END
     let g:tagbar_sort=0
-    let g:tagbar_type_idl = {
-        \ 'ctagstype' : 'idl',
-        \ 'kinds'     : [
-            \ 'i:interface'
-        \ ],
-        \ 'sort'      : 0
-        \ }
     nmap <silent> <F7> :TagbarToggle<CR>
     Plugin 'steffanc/cscopemaps.vim'
     Plugin 'octol/vim-cpp-enhanced-highlight'
-    " Plugin 'HiCursorWords'
 endif
 
 if g:vimrc_bundle_lisp == 1
@@ -912,14 +801,6 @@ if g:vimrc_bundle_ycm == 1
         imap <buffer> <Tab> <Plug>SuperTabForward
         imap <buffer> <S-Tab> <Plug>SuperTabBackward
     endfunction
-elseif has('lua')
-    " Use neocomplete if we have lua
-    Plugin 'Shougo/neocomplete.vim'
-    let g:neocomplete#enable_at_startup = 1
-    inoremap <expr><Tab>
-    \ neocomplete#complete_common_string() != '' ?
-    \   neocomplete#complete_common_string() :
-    \ pumvisible() ? "\<C-n>" : "\<Tab>"
 endif
 
 " use supertab for fallback completion
@@ -973,5 +854,6 @@ endif
 
 Plugin 'tommcdo/vim-exchange'
 
+call vundle#end()
 
 " vim:ft=vim:ts=4:sw=4:
