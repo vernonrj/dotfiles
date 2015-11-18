@@ -451,11 +451,6 @@ map <M-6> 6gt
 map <M-7> 7gt
 map <M-8> 8gt
 map <M-9> 9gt
-" Switch to previous buffer
-nmap <Leader>` :b#<CR>
-let g:lasttab = tabpagenr()
-nmap <M-`> :exe "tabn ".g:lasttab<CR>
-autocmd TabLeave * let g:lasttab = tabpagenr()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Splits
