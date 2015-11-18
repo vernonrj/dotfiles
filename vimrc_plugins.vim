@@ -242,6 +242,7 @@ if g:vimrc_bundle_c == 1
     nmap <silent> <F7> :TagbarToggle<CR>
     Plugin 'steffanc/cscopemaps.vim'
     Plugin 'octol/vim-cpp-enhanced-highlight'
+    " Plugin 'HiCursorWords'
 endif
 
 if g:vimrc_bundle_lisp == 1

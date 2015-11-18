@@ -98,4 +98,43 @@ function! CtrlSpaceBufDo(command)
 endfunction
 command! -nargs=* CtrlSpaceBufDo call CtrlSpaceBufDo(<f-args>)
 
+
+if !exists('g:highlight_under_cursor')
+    let g:highlight_under_cursor = 0
+endif
+
+function! HighlightAssignment()
+    try | call ClearCustomHighlights() | catch /.*/ | endtry
+    if exists('g:highlight_under_cursor') && g:highlight_under_cursor == 1
+        if match(expand('<cword>'), '\k\+') >= 0
+            execute 'syn match WordUnderCursor "'
+                        \ . expand('<cword>')
+                        \ . '" conceal'
+            execute 'syn match WordUnderCursorAssign "'
+                        \ . expand('<cword>')
+                        \ . '\(\s*\(\*\|[+-/^%]\)\?=\([^=]\|$\)\)\@="'
+            hi def link WordUnderCursorAssign SignColumn
+            hi WordUnderCursor guibg=#9fbfd6
+        endif
+    endif
+endfunction
+
+function! ClearCustomHighlights()
+    syn clear WordUnderCursor
+    syn clear WordUnderCursorAssign
+endfunction
+
+augroup vimrcHighlightAssign
+    autocmd!
+    " autocmd CursorHold *.cpp call HighlightAssignment()
+augroup END
+
+function! SmartLineBegin()
+    let s:curcol = col('.')
+    normal! ^
+    if col('.') == s:curcol
+        normal! 0
+    endif
+endfunction
+
 " vim:ft=vim:ts=4:sw=4:

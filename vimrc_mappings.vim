@@ -132,8 +132,8 @@ inoremap <Up> <C-O>gk
 inoremap <Down> <C-O>gj
 " Remap 0/^ and related keys to how I like them
 nnoremap <M-0> 0
-nnoremap 0 ^
-nnoremap ^ 0
+nnoremap <silent> 0 :call SmartLineBegin()<CR>
+" nnoremap ^ 0
 nnoremap g0 g^
 nnoremap g^ g0
 " Remap home/end keys to act like windows text editors when lines wrap
