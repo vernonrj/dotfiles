@@ -413,58 +413,6 @@ endfunction
 command! -nargs=* -complete=file BComp call BComp()
 
 
-" Cleartool functions
-command! -nargs=0 -complete=command CTree exec 
-    \ ":Spawn! clearvtree.exe ".expand("%")
-command! -nargs=0 -complete=command CDiff exec
-    \ ":Spawn! cleartool diff -graphical -pred \"".expand("%")."\""
-command! -nargs=0 -complete=command CCheckout exec
-    \ "!start cleartool checkout \"".expand("%")."\""
-command! -nargs=0 -complete=command CCommit exec
-    \ "!start cleartool checkin \"".expand("%")."\""
-command! -nargs=0 -complete=command CUnco exec
-    \ "!start cleartool uncheckout \"".expand("%")."\""
-
-
-if !exists('g:highlight_under_cursor')
-    let g:highlight_under_cursor = 0
-endif
-
-function! HighlightAssignment()
-    try | call ClearCustomHighlights() | catch /.*/ | endtry
-    if exists('g:highlight_under_cursor') && g:highlight_under_cursor == 1
-        if match(expand('<cword>'), '\k\+') >= 0
-            execute 'syn match WordUnderCursor "'
-                        \ . expand('<cword>')
-                        \ . '" conceal'
-            execute 'syn match WordUnderCursorAssign "'
-                        \ . expand('<cword>')
-                        \ . '\(\s*\(\*\|[+-/^%]\)\?=\([^=]\|$\)\)\@="'
-            hi def link WordUnderCursorAssign SignColumn
-            hi WordUnderCursor guibg=#9fbfd6
-        endif
-    endif
-endfunction
-
-function! ClearCustomHighlights()
-    syn clear WordUnderCursor
-    syn clear WordUnderCursorAssign
-endfunction
-
-augroup vimrcHighlightAssign
-    autocmd!
-    " autocmd CursorHold *.cpp call HighlightAssignment()
-augroup END
-
-function! SmartLineBegin()
-    let s:curcol = col('.')
-    normal! ^
-    if col('.') == s:curcol
-        normal! 0
-    endif
-endfunction
-
-
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 " Mappings
@@ -532,12 +480,12 @@ inoremap <Up> <C-O>gk
 inoremap <Down> <C-O>gj
 " Remap 0/^ and related keys to how I like them
 nnoremap <M-0> 0
-nnoremap <silent> 0 :call SmartLineBegin()<CR>
+" nnoremap <silent> 0 :call SmartLineBegin()<CR>
 " nnoremap ^ 0
 nnoremap g0 g^
 nnoremap g^ g0
 " Remap home/end keys to act like windows text editors when lines wrap
-nnoremap <Home> g0
+" nnoremap <Home> g0
 nnoremap <End> g$
 " Highlight last pasted text
 nmap <silent> gb `[v`]
