@@ -16,46 +16,6 @@ if !exists('g:vimrc_rsa_1es')
 endif
 
 "----------------------------------------------------------"
-" Bundle Configuration
-"----------------------------------------------------------"
-
-if !exists('g:vimrc_bundle_c')
-    " c-like language plugins
-    let g:vimrc_bundle_c=0
-endif
-
-if !exists('g:vimrc_bundle_lisp')
-    " lisp-related plugins
-    let g:vimrc_bundle_lisp=0
-endif
-
-if !exists('g:vimrc_bundle_airline')
-    " heavier statusline
-    let g:vimrc_bundle_airline=1
-endif
-
-if !exists('g:vimrc_bundle_ycm')
-    " heavier, more complex fuzzy completion (if on, turns on syntastic too)
-    " if off, turns on supertab
-    let g:vimrc_bundle_ycm=0
-endif
-
-if !exists('g:vimrc_bundle_syntastic')
-    " syntax checking
-    let g:vimrc_bundle_syntastic=0
-endif
-
-if !exists('g:vimrc_bundle_windows_dev')
-    " work/windows plugins
-    let g:vimrc_bundle_windows_dev=0
-endif
-
-if !exists('g:vimrc_bundle_command_t')
-    " Use ctrlp by default
-    let g:vimrc_bundle_command_t = 0
-endif
-
-"----------------------------------------------------------"
 " General configuration
 "----------------------------------------------------------"
 if !has('nvim')
@@ -104,12 +64,6 @@ else
     map <Leader>gV :e ~/.vimrc<CR>
     let g:bcomp_path = "bcompare"
 endif
-
-if !has("python") || has("nvim")
-    let g:vimrc_bundle_ycm=0
-endif
-
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Terminal
@@ -487,72 +441,13 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 
 
-"## Functionality inspired by other editors ##
-
-Plugin 'terryma/vim-multiple-cursors'
-let g:multi_cursor_exit_from_visual_mode = 0
-let g:multi_cursor_exit_from_insert_mode = 0
-
-" Plugin 'chrisbra/NrrwRgn'
-
-
 
 "## Vim feature enhancement ##
 " Session
-Plugin 'szw/vim-ctrlspace'
-if has("win32") || has("win64")
-    " Can't get unicode font to work correctly...
-    let g:ctrlspace_unicode_font = 0
-endif
-if executable("ag")
-    let g:ctrlspace_glob_command = 'ag -l --nocolor -g ""'
-endif
 
 " Movement
 Plugin 'vim-scripts/matchit.zip'
 
-if g:vimrc_bundle_command_t == 0 || !has('ruby')
-    " Ctrlp
-    " Plugin 'kien/ctrlp.vim'
-    Plugin 'ctrlpvim/ctrlp.vim'
-    Plugin 'FelikZ/ctrlp-py-matcher'
-    nnoremap <C-n> :CtrlPMRU<CR>
-    nnoremap <M-p> :CtrlP .<CR>
-    noremap <Leader>bt :CtrlPTag<CR>
-    noremap <Leader><C-p> :CtrlPMixed<CR>
-    noremap <Leader><C-b> :CtrlPBookmarkDir<CR>
-    noremap <Leader><C-d> :CtrlPBookmarkDirAdd<CR>
-    let g:ctrlp_prompt_mappings = { 'ToggleMRURelative()': ['<F2>']}
-    if g:vimrc_rsa_1es == 1
-        " handle large projects better
-        let g:ctrlp_root_markers = ['build']
-    endif
-    let g:ctrlp_max_files = 0
-    let g:ctrlp_lazy_update = 1
-    if has('python')
-        let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-    endif
-else
-    " Command-T
-    " faster than ctrl-p, but more difficult to set up
-    Plugin 'wincent/command-t'
-
-    let g:CommandTMaxCachedDirectories = 5
-    let g:CommandTMatchWindowReverse = 1
-    let g:CommandTMaxHeight = 20
-
-    if vimrc_rsa_1es == 1
-        let g:CommandTMaxFiles = 1000000
-        let g:CommandTSCMDirectories = '.git,.hg,.svn,.bzr,_darcs,build'
-    endif
-
-    nnoremap <silent> <C-p> :CommandT<CR>
-    nnoremap <silent> <M-p> :CommandT .<CR>
-
-    if executable('watchman')
-        let g:CommandTFileScanner = 'watchman'
-    endif
-endif
 
 " Editing
 Plugin 'tpope/vim-surround'                 " Surrounding movements
@@ -570,59 +465,16 @@ if has('gui_running') || !(has("win32") || has("win64"))
     nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
 endif
 
-Plugin 'MattesGroeger/vim-bookmarks'
-nmap <M-b>m <Plug>BookmarkToggle
-nmap <M-b>a <Plug>BookmarkAnnotate
-nmap <M-b>n <Plug>BookmarkNext
-nmap <M-b>p <Plug>BookmarkPrev
-nmap <M-b>i <Plug>BookmarkShowAll
-nmap <M-b>c <Plug>BookmarkClear
-nmap <M-b>x <Plug>BookmarkClearAll
-if has("win32") || has("win64")
-    " can't get unicode to work correctly on windows :(
-    let g:bookmark_sign = '**'
-    let g:bookmark_annotation_sign = '##'
-endif
-let g:bookmark_save_per_working_dir = 1
-let g:bookmark_auto_save = 1
-let g:bookmark_manage_per_buffer = 1
 
 
 "## Look And Feel ##
 
-" Statusbar
-if g:vimrc_bundle_airline == 1
-    Plugin 'bling/vim-airline'
-    let g:airline#extensions#whitespace#enabled = 0
-    if g:vimrc_rsa_1es == 1
-        let g:airline#extensions#branch#enabled = 0
-    endif
-else
-    Plugin 'itchyny/lightline.vim'
-    let g:lightline = {
-                \ 'colorscheme': 'solarized',
-                \ 'active': {
-                \   'right': [
-                \       [ 'syntastic', 'lineinfo'],
-                \       [ 'percent' ],
-                \       ['fileformat', 'fileencoding', 'filetype'],
-                \       [ 'tagbar' ]
-                \   ]
-                \ },
-                \ 'component': {
-                \   'readonly': '%{&readonly?"RO":""}',
-                \ },
-                \ 'component_function': {
-                \   'tagbar': 'TagbarStatusFunc'
-                \ }
-                \ }
-    set noshowmode
+Plugin 'bling/vim-airline'
+let g:airline#extensions#whitespace#enabled = 0
+if g:vimrc_rsa_1es == 1
+    let g:airline#extensions#branch#enabled = 0
 endif
 
-
-function! TagbarStatusFunc()
-    return tagbar#currenttag('%s','')
-endfunction
 
 " Syntax highlighting
 Plugin 'elzr/vim-json'              " json syntax highlighting
@@ -658,68 +510,6 @@ Bundle 'bronson/vim-visual-star-search'
 
 " Bundle 'chrisbra/vim-diff-enhanced'
 
-" ## Optional Plugins ##
-
-if g:vimrc_bundle_c == 1
-    " C/C++ related plugins
-    Plugin 'a.vim'
-    Plugin 'majutsushi/tagbar'
-    augroup vimrcPluginTagbarExtra
-        autocmd!
-        autocmd FileType qf let b:tagbar_ignore = 1
-    augroup END
-    let g:tagbar_sort=0
-    nmap <silent> <F7> :TagbarToggle<CR>
-    Plugin 'steffanc/cscopemaps.vim'
-    Plugin 'octol/vim-cpp-enhanced-highlight'
-endif
-
-if g:vimrc_bundle_lisp == 1
-    " Load bundles related to LISP coding
-    " Plugin 'guns/paredit'
-    Plugin 'tpope/vim-fireplace'
-    Plugin 'tpope/vim-classpath'
-    Plugin 'guns/vim-clojure-static'
-endif
-
-
-if g:vimrc_bundle_ycm == 1
-    " use heavier YCM for completion
-    Plugin 'Valloric/YouCompleteMe'
-    augroup vimrcYcm
-        autocmd!
-        autocmd BufReadPost *
-                    \ if getfsize(expand('%')) > (g:ycm_disable_for_files_larger_than_kb * 1024) |
-                    \   imap <buffer> <Tab> <Plug>SuperTabForward|
-                    \   imap <buffer> <S-Tab> <Plug>SuperTabBackward|
-                    \ endif
-    augroup END
-    let g:ycm_key_invoke_completion = '<C-y>'
-    let g:ycm_confirm_extra_conf = 0
-    "let g:ycm_filetype_blacklist = { 'python': 1}
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-    " use syntastic too
-    let g:vimrc_bundle_syntastic=1
-    let g:ycm_filetype_blacklist = {
-          \ 'tagbar' : 1,
-          \ 'qf' : 1,
-          \ 'notes' : 1,
-          \ 'markdown' : 1,
-          \ 'unite' : 1,
-          \ 'text' : 1,
-          \ 'vimwiki' : 1,
-          \ 'pandoc' : 1,
-          \ 'infolog' : 1,
-          \ 'mail' : 1,
-          \ 'log' : 1
-          \}
-    function! VimrcUseSupertab()
-        setlocal completefunc=
-        imap <buffer> <Tab> <Plug>SuperTabForward
-        imap <buffer> <S-Tab> <Plug>SuperTabBackward
-    endfunction
-endif
-
 " use supertab for fallback completion
 Plugin 'ervandew/supertab'
 let g:SuperTabNoCompleteAfter = ['=', '+']
@@ -728,42 +518,6 @@ let g:SuperTabNoCompleteAfter += [']', ')', '}']
 let g:SuperTabNoCompleteAfter += [',', ';', '&', '^', '\s']
 set completeopt+=longest
 
-if g:vimrc_bundle_syntastic == 1
-    " Add syntax checking
-    Plugin 'scrooloose/syntastic'
-    let g:syntastic_cpp_compiler_options = ' -std=c++11'
-    let g:syntastic_python_checkers = ['pylint']
-    let g:syntastic_cpp_checkers = ['cppcheck', 'gcc']
-    if !exists('g:syntastic_mode_map')
-        let g:syntastic_mode_map = {"mode": "active",
-                    \ "active_filetypes": ["python"],
-                    \ "passive_filetypes": []}
-    endif
-    nnoremap <F5> :SyntasticCheck<CR>
-    nnoremap <C-F5> :SyntasticToggleMode<CR>
-    nnoremap <C-S-F5> :SyntasticReset<CR>
-    if g:vimrc_rsa_1es == 1
-        let g:syntastic_mode_map["passive_filetypes"] += ["cpp"]
-    endif
-endif
-
-
-if g:vimrc_bundle_windows_dev == 1
-    " Make Wandows work ngrmadly
-
-    " ClearCase integration
-    if g:vimrc_rsa_1es == 1
-        " Plugin 'vim-scripts/ccase.vim'
-    endif
-    " Visual Studio integration
-    Plugin 'vim-scripts/visual_studio.vim'
-    let g:visual_studio_output = "C:/temp/vs_output.txt"
-    let g:visual_studio_task_list = "C:/temp/vs_task_list.txt"
-    let g:visual_studio_find_results_1 = "C:/temp/vs_find_results_1.txt"
-    let g:visual_studio_find_results_2 = "C:/temp/vs_find_results_2.txt"
-    " Extra syntax highlighting
-    Plugin 'PProvost/vim-ps1'
-endif
 
 if has('nvim')
     Plugin 'benekastah/neomake'
