@@ -10,15 +10,18 @@ filetype off
 let g:vimrc_rsa_1es=0
 
 source ~/dotfiles/vimrc
+
 source ~/dotfiles/vimrc_plugin_bookmarks.vim
 source ~/dotfiles/vimrc_plugin_ctrlspace.vim
-source ~/dotfiles/vimrc_plugin_language_c.vim
-" source ~/dotfiles/vimrc_plugin_language_lisp.vim
-source ~/dotfiles/vimrc_plugin_ctrlp.vim
 source ~/dotfiles/vimrc_plugin_multiple_cursors.vim
 source ~/dotfiles/vimrc_plugin_syntastic.vim
 source ~/dotfiles/vimrc_plugin_ycm.vim
 source ~/dotfiles/vimrc_plugin_windows.vim
+
+source ~/dotfiles/vimrc_plugin_language_c.vim
+" source ~/dotfiles/vimrc_plugin_language_lisp.vim
+
+source ~/dotfiles/vimrc_plugin_ctrlp.vim
 " source ~/dotfiles/vimrc_plugin_command_t.vim
 
 filetype plugin indent on
