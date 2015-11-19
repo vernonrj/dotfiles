@@ -9,28 +9,17 @@ filetype off
 " tab length and other settings
 let g:vimrc_rsa_1es=0
 
-"----------------------------------------------------------"
-" Bundle Configuration
-"----------------------------------------------------------"
-" colorscheme (zenburn or solarized)
-let g:vimrc_bundle_color='darkburn'
-" c-like language plugins
-let g:vimrc_bundle_c=0
-" lisp-related plugins
-let g:vimrc_bundle_lisp=0
-" heavier, more complex fuzzy completion (if on, turns on syntastic too)
-" if off, turns on supertab
-let g:vimrc_bundle_ycm=0
-" syntax checking
-let g:vimrc_bundle_syntastic=0
-" work/windows plugins
-let g:vimrc_bundle_windows_dev=0
-" Use command-t
-let g:vimrc_bundle_command_t=1
-
 source ~/dotfiles/vimrc
-
-call vundle#end()
+source ~/dotfiles/vimrc_plugin_bookmarks.vim
+source ~/dotfiles/vimrc_plugin_ctrlspace.vim
+source ~/dotfiles/vimrc_plugin_language_c.vim
+" source ~/dotfiles/vimrc_plugin_language_lisp.vim
+source ~/dotfiles/vimrc_plugin_ctrlp.vim
+source ~/dotfiles/vimrc_plugin_multiple_cursors.vim
+source ~/dotfiles/vimrc_plugin_syntastic.vim
+source ~/dotfiles/vimrc_plugin_ycm.vim
+source ~/dotfiles/vimrc_plugin_windows.vim
+" source ~/dotfiles/vimrc_plugin_command_t.vim
 
 filetype plugin indent on
 syntax enable

@@ -25,7 +25,6 @@ set history=2000
 set viminfo+=!             " Store upper-case registers in viminfo
 set ssop+=globals
 let g:netrw_liststyle=3
-" set hidden                  " Buffers are not unloaded when hidden
 
 
 "----------------------------------------------------------"
