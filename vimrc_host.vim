@@ -26,4 +26,7 @@ syntax enable
 
 colorscheme darkburn
 
+" Make things like search wrap and other warnings way more obvious
+highlight WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
+
 " vim:ft=vim:ts=4:sw=4:

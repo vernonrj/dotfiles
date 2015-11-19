@@ -135,9 +135,6 @@ if executable('csearch')
 endif
 
 
-" Make things like search wrap and other warnings way more obvious
-highlight WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
-
 if has('linebreak')
     set breakindent
 endif
