@@ -76,51 +76,26 @@ endif
 " Colors, Fonts, Syntax, Statuslines, etc
 "----------------------------------------------------------"
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Lines
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set scrolloff=2
 set display+=lastline
-" Line Breaks
-setlocal linebreak
+setlocal linebreak      " Some better linebreak behavior
 "set textwidth=110
 let &showbreak = '+++'  " Show line breaks using given symbol
+set laststatus=2        " sane statusline
+set cinoptions+=(0      " re-indent how I like
+set ttyfast             " go faster
+set lazyredraw          " go faster!
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Statusline
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set statusline=%{fugitive#statusline()}
-set laststatus=2
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Syntax
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set cinoptions+=(0
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Drawing
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set ttyfast
-set lazyredraw
-
-
-"----------------------------------------------------------"
-" Window management
-" Buffers, Splits, Tabs
-"----------------------------------------------------------"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Splits
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set splitright
+set splitright           " as in, 'that's how split is supposed to work'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tab Behavior
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set expandtab
+set expandtab            " no tabs allowed
 if g:vimrc_rsa_1es == 1
     set tabstop=3
     set shiftwidth=3
@@ -128,30 +103,17 @@ else
     set tabstop=4
     set shiftwidth=4
 endif
-set smarttab
+set smarttab              " be a bit smarter
 
-
-
-"----------------------------------------------------------"
-" GUI elements
-" Mouse, terminal config
-"----------------------------------------------------------"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GUI menu config, cursor
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('gui')
     set guioptions=eg
-    set guicursor+=a:blinkon0
+    set guicursor+=a:blinkon0   " I hate blinking cursors
 endif
 
 set ruler       " Show cursor position always
 set showcmd     " Display incomplete terms
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Mouse
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set mousehide
 if has('mouse')
    if has("win32") || has("win64")
@@ -165,36 +127,18 @@ if has('mouse')
 endif
 
 
-
-"----------------------------------------------------------"
-" Search
-" Searching, tags
-"----------------------------------------------------------"
-
+set incsearch
+set ignorecase
+set smartcase
 if executable('csearch')
     set grepprg=csearch\ -n
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Incremental Search
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set incsearch   " Do incremental searching
-set ignorecase
-set smartcase
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" highlight
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make things like search wrap and other warnings way more obvious
 highlight WarningMsg ctermfg=white ctermbg=red guifg=White guibg=Red gui=None
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Indent/Completion
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('linebreak')
-    " wrapping is indented to create blocks of text
     set breakindent
 endif
 
@@ -222,29 +166,14 @@ set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
 set wildignore+=*.doc,*.docx,*.xls,*.xlsx
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Movement
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ensure backspace works like expected on tabs
+
 set backspace=indent,eol,start
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" File change watching
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autoread
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Folding
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set foldmethod=marker
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Autocmd
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Only use these commands when compiled with support for autocommands
 augroup vimrcExtraSyntax
     autocmd!
     " autocmd BufEnter * :syntax sync fromstart
@@ -285,6 +214,7 @@ augroup vimrcEx
 augroup END
 
 if has("win32") || has("win64")
+    " No, I don't want to hear when tab completion fails
     augroup vimrcWindows
         autocmd!
         autocmd GUIEnter * set visualbell t_vb=
@@ -438,16 +368,8 @@ call vundle#begin()
 
 " Vundle
 Plugin 'gmarik/vundle'
-
-
-
-"## Vim feature enhancement ##
-" Session
-
 " Movement
 Plugin 'vim-scripts/matchit.zip'
-
-
 " Editing
 Plugin 'tpope/vim-surround'                 " Surrounding movements
 Plugin 'tpope/vim-repeat'
@@ -466,25 +388,17 @@ endif
 
 
 
-"## Look And Feel ##
-
 Plugin 'bling/vim-airline'
 let g:airline#extensions#whitespace#enabled = 0
 if g:vimrc_rsa_1es == 1
     let g:airline#extensions#branch#enabled = 0
 endif
-
-
 " Syntax highlighting
 Plugin 'elzr/vim-json'              " json syntax highlighting
 let g:vim_json_syntax_conceal = 0
-
-
 " Colorscheme / Look-and-feel
 Plugin 'flazz/vim-colorschemes'
 
-" Solarized
-" Plugin 'altercation/vim-colors-solarized'
 set background=dark
 let g:solarized_termtrans=1
 let g:solarized_termcolors=256
@@ -493,20 +407,11 @@ let g:solarized_termcolors=256
 
 
 " ## External programs ##
-
-" git integration
 Plugin 'tpope/vim-fugitive'
-
-" Compilation
 Plugin 'tpope/vim-dispatch'         " Better :make
-
-" Searching
 Plugin 'rking/ag.vim'               " Better ack
 " Plugin 'mileszs/ack.vim'            " Better vimgrep
-
-" * and # searching
 Bundle 'bronson/vim-visual-star-search'
-
 " Bundle 'chrisbra/vim-diff-enhanced'
 
 " use supertab for fallback completion
