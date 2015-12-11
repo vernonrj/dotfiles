@@ -23,7 +23,9 @@ if !has('nvim')
 endif
 set history=2000
 set viminfo+=!             " Store upper-case registers in viminfo
-set ssop+=globals
+set sessionoptions+=globals
+set sessionoptions-=options
+set sessionoptions-=curdir
 let g:netrw_liststyle=3
 
 
