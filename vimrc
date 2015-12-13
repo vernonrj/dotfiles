@@ -223,30 +223,6 @@ endif
 
 
 
-" Diff original file
-command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-        \ | wincmd p | diffthis
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Beyond Compare Integration
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! BCompAdd()
-    let g:bcomp_file = expand('%:p')
-endfunction
-command! -nargs=* -complete=file BCompAdd call BCompAdd()
-function! BComp()
-    if !exists('g:bcomp_file')
-        let g:bcomp_file = ""
-    endif
-    let thisfile = ''.expand('%:p')
-    echo("Compare ".thisfile." ".g:bcomp_file)
-    exec("silent !\"".g:bcomp_path."\" \"".thisfile."\" \"".g:bcomp_file."\"")
-endfunction
-command! -nargs=* -complete=file BComp call BComp()
-
-
-
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 " Mappings
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -387,7 +363,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'         " Better :make
 Plugin 'rking/ag.vim'               " Better ack
 " Plugin 'mileszs/ack.vim'            " Better vimgrep
-Bundle 'bronson/vim-visual-star-search'
+Plugin 'bronson/vim-visual-star-search'
 " Bundle 'chrisbra/vim-diff-enhanced'
 
 " use supertab for fallback completion
