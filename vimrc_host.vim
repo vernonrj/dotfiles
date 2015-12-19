@@ -12,7 +12,9 @@ let g:vimrc_rsa_1es=0
 source ~/dotfiles/vimrc
 
 source ~/dotfiles/vimrc_plugin_bookmarks.vim
-source ~/dotfiles/vimrc_plugin_ctrlspace.vim
+" source ~/dotfiles/vimrc_plugin_ctrlspace.vim
+source ~/dotfiles/vimrc_plugin_obsession.vim
+source ~/dotfiles/vimrc_plugin_taboo.vim
 source ~/dotfiles/vimrc_plugin_multiple_cursors.vim
 source ~/dotfiles/vimrc_plugin_syntastic.vim
 source ~/dotfiles/vimrc_plugin_ycm.vim

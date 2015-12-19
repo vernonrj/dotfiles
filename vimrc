@@ -326,10 +326,13 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 " Movement
 Plugin 'vim-scripts/matchit.zip'
+Plugin 'vernonrj/vim-lasttab'
 " Editing
 Plugin 'tpope/vim-surround'                 " Surrounding movements
 Plugin 'tpope/vim-repeat'
 Plugin 'tComment'                           " better commenting
+Plugin 'vernonrj/vim-smarthome'
+Plugin 'tommcdo/vim-exchange'
 
 
 if has('gui_running') || !(has("win32") || has("win64"))
@@ -342,6 +345,7 @@ if has('gui_running') || !(has("win32") || has("win64"))
     nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
 endif
 
+Plugin 'bronson/vim-visual-star-search'
 
 
 Plugin 'bling/vim-airline'
@@ -367,7 +371,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'         " Better :make
 Plugin 'rking/ag.vim'               " Better ack
 " Plugin 'mileszs/ack.vim'            " Better vimgrep
-Plugin 'bronson/vim-visual-star-search'
 " Bundle 'chrisbra/vim-diff-enhanced'
 
 " use supertab for fallback completion
@@ -383,7 +386,7 @@ if has('nvim')
     Plugin 'benekastah/neomake'
 endif
 
-Plugin 'tommcdo/vim-exchange'
+Plugin 'vim-scripts/bufexplorer.zip'
 
 call vundle#end()
 
