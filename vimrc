@@ -186,6 +186,7 @@ augroup vimrcExtraFileTypes
     autocmd BufRead,BufNewFile *.json set filetype=json
     autocmd BufRead,BufNewFile *.ps1 set filetype=ps1
     autocmd BufRead,BufNewFile *.log set filetype=log
+    autocmd BufRead,BufNewFile *.md set filetype=markdown
     if g:vimrc_rsa_1es == 1
         autocmd BufRead,BufNewFile *.cmd set filetype=iecwin
         autocmd BufRead,BufNewFile *.inp set filetype=iecwin
@@ -284,11 +285,7 @@ inoremap <Up> <C-O>gk
 inoremap <Down> <C-O>gj
 " Remap 0/^ and related keys to how I like them
 nnoremap <M-0> 0
-if exists('*SmartLineBegin')
-    nnoremap <silent> 0 :call SmartLineBegin()<CR>
-else
-    nnoremap <silent> 0 ^
-endif
+nnoremap <silent> 0 ^
 nnoremap ^ 0
 nnoremap g0 g^
 nnoremap g^ g0
@@ -334,6 +331,7 @@ Plugin 'tComment'                           " better commenting
 Plugin 'vernonrj/vim-smarthome'
 Plugin 'tommcdo/vim-exchange'
 
+map <silent> 0 :call SmartLineBegin()<CR>
 
 if has('gui_running') || !(has("win32") || has("win64"))
     Plugin 'vernonrj/Mark--Karkat'
@@ -387,6 +385,7 @@ if has('nvim')
 endif
 
 Plugin 'vim-scripts/bufexplorer.zip'
+Plugin 'rust-lang/rust.vim'
 
 call vundle#end()
 
