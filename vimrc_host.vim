@@ -9,6 +9,8 @@ filetype off
 " tab length and other settings
 let g:vimrc_rsa_1es=0
 
+" set runtimepath+=~/.vim/bundle/vundle
+" let g:vimrc_vundle_install_path = 'C:/Users/jones_v/.vim/bundle'
 source ~/dotfiles/vimrc
 
 source ~/dotfiles/vimrc_plugin_bookmarks.vim

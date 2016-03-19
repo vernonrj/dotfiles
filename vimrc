@@ -316,8 +316,11 @@ nnoremap K <nop>
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-set runtimepath+=~/.vim/bundle/vundle
-call vundle#begin()
+if exists('g:vimrc_vundle_install_path')
+    call vundle#begin(g:vimrc_vundle_install_path)
+else
+    call vundle#begin()
+endif
 
 " Vundle
 Plugin 'gmarik/vundle'
