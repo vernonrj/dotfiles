@@ -8,6 +8,7 @@ augroup vimrcYcm
                 \   imap <buffer> <Tab> <Plug>SuperTabForward|
                 \   imap <buffer> <S-Tab> <Plug>SuperTabBackward|
                 \ endif
+    autocmd BufReadPost *.rs :nmap <silent> <buffer> <nowait> <C-]> :YcmCompleter GoTo<CR>
 augroup END
 let g:ycm_key_invoke_completion = '<C-y>'
 let g:ycm_confirm_extra_conf = 0
