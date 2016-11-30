@@ -151,6 +151,7 @@ if g:vimrc_rsa_1es == 1
     set complete-=i
 endif
 " Compilation ignores
+set wildignore+=*/target/*
 set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
 set wildignore+=*.rlib
 set wildignore+=*.pyo,*.pyc,*.so,*.o
@@ -370,8 +371,12 @@ let g:solarized_termcolors=256
 " ## External programs ##
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'         " Better :make
-Plugin 'rking/ag.vim'               " Better ack
-" Plugin 'mileszs/ack.vim'            " Better vimgrep
+Plugin 'mileszs/ack.vim'            " Better grep
+if executable('rg')
+    let g:ackprg = 'rg --vimgrep'
+elseif executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
 " Bundle 'chrisbra/vim-diff-enhanced'
 
 " use supertab for fallback completion
