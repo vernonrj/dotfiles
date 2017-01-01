@@ -151,7 +151,7 @@ if g:vimrc_rsa_1es == 1
     set complete-=i
 endif
 " Compilation ignores
-set wildignore+=*/target/*
+set wildignore+=*/target/*,*/node_modules/*
 set wildignore+=*.dll,*.lib,*.pdb,*.org,*.tlb,*.obj,*.lnk,*.msi,*.exe
 set wildignore+=*.rlib
 set wildignore+=*.pyo,*.pyc,*.so,*.o
@@ -164,6 +164,7 @@ set wildignore+=*.zip,*.rar,*.tar,*.jar,*.tar.gz,*.tar.xz,*.tar.bz,*.7z
 set wildignore+=*.chm,*.ilk,*.dfl,*.ttf
 set wildignore+=*.iqw,*.ibn,*.wv,*.vam,*.suo
 set wildignore+=*.doc,*.docx,*.xls,*.xlsx
+set wildignore+=*.rs.bk
 
 
 
