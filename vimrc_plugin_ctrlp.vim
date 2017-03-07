@@ -8,3 +8,21 @@ let g:ctrlp_switch_buffer = 'e'
 if has('python')
     let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 endif
+if has('win32')
+    if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+    call extend(g:airline_symbols, {
+                \ 'linenr': ':',
+                \ 'paste': 'PASTE',
+                \ 'maxlinenr': '',
+                \ 'notexists': '∄',
+                \ 'readonly': 'RO',
+                \ 'spell': 'SPELL',
+                \ 'modified': '+',
+                \ 'space': ' ',
+                \ 'crypt': '🔒',
+                \ 'branch': '',
+                \ 'whitespace': '!'
+                \ }, 'keep')
+endif
