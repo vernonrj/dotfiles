@@ -51,7 +51,7 @@ if has("win32") || has("win64")
     map <Leader>gv :source ~/_vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
     "Open .vimrc for editing
     map <Leader>gV :e ~/_vimrc<CR>
-    let g:bcomp_path = "C:\\Program Files (x86)\\Beyond Compare 4\\BComp.exe"
+    let g:bcomp_path = "C:\\Program Files\\Beyond Compare 4\\BComp.exe"
 
     " Disable annoying beeps in windows.
     set noerrorbells visualbell t_vb=
@@ -132,8 +132,10 @@ endif
 set incsearch
 set ignorecase
 set smartcase
-if executable('csearch')
-    set grepprg=csearch\ -n
+if executable('rg')
+    set grepprg=rg\ --vimgrep
+elseif executable('ag')
+    set grepprg=ag\ --vimgrep
 endif
 
 
@@ -372,12 +374,12 @@ let g:solarized_termcolors=256
 " ## External programs ##
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-dispatch'         " Better :make
-Plugin 'mileszs/ack.vim'            " Better grep
-if executable('rg')
-    let g:ackprg = 'rg --vimgrep'
-elseif executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
+" Plugin 'mileszs/ack.vim'            " Better grep
+" if executable('rg')
+"     let g:ackprg = 'rg --column -n'
+" elseif executable('ag')
+"     let g:ackprg = 'ag --vimgrep'
+" endif
 " Bundle 'chrisbra/vim-diff-enhanced'
 
 " use supertab for fallback completion
