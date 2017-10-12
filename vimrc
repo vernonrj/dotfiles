@@ -58,6 +58,9 @@ if has("win32") || has("win64")
 
     nmap <X2Mouse> [[
     nmap <X1Mouse> ]]
+    " if has('terminal')
+    "     set shell=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+    " endif
 else
     " reloading mappings for vimrc on *nix
     map <Leader>gv :source ~/.vimrc<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -141,6 +144,7 @@ endif
 
 if has('linebreak')
     set breakindent
+    set linebreak
 endif
 
 " Tab completion on commands
