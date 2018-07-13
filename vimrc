@@ -42,6 +42,11 @@ if has("win32") || has("win64")
        language English_United States
     endif
 
+    if &term == "win32"
+        set ttyscroll=0
+        set term=xterm
+    endif
+
     set guifont=Consolas:h11:cANSI
     behave xterm
     " Ensure various split commands work on windows
@@ -60,6 +65,9 @@ if has("win32") || has("win64")
     nmap <X1Mouse> ]]
     " if has('terminal')
     "     set shell=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+    "     set shellcmdflag=-NoLogo\ -NoProfile\ -NonInteractive\ -Command
+    "     set shellquote=\"
+    "     set shellxquote=
     " endif
 else
     " reloading mappings for vimrc on *nix
@@ -72,7 +80,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Terminal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if &term =~ "xterm"
+if &term =~ "xterm" && !has('win32') && !has('win64')
     set term=xterm-256color
 endif
 
@@ -401,6 +409,7 @@ endif
 
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'rust-lang/rust.vim'
+Plugin 'cespare/vim-toml'
 
 call vundle#end()
 

@@ -1,6 +1,9 @@
 " Ctrlp
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
+if executable('rg')
+    let g:ctrlp_user_command = "rg --files %s"
+endif
 nnoremap <C-Space> :CtrlPBuffer<CR>
 let g:ctrlp_max_files = 0
 let g:ctrlp_lazy_update = 1

@@ -12,7 +12,7 @@ augroup vimrcYcm
 augroup END
 " let g:ycm_key_invoke_completion = '<C-y>'
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_disable_for_files_larger_than_kb = 250
+let g:ycm_disable_for_files_larger_than_kb = 2000
 " let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_filetype_blacklist = {
       \ 'tagbar' : 1,
